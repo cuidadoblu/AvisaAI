@@ -18,7 +18,7 @@ import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.localidade.Localidade;
 
 @WebServlet(urlPatterns = { "/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
-		"/inserir-comunidade", "editar-comunidade", "/excluir-comunidade", "/erro" })
+		"/inserir-comunidade", "editar-comunidade", "/excluir-comunidade", "/nao-encontrado" })
 
 public class ComunidadeServlet extends HttpServlet {
 
@@ -74,7 +74,7 @@ public class ComunidadeServlet extends HttpServlet {
 				excluirComunidade(requisicao, resposta);
 				break;
 
-			case "/erro":
+			case "/nao-encontrado":
 				erro(requisicao, resposta);
 				break;
 			}

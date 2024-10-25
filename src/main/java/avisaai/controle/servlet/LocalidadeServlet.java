@@ -14,7 +14,7 @@ import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.entidade.localidade.Localidade;
 
 @WebServlet(urlPatterns = { "/localidades", "/cadastro-localidade", "/editar-localidade", "/inserir-localidade",
-		"/consultar-localidade", "/atualizar-localidade", "/excluir-localidade", "/erro"})
+		"/consultar-localidade", "/atualizar-localidade", "/excluir-localidade", "/nao-encontrado"})
 
 public class LocalidadeServlet extends HttpServlet {
 
@@ -63,7 +63,7 @@ public class LocalidadeServlet extends HttpServlet {
 				excluirLocalidade(requisicao, resposta);
 				break;
 
-			case "/erro":
+			case "/nao-encontrado":
 				erro(requisicao, resposta);
 				break;
 			}

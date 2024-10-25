@@ -63,6 +63,7 @@ public class Localidade implements Serializable {
 
 		setLogradouro(logradouro);
 		setTipo(tipo);
+		setNumero(numero);
 		setBairro(bairro);
 		setCidade(cidade);
 		setEstado(estado);
@@ -70,12 +71,13 @@ public class Localidade implements Serializable {
 		incidentes = new ArrayList<Incidente>();
 	}
 
-	public Localidade(Long id, String tipo, String logradouro, short numero, String bairro, String cidade,
+	public Localidade(Long id, String tipo, short numero, String logradouro, String bairro, String cidade,
 			String estado, String complemento) {
 
 		setId(id);
 		setLogradouro(logradouro);
 		setTipo(tipo);
+		setNumero(numero);
 		setBairro(bairro);
 		setCidade(cidade);
 		setEstado(estado);

@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import avisaai.modelo.dao.localidade.LocalidadeDAO;
 import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
@@ -98,9 +97,10 @@ public class LocalidadeServlet extends HttpServlet {
 
 	private void excluirLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
-		String id = requisicao.getParameter("id");
+		
+		Long id = Long.parseLong(requisicao.getParameter("id"));
 
-		Localidade localidade = localidadeDAO.consultarLocalidadePorId(id);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(id);
 
 		if (localidade == null) {
 			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
@@ -115,7 +115,7 @@ public class LocalidadeServlet extends HttpServlet {
 	private void atualizarLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		String id = requisicao.getParameter("id");
+		Long id = Long.parseLong(requisicao.getParameter("id"));
 		String logradouro = requisicao.getParameter("logradouro");
 		String tipo = requisicao.getParameter("tipo");
 		String numero = requisicao.getParameter("numero");
@@ -124,7 +124,7 @@ public class LocalidadeServlet extends HttpServlet {
 		String estado = requisicao.getParameter("estado");
 		String complemento = requisicao.getParameter("complemento");
 
-		Localidade localidade = localidadeDAO.consultarLocalidadePorId(id);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(id);
 
 		if (localidade == null) {
 			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);

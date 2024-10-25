@@ -17,7 +17,7 @@ import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.entidade.usuario.contato.Contato;
 
-@WebServlet(urlPatterns = {"/login", "/cadastro-usuario", "/alterar-senha", "/definir-senha", "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/exibir-perfil", "/erro"})
+@WebServlet(urlPatterns = {"/login", "/cadastro-usuario", "/alterar-senha", "/definir-senha", "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/nao-encontrado"})
 public class UsuarioServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1959126762240015341L;
@@ -75,11 +75,7 @@ public class UsuarioServlet extends HttpServlet {
 					excluirUsuario(requisicao, resposta);
 					break;
 					
-				case "/exibir-perfil":
-					exibirPerfil(requisicao, resposta);
-					break;
-					
-				case "/erro":
+				case "/nao-encontrado":
 					erro(requisicao, resposta);
 					break;
 				}
@@ -141,42 +137,44 @@ public class UsuarioServlet extends HttpServlet {
 	private void atualizarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
 				throws SQLException, ServletException, IOException {
 		
-			Long id = Long.parseLong(requisicao.getParameter("id"));
+			Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
+			
+			if (usuarioDAO.consultarUsuarioId(idUsuario) == null) {
+				resposta.sendRedirect("perfil-usuario");
+			}
+			
 			String nome = requisicao.getParameter("nome");
 			String sobrenome = requisicao.getParameter("sobrenome");
 			String senha = requisicao.getParameter("senha");
 			
+			Long idContato = Long.parseLong(requisicao.getParameter("id-contato"));
+			
+			if (contatoDAO.consultarContatoId(idContato) == null) {
+				resposta.sendRedirect("perfil-usuario");
+			}
+			
 			String telefone = requisicao.getParameter("telefone");
 			String email = requisicao.getParameter("email");
-			Contato contato = new Contato(telefone, email);
 			
-			contatoDAO.atualizarContato(new Contato(telefone, email));
+			contatoDAO.atualizarContato(new Contato(idContato, email, telefone));
 			
 			//Adicionar papel aqui e trocar o null no construtor
 			
-			usuarioDAO.atualizarUsuario(new Usuario(id, nome, sobrenome, senha, contato, null, null));
+			usuarioDAO.atualizarUsuario(new Usuario(idUsuario, nome, sobrenome, senha, contatoDAO.consultarContatoId(idContato), null, null));
 			
-			requisicao.getRequestDispatcher("exibir-perfil").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
 	}
 	
 	private void excluirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
 		
 		Long id = Long.parseLong(requisicao.getParameter("id_usuario"));
-		Usuario usuario = usuarioDAO.consultarUsuarioId(id);
-		usuarioDAO.deletarUsuario(usuario);
+		usuarioDAO.deletarUsuario(usuarioDAO.consultarUsuarioId(id));
 		
 		Long idContato = Long.parseLong(requisicao.getParameter("id_contato"));
-		Contato contato = contatoDAO.consultarContatoId(idContato);
-		contatoDAO.deletarContato(contato);
+		contatoDAO.deletarContato(contatoDAO.consultarContatoId(idContato));
 		
 		requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
-	}
-	private void exibirPerfil(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
-	
-		HttpSession sessao = requisicao.getSession();
-		requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
 	}
 	
 	private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)

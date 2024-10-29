@@ -18,7 +18,7 @@ import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.localidade.Localidade;
 
 @WebServlet(urlPatterns = { "/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
-		"/inserir-comunidade", "editar-comunidade", "/excluir-comunidade", "/nao-encontrado" })
+		"/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada" })
 
 public class ComunidadeServlet extends HttpServlet {
 
@@ -74,7 +74,7 @@ public class ComunidadeServlet extends HttpServlet {
 				excluirComunidade(requisicao, resposta);
 				break;
 
-			case "/nao-encontrado":
+			case "/comunidade-nao-encontrado":
 				erro(requisicao, resposta);
 				break;
 			}
@@ -113,7 +113,7 @@ public class ComunidadeServlet extends HttpServlet {
 		Localidade localidade = localidadeDAO.consultarLocalidadeId(localidadeId);
 
 		if (localidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
@@ -131,7 +131,7 @@ public class ComunidadeServlet extends HttpServlet {
 		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(id);
 
 		if (comunidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
@@ -155,14 +155,14 @@ public class ComunidadeServlet extends HttpServlet {
 		Localidade localidade = localidadeDAO.consultarLocalidadeId(localidadeId);
 
 		if (localidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
 		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(id);
 
 		if (comunidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 

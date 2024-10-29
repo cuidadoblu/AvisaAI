@@ -13,14 +13,14 @@
 	<main>
 		<div class="container-cadastro">
 			<div class="cabecalho-cadastro">
-				<a href="" class="botao-retornar">←</a>
+				<a href="inserir-incidente" class="botao-retornar">←</a>
 				<h2>Cadastrar Incidente</h2>
 			</div>
 			<form action="inserir-incidente" method="post"
 				enctype="multipart/form-data">
 				<div class="formulario-entradas">
 					<div class="formulario-grupo">
-						<label for="titulo-incidente">Título</label> <input type="text"
+						<label for="titulo">Título</label> <input type="text"
 							id="titulo" name="titulo"
 							placeholder="Escreva o título do incidente..." maxlength="50"
 							required> <span class="contador-caracteres">0/50</span>
@@ -34,8 +34,8 @@
 					</div>
 
 					<div class="formulario-grupo">
-						<label for="enviar-foto" class="arquivo-foto">Escolha uma
-							foto</label> <input type="file" id="enviar-foto" name="foto"
+						<label for="foto" class="arquivo-foto">Escolha uma
+							foto</label> <input type="file" id="foto" name="foto"
 							class="arquivo-foto" accept="image/*">
 					</div>
 
@@ -82,7 +82,7 @@
 
 					<div class="formulario-botoes">
 						<button type="button" class="botao-cancelar"
-							onclick="window.location.href='feed-pessoal.jsp'">Cancelar</button>
+							onclick="window.location.href='feed-pessoal'">Cancelar</button>
 						<button type="submit" class="botao-confirmar">Confirmar</button>
 					</div>
 				</div>

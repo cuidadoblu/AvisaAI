@@ -13,7 +13,7 @@ import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.entidade.localidade.Localidade;
 
 @WebServlet(urlPatterns = { "/localidades", "/cadastro-localidade", "/editar-localidade", "/inserir-localidade",
-		"/consultar-localidade", "/atualizar-localidade", "/excluir-localidade", "/nao-encontrado"})
+		"/consultar-localidade", "/atualizar-localidade", "/excluir-localidade", "/localidade-nao-encontrada" })
 
 public class LocalidadeServlet extends HttpServlet {
 
@@ -62,7 +62,7 @@ public class LocalidadeServlet extends HttpServlet {
 				excluirLocalidade(requisicao, resposta);
 				break;
 
-			case "/nao-encontrado":
+			case "/localidade-nao-encontrada":
 				erro(requisicao, resposta);
 				break;
 			}
@@ -75,7 +75,8 @@ public class LocalidadeServlet extends HttpServlet {
 	private void mostrarTelaCadastroLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("/recursos/paginas/localidade/cadastro-localidade.jsp").forward(requisicao, resposta);
+		requisicao.getRequestDispatcher("/recursos/paginas/localidade/cadastro-localidade.jsp").forward(requisicao,
+				resposta);
 	}
 
 	private void inserirLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -97,13 +98,13 @@ public class LocalidadeServlet extends HttpServlet {
 
 	private void excluirLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
-		
-		Long id = Long.parseLong(requisicao.getParameter("id"));
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(id);
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
+
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("localidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
@@ -115,7 +116,7 @@ public class LocalidadeServlet extends HttpServlet {
 	private void atualizarLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 		String logradouro = requisicao.getParameter("logradouro");
 		String tipo = requisicao.getParameter("tipo");
 		String numero = requisicao.getParameter("numero");
@@ -124,10 +125,10 @@ public class LocalidadeServlet extends HttpServlet {
 		String estado = requisicao.getParameter("estado");
 		String complemento = requisicao.getParameter("complemento");
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(id);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("localidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
@@ -148,13 +149,15 @@ public class LocalidadeServlet extends HttpServlet {
 	private void mostrarTelaAtualizaLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("/recursos/paginas/localidade/cadastro-localidade.jsp").forward(requisicao, resposta);
+		requisicao.getRequestDispatcher("/recursos/paginas/localidade/cadastro-localidade.jsp").forward(requisicao,
+				resposta);
 	}
 
 	private void mostrarTelaConsultaLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("/recursos/paginas/localidade/consulta-localidade.jsp").forward(requisicao, resposta);
+		requisicao.getRequestDispatcher("/recursos/paginas/localidade/consulta-localidade.jsp").forward(requisicao,
+				resposta);
 	}
 
 	private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)

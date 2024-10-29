@@ -18,7 +18,7 @@ import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.localidade.Localidade;
 
 @WebServlet(urlPatterns = { "/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
-		"/inserir-comunidade", "editar-comunidade", "/excluir-comunidade", "/nao-encontrado" })
+		"/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada" })
 
 public class ComunidadeServlet extends HttpServlet {
 
@@ -74,7 +74,7 @@ public class ComunidadeServlet extends HttpServlet {
 				excluirComunidade(requisicao, resposta);
 				break;
 
-			case "/nao-encontrado":
+			case "/comunidade-nao-encontrado":
 				erro(requisicao, resposta);
 				break;
 			}
@@ -104,16 +104,16 @@ public class ComunidadeServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		String nome = requisicao.getParameter("nome");
 		String descricao = requisicao.getParameter("descricao");
-		Long localidadeId = Long.parseLong(requisicao.getParameter("localidade-id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 //		Foto fotoPerfil = requisicao.getParameter("foto");
 //		String fotoExtencao = requisicao.getParameter("foto-extencao");
 
 //		Foto foto = new Foto(fotoPerfil.getBytes(), fotoExtencao);
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(localidadeId);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
@@ -126,12 +126,12 @@ public class ComunidadeServlet extends HttpServlet {
 	private void excluirComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
 
-		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(id);
+		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(idComunidade);
 
 		if (comunidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
@@ -143,26 +143,26 @@ public class ComunidadeServlet extends HttpServlet {
 	private void atualizarComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
 		String nome = requisicao.getParameter("nome");
 		String descricao = requisicao.getParameter("descricao");
-		Long localidadeId = Long.parseLong(requisicao.getParameter("localidade-id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 //		String fotoPerfil = requisicao.getParameter("foto");
 //		String fotoExtencao = requisicao.getParameter("foto_extencao");
 //
 //		Foto foto = new Foto(fotoPerfil.getBytes(), fotoExtencao);
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(localidadeId);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
-		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(id);
+		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(idComunidade);
 
 		if (comunidade == null) {
-			requisicao.getRequestDispatcher("erro").forward(requisicao, resposta);
+			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 

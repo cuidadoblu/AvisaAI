@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<!--<jsp:include page="/componentes/cabecalho.jsp" />-->
+	<%--<jsp:include page="/componentes/cabecalho.jsp" />--%>
     <main>
         <div class="container-cadastro">
             <div class="cabecalho-cadastro">

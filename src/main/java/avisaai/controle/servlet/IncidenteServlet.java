@@ -22,7 +22,8 @@ import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.enumeracao.categoria.Categoria;
 import avisaai.modelo.enumeracao.situacao.Situacao;
 
-@WebServlet(urlPatterns = { "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/nao-encontrado" })
+@WebServlet(urlPatterns = { "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente",
+		"/incidente-nao-encontrado" })
 public class IncidenteServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -2732576384429342823L;
@@ -76,7 +77,7 @@ public class IncidenteServlet extends HttpServlet {
 				excluirIncidente(requisicao, resposta);
 				break;
 
-			case "/nao-encontrado":
+			case "/incidente-nao-encontrado":
 				erro(requisicao, resposta);
 				break;
 			}

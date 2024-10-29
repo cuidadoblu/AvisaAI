@@ -99,9 +99,9 @@ public class LocalidadeServlet extends HttpServlet {
 	private void excluirLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(id);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
 			requisicao.getRequestDispatcher("localidade-nao-encontrada").forward(requisicao, resposta);
@@ -116,7 +116,7 @@ public class LocalidadeServlet extends HttpServlet {
 	private void atualizarLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 		String logradouro = requisicao.getParameter("logradouro");
 		String tipo = requisicao.getParameter("tipo");
 		String numero = requisicao.getParameter("numero");
@@ -125,7 +125,7 @@ public class LocalidadeServlet extends HttpServlet {
 		String estado = requisicao.getParameter("estado");
 		String complemento = requisicao.getParameter("complemento");
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(id);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
 			requisicao.getRequestDispatcher("localidade-nao-encontrada").forward(requisicao, resposta);

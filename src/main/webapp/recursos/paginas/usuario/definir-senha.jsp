@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,7 +12,7 @@
 	<!-- Logo no topo -->
 	<header>
 		<div class="logo-acesso">
-			<a href="landing-Page.jsp"><img src="img" alt="AvisaAí Logo"
+			<a href="landing-page"><img src="img" alt="AvisaAí Logo"
 				class="logo-avisaai"></a>
 		</div>
 	</header>
@@ -26,7 +26,7 @@
 			<div class="acesso-direita">
 				<div class="formulario-entradas">
 					<h2>Definir Senha</h2>
-					<form action="definir-senha" method="post">
+					<form action="atualizar-cadastro" method="post">
 						<div class="formulario-grupo">
 							<input type="password" name="senha" id="senha"
 								placeholder="Senha:" required>
@@ -39,11 +39,11 @@
 
 						<div class="formulario-botoes">
 							<button type="button"
-								onclick="window.location.href='cadastro.jsp'"
+								onclick="window.location.href='cadastro-usuario'"
 								class="botao-cadastrar">Cadastrar-se</button>
 							<button type="submit" class="botao-confirmar">Confirmar</button>
 							<div class="botao-login">
-								Já tem conta? <a href="login.jsp" class="link">Entrar</a>
+								Já tem conta? <a href="login" class="link">Entrar</a>
 							</div>
 						</div>
 					</form>

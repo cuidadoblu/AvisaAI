@@ -104,13 +104,13 @@ public class ComunidadeServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		String nome = requisicao.getParameter("nome");
 		String descricao = requisicao.getParameter("descricao");
-		Long localidadeId = Long.parseLong(requisicao.getParameter("localidade-id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 //		Foto fotoPerfil = requisicao.getParameter("foto");
 //		String fotoExtencao = requisicao.getParameter("foto-extencao");
 
 //		Foto foto = new Foto(fotoPerfil.getBytes(), fotoExtencao);
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(localidadeId);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
 			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
@@ -126,9 +126,9 @@ public class ComunidadeServlet extends HttpServlet {
 	private void excluirComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
 
-		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(id);
+		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(idComunidade);
 
 		if (comunidade == null) {
 			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
@@ -143,23 +143,23 @@ public class ComunidadeServlet extends HttpServlet {
 	private void atualizarComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
 
-		Long id = Long.parseLong(requisicao.getParameter("id"));
+		Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
 		String nome = requisicao.getParameter("nome");
 		String descricao = requisicao.getParameter("descricao");
-		Long localidadeId = Long.parseLong(requisicao.getParameter("localidade-id"));
+		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 //		String fotoPerfil = requisicao.getParameter("foto");
 //		String fotoExtencao = requisicao.getParameter("foto_extencao");
 //
 //		Foto foto = new Foto(fotoPerfil.getBytes(), fotoExtencao);
 
-		Localidade localidade = localidadeDAO.consultarLocalidadeId(localidadeId);
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(idLocalidade);
 
 		if (localidade == null) {
 			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);
 			return;
 		}
 
-		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(id);
+		Comunidade comunidade = comunidadeDAO.consultarComunidadeId(idComunidade);
 
 		if (comunidade == null) {
 			requisicao.getRequestDispatcher("comunidade-nao-encontrada").forward(requisicao, resposta);

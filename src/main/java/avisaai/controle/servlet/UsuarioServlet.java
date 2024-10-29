@@ -17,7 +17,8 @@ import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.entidade.usuario.contato.Contato;
 
-@WebServlet(urlPatterns = {"/login", "/cadastro-usuario", "/alterar-senha", "/definir-senha", "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/nao-encontrado"})
+@WebServlet(urlPatterns = { "/login", "/cadastro-usuario", "/alterar-senha", "/definir-senha", "/inserir-usuario",
+		"/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/usuario-nao-encontrado" })
 public class UsuarioServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1959126762240015341L;
@@ -36,150 +37,152 @@ public class UsuarioServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
-		
+
 		String action = requisicao.getServletPath();
 
 		try {
 
-				switch (action) {
-				
-				case "/login":
-					mostrarTelaLogin(requisicao, resposta);
-					break;
-					
-				case "/cadastro-usuario":
-					mostrarTelaCadastro(requisicao, resposta);
-					break;
-					
-				case "/alterar-senha":
-					mostrarTelaAlterarSenha(requisicao, resposta);
-					break;
-					
-				case "/definir-senha":
-					mostrarTelaDefinirSenha(requisicao, resposta);
-					break;
-					
-				case "/perfil-usuario":
-					mostrarTelaPerfilUsuario(requisicao, resposta);
-					break;
-					
-				case "/inserir-usuario":
-					inserirUsuario(requisicao, resposta);
-					break;
-					
-				case "/atualizar-usuario":
-					atualizarUsuario(requisicao, resposta);
-					break;
-					
-				case "/excluir-usuario":
-					excluirUsuario(requisicao, resposta);
-					break;
-					
-				case "/nao-encontrado":
-					erro(requisicao, resposta);
-					break;
-				}
-				
+			switch (action) {
+
+			case "/login":
+				mostrarTelaLogin(requisicao, resposta);
+				break;
+
+			case "/cadastro-usuario":
+				mostrarTelaCadastro(requisicao, resposta);
+				break;
+
+			case "/alterar-senha":
+				mostrarTelaAlterarSenha(requisicao, resposta);
+				break;
+
+			case "/definir-senha":
+				mostrarTelaDefinirSenha(requisicao, resposta);
+				break;
+
+			case "/perfil-usuario":
+				mostrarTelaPerfilUsuario(requisicao, resposta);
+				break;
+
+			case "/inserir-usuario":
+				inserirUsuario(requisicao, resposta);
+				break;
+
+			case "/atualizar-usuario":
+				atualizarUsuario(requisicao, resposta);
+				break;
+
+			case "/excluir-usuario":
+				excluirUsuario(requisicao, resposta);
+				break;
+
+			case "/usuario-nao-encontrado":
+				erro(requisicao, resposta);
+				break;
+			}
+
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 	}
-	
+
 	private void mostrarTelaLogin(HttpServletRequest requisicao, HttpServletResponse resposta)
-					throws ServletException, IOException {
-			
-			requisicao.getRequestDispatcher("/recursos/paginas/usuario/login.jsp").forward(requisicao, resposta); 
+			throws ServletException, IOException {
+
+		requisicao.getRequestDispatcher("/recursos/paginas/usuario/login.jsp").forward(requisicao, resposta);
 	}
 
 	private void mostrarTelaCadastro(HttpServletRequest requisicao, HttpServletResponse resposta)
-					throws ServletException, IOException {
-		
-			requisicao.getRequestDispatcher("/recursos/paginas/usuario/cadastro-usuario.jsp").forward(requisicao, resposta);
+			throws ServletException, IOException {
+
+		requisicao.getRequestDispatcher("/recursos/paginas/usuario/cadastro-usuario.jsp").forward(requisicao, resposta);
 	}
+
 	private void mostrarTelaAlterarSenha(HttpServletRequest requisicao, HttpServletResponse resposta)
-				throws ServletException, IOException {
-		
-			requisicao.getRequestDispatcher("/recursos/paginas/usuario/alterar-senha.jsp").forward(requisicao, resposta);
+			throws ServletException, IOException {
+
+		requisicao.getRequestDispatcher("/recursos/paginas/usuario/alterar-senha.jsp").forward(requisicao, resposta);
 	}
 
 	private void mostrarTelaDefinirSenha(HttpServletRequest requisicao, HttpServletResponse resposta)
-				throws ServletException, IOException {
-		
-			HttpSession sessao = requisicao.getSession();
-			requisicao.getRequestDispatcher("/recursos/paginas/usuario/redefinir-senha.jsp").forward(requisicao, resposta);
+			throws ServletException, IOException {
+
+		HttpSession sessao = requisicao.getSession();
+		requisicao.getRequestDispatcher("/recursos/paginas/usuario/redefinir-senha.jsp").forward(requisicao, resposta);
 	}
-	
+
 	private void mostrarTelaPerfilUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
-		
-			HttpSession sessao = requisicao.getSession();
-			requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
+
+		HttpSession sessao = requisicao.getSession();
+		requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
 	}
-	
+
 	private void inserirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
-				throws SQLException, ServletException, IOException {
-		
-			String nome = requisicao.getParameter("nome");
-			String sobrenome = requisicao.getParameter("sobrenome");
-			String senha = requisicao.getParameter("senha");
-			
-			String telefone = requisicao.getParameter("telefone");
-			String email = requisicao.getParameter("email");
-			
-			Contato contato = new Contato(telefone, email);
-			contatoDAO.inserirContato(contato);
-			
-			usuarioDAO.inserirUsuario(new Usuario(nome, sobrenome, senha, contato, null, null));
-			
-			requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
-	}
-	
-	private void atualizarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
-				throws SQLException, ServletException, IOException {
-		
-			Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
-			
-			if (usuarioDAO.consultarUsuarioId(idUsuario) == null) {
-				resposta.sendRedirect("perfil-usuario");
-			}
-			
-			String nome = requisicao.getParameter("nome");
-			String sobrenome = requisicao.getParameter("sobrenome");
-			String senha = requisicao.getParameter("senha");
-			
-			Long idContato = Long.parseLong(requisicao.getParameter("id-contato"));
-			
-			if (contatoDAO.consultarContatoId(idContato) == null) {
-				resposta.sendRedirect("perfil-usuario");
-			}
-			
-			String telefone = requisicao.getParameter("telefone");
-			String email = requisicao.getParameter("email");
-			
-			contatoDAO.atualizarContato(new Contato(idContato, email, telefone));
-			
-			//Adicionar papel aqui e trocar o null no construtor
-			
-			usuarioDAO.atualizarUsuario(new Usuario(idUsuario, nome, sobrenome, senha, contatoDAO.consultarContatoId(idContato), null, null));
-			
-			requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
-	}
-	
-	private void excluirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
-		
-		Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
-		usuarioDAO.deletarUsuario(usuarioDAO.consultarUsuarioId(idUsuario));
-		
-		Long idContato = Long.parseLong(requisicao.getParameter("id-contato"));
-		contatoDAO.deletarContato(contatoDAO.consultarContatoId(idContato));
-		
+
+		String nome = requisicao.getParameter("nome");
+		String sobrenome = requisicao.getParameter("sobrenome");
+		String senha = requisicao.getParameter("senha");
+
+		String telefone = requisicao.getParameter("telefone");
+		String email = requisicao.getParameter("email");
+
+		Contato contato = new Contato(telefone, email);
+		contatoDAO.inserirContato(contato);
+
+		usuarioDAO.inserirUsuario(new Usuario(nome, sobrenome, senha, contato, null, null));
+
 		requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
 	}
-	
+
+	private void atualizarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
+
+		Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
+
+		if (usuarioDAO.consultarUsuarioId(idUsuario) == null) {
+			resposta.sendRedirect("perfil-usuario");
+		}
+
+		String nome = requisicao.getParameter("nome");
+		String sobrenome = requisicao.getParameter("sobrenome");
+		String senha = requisicao.getParameter("senha");
+
+		Long idContato = Long.parseLong(requisicao.getParameter("id-contato"));
+
+		if (contatoDAO.consultarContatoId(idContato) == null) {
+			resposta.sendRedirect("perfil-usuario");
+		}
+
+		String telefone = requisicao.getParameter("telefone");
+		String email = requisicao.getParameter("email");
+
+		contatoDAO.atualizarContato(new Contato(idContato, email, telefone));
+
+		// Adicionar papel aqui e trocar o null no construtor
+
+		usuarioDAO.atualizarUsuario(
+				new Usuario(idUsuario, nome, sobrenome, senha, contatoDAO.consultarContatoId(idContato), null, null));
+
+		requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+	}
+
+	private void excluirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
+
+		Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
+		usuarioDAO.deletarUsuario(usuarioDAO.consultarUsuarioId(idUsuario));
+
+		Long idContato = Long.parseLong(requisicao.getParameter("id-contato"));
+		contatoDAO.deletarContato(contatoDAO.consultarContatoId(idContato));
+
+		requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
+	}
+
 	private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
-		
+
 		requisicao.getRequestDispatcher("/recursos/paginas/erro/erro-404.jsp").forward(requisicao, resposta);
 	}
 }

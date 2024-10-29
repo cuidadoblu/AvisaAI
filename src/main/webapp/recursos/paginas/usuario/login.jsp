@@ -11,7 +11,7 @@
 	<!-- Logo no topo -->
 	<header>
 		<div class="logo-acesso">
-			<a href="landing-Page.jsp"><img src="img" alt="AvisaAí Logo"
+			<a href="landing-Page"><img src="img" alt="AvisaAí Logo"
 				class="logo-avisaai"></a>
 		</div>
 	</header>
@@ -38,10 +38,10 @@
 
 						<div class="formulario-botoes">
 							<button type="submit" class="botao-confirmar">Confirmar</button>
-							<button type="button" onclick="window.location.href='cadastro.jsp'"class="botao-cadastrar">Cadastrar-se</button>
+							<button type="button" onclick="window.location.href='cadastro-usuario'"class="botao-cadastrar">Cadastrar-se</button>
 							</div>
 							<div class="botao-cadastro">
-								<a href="alterar-senha.jsp" class="link">Esqueceu a senha?</a>
+								<a href="alterar-senha" class="link">Esqueceu a senha?</a>
 							</div>
 						</div>
 					</form>

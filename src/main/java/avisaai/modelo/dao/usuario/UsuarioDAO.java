@@ -17,4 +17,6 @@ public interface UsuarioDAO {
 	List<Usuario> recuperarUsuarios(Usuario usuario);
 
 	Usuario consultarUsuarioId(Long id);
+
+	boolean consultarUsuarioSenha(String senha);
 }

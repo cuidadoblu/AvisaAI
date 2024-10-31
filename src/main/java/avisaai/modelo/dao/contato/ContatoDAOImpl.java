@@ -168,4 +168,76 @@ public class ContatoDAOImpl implements ContatoDAO {
 
 		return contato;
 	}
+
+	public boolean consultarContatoEmail(String email) {
+
+		Session sessao = null;
+		Contato contato = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
+			Root<Contato> raizContato = criteria.from(Contato.class);
+
+			ParameterExpression<String> emailContato = construtor.parameter(String.class);
+			criteria.select(raizContato).where(construtor.equal(raizContato.get("email"), emailContato));
+
+			criteria.select(raizContato);
+
+			contato	= sessao.createQuery(criteria).getSingleResult();
+			sessao.getTransaction().commit();
+
+		}	catch (Exception exception) {
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+			exception.printStackTrace();
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return true;
+	}
+
+	public boolean consultarContatoTelefone(String telefone) {
+
+		Session sessao = null;
+		Contato contato = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
+			Root<Contato> raizContato = criteria.from(Contato.class);
+
+			ParameterExpression<String> telefoneContato = construtor.parameter(String.class);
+			criteria.select(raizContato).where(construtor.equal(raizContato.get("telefone"), telefoneContato));
+
+			criteria.select(raizContato);
+
+			contato = sessao.createQuery(criteria).getSingleResult();
+			sessao.getTransaction().commit();
+
+		}	catch (Exception exception) {
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+			exception.printStackTrace();
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return true;
+	}
 }

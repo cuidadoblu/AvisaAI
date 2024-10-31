@@ -14,4 +14,8 @@ public interface ContatoDAO {
 	Contato recuperarContatoUsuario(Usuario usuario);
 	
 	Contato consultarContatoId(Long id);
+
+	boolean consultarContatoEmail(String email);
+
+	boolean consultarContatoTelefone(String telefone);
 }

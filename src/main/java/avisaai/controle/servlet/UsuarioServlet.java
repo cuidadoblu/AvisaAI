@@ -3,6 +3,7 @@ package avisaai.controle.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -90,6 +91,29 @@ public class UsuarioServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		requisicao.getRequestDispatcher("/recursos/paginas/usuario/login.jsp").forward(requisicao, resposta);
+	}
+
+	private void fazerLogin(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws ServletException, IOException {
+
+		String email = requisicao.getParameter("email");
+		String senha = requisicao.getParameter("senha");
+
+		boolean checarExistencia = false;
+
+		if (usuarioDAO.consultarUsuarioSenha() == true && contatoDAO.consultarContatoEmail() == true) {
+			checarExistencia = true;
+		}
+
+		if (checarExistencia) {
+			HttpSession sessao = requisicao.getSession();
+			Usuario usuario = ContatoDAO.recuperarUsuarioPorContatoEmail(email);
+			sessao.setAttribute("usuario-logado", usuario);
+			RequestDispatcher dispatcher = requisicao.getRequestDispatcher("perfil-usuario");
+			dispatcher.forward(requisicao, resposta);
+		} else {
+			requisicao.getRequestDispatcher("mostrarTelaLogin").forward(requisicao, resposta);
+		}
 	}
 
 	private void mostrarTelaCadastro(HttpServletRequest requisicao, HttpServletResponse resposta)

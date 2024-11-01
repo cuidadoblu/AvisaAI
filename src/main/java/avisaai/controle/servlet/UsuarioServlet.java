@@ -99,15 +99,14 @@ public class UsuarioServlet extends HttpServlet {
 		String email = requisicao.getParameter("email");
 		String senha = requisicao.getParameter("senha");
 
-		boolean checarExistencia = false;
 
-		if (usuarioDAO.consultarUsuarioSenha() == true && contatoDAO.consultarContatoEmail() == true) {
-			checarExistencia = true;
+		if (!usuarioDAO.checarUsuarioPorCredenciais(email, senha)) {
+			resposta.sendRedirect("login");
 		}
 
-		if (checarExistencia) {
+		if (checarUsuarioPorCredenciais(email, senha)) {
 			HttpSession sessao = requisicao.getSession();
-			Usuario usuario = ContatoDAO.recuperarUsuarioPorContatoEmail(email);
+			Usuario usuario = usuarioDAO.recuperarUsuarioPorCredenciais(email, senha);
 			sessao.setAttribute("usuario-logado", usuario);
 			RequestDispatcher dispatcher = requisicao.getRequestDispatcher("perfil-usuario");
 			dispatcher.forward(requisicao, resposta);

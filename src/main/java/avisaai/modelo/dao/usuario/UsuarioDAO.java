@@ -3,6 +3,7 @@ package avisaai.modelo.dao.usuario;
 import java.util.List;
 
 import avisaai.modelo.entidade.usuario.Usuario;
+import avisaai.modelo.entidade.usuario.contato.Contato;
 
 public interface UsuarioDAO {
 
@@ -18,5 +19,7 @@ public interface UsuarioDAO {
 
 	Usuario consultarUsuarioId(Long id);
 
-	boolean consultarUsuarioSenha(String senha);
+	Usuario recuperarUsuarioPorCredenciais(String email, String senha);
+
+	Contato recuperarContatoUsuario(Usuario usuario);
 }

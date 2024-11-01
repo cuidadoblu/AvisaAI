@@ -2,11 +2,12 @@ package avisaai.modelo.dao.usuario;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
+import avisaai.modelo.dao.contato.ContatoDAO;
+import avisaai.modelo.dao.contato.ContatoDAOImpl;
+import avisaai.modelo.entidade.usuario.contato.Contato;
+import avisaai.modelo.entidade.usuario.contato.Contato_;
 import org.hibernate.Session;
 
 import avisaai.modelo.entidade.usuario.Usuario;
@@ -217,7 +218,39 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return usuario;
 	}
 
-	public boolean consultarUsuarioSenha(String senha) {
+	public boolean checarCredenciaisUsuario(String email, String senha) {
+
+		Session sessao = null;
+		boolean existeCredenciais = false;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+			criteria.select(raizUsuario);
+
+			Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
+
+			Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
+
+			Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
+
+			Predicate predicadoResultado = construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario);
+			criteria.where(predicadoResultado);
+
+			existeCredenciais = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+		}
+	}
+
+	public Usuario recuperarUsuarioPorCredenciais(String email, String senha) {
 
 		Session sessao = null;
 		Usuario usuario = null;
@@ -232,27 +265,67 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
 			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-			ParameterExpression<String> senhaUsuario = construtor.parameter(String.class);
-			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("senha"), senhaUsuario));
+			criteria.select(raizUsuario);
 
-			usuario =  sessao.createQuery(criteria).getSingleResult();
+			Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
+
+			Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
+
+			Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
+
+			Predicate predicadoResultado = construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario);
+			criteria.where(predicadoResultado);
+
+			usuario = sessao.createQuery(criteria).getSingleResult();
 
 			sessao.getTransaction().commit();
 
-		}  catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
+		}	catch (Exception exception) {
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
-
-		}	finally {
-
+			exception.printStackTrace();
+		} finally {
 			if (sessao != null) {
 				sessao.close();
 			}
 		}
-		return true;
+		return usuario;
+	}
+
+	public Contato recuperarContatoUsuario(Usuario usuario) {
+
+		Session sessao = null;
+		Contato contato = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
+			Root<Contato> raizContato = criteria.from(Contato.class);
+
+			criteria.select(raizContato);
+
+			Join<Contato, Usuario> juncaoUsuario = raizContato.join((Contato_.usuario));
+
+			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoUsuario.get(Usuario_.id), idUsuario));
+
+			contato = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getSingleResult();
+
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return contato;
 	}
 }

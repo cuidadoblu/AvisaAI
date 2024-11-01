@@ -1,0 +1,258 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvisaAí - Interface</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Inclua seu arquivo CSS personalizado -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #2c3e50;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        /* Cabeçalho */
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #2c3e50;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .cabecalho .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cabecalho .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .cabecalho .barra-consulta {
+            flex-grow: 1;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .barra-consulta input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            padding-left: 30px;
+        }
+
+        .barra-consulta i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .cabecalho .icones {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icones img {
+            width: 24px;
+            cursor: pointer;
+        }
+
+        /* Lista de consulta expandida */
+        .consulta-expandida {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .consulta-expandida h4 {
+            margin-bottom: 5px;
+        }
+
+        .consulta-expandida .item-consulta {
+            cursor: pointer;
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .consulta-expandida .item-consulta:last-child {
+            border-bottom: none;
+        }
+
+        .consulta-expandida .item-consulta:hover {
+            background-color: #ddd;
+        }
+
+        /* Barra lateral */
+        .barra-lateral {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #2c3e50;
+            color: white;
+            transition: left 0.3s ease;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .barra-lateral.aberta {
+            left: 0;
+        }
+
+        .barra-lateral .menu {
+            margin-bottom: 20px;
+        }
+
+        .barra-lateral .menu h2 {
+            margin-bottom: 15px;
+        }
+
+        .barra-lateral .menu a {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            padding: 5px 0;
+        }
+
+        .barra-lateral .menu img {
+            margin-right: 10px;
+            width: 24px;
+        }
+
+        .barra-lateral .perfil {
+            margin-top: auto;
+        }
+
+        .barra-lateral .perfil img {
+            border-radius: 50%;
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .barra-lateral button {
+            margin-top: 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cabeçalho -->
+<header class="cabecalho">
+    <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+    <div class="logo">
+        <i class="fas fa-users"></i> AvisaAí!
+    </div>
+    <div class="barra-consulta">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Consultar" onkeyup="mostrarConsultaExpandida(this.value)">
+    </div>
+    <div class="icones">
+        <a href="cadastrar-incidente">
+            <img src="icons/cadastrar-incidente.png" alt="Cadastrar Incidente">
+        </a>
+        <a href="feed">
+            <img src="icons/feed.png" alt="Feed">
+        </a>
+        <a href="notificacoes">
+            <img src="icons/notificacoes.png" alt="Notificações">
+        </a>
+        <a href="perfil-usuario">
+            <img src="icons/perfil.png" alt="Perfil">
+        </a>
+    </div>
+</header>
+
+<!-- Lista de consulta expandida -->
+<div class="consulta-expandida" id="consultaExpandida" style="display: none;">
+    <h4>Comunidades</h4>
+    <c:forEach var="comunidade" items="${comunidades}">
+        <div class="item-consulta" onclick="redirecionar('perfil-comunidade?id=${comunidade.id}')">
+            ${comunidade.nome}
+        </div>
+    </c:forEach>
+    <h4>Usuários</h4>
+    <c:forEach var="usuario" items="${usuarios}">
+        <div class="item-consulta" onclick="redirecionar('perfil-usuario?id=${usuario.id}')">
+            ${usuario.nome} ${usuario.sobrenome}
+        </div>
+    </c:forEach>
+    <h4>Incidentes</h4>
+    <c:forEach var="incidente" items="${incidentes}">
+        <div class="item-consulta" onclick="redirecionar('perfil-incidente?id=${incidente.id}')">
+            ${incidente.titulo}
+        </div>
+    </c:forEach>
+</div>
+
+<!-- Barra lateral -->
+<div class="barra-lateral" id="barraLateral">
+    <div class="menu">
+        <h2>Menu</h2>
+        <a href="cadastrar-incidente"><i class="fas fa-exclamation-triangle"></i> Cadastrar Incidente</a>
+        <a href="feed"><i class="fas fa-newspaper"></i> Feed</a>
+        <h3>Comunidades</h3>
+        <c:forEach var="comunidade" items="${comunidades}">
+            <a href="perfil-comunidade?id=${comunidade.id}">
+                <img src="${comunidade.foto}" alt="${comunidade.nome}"> ${comunidade.nome}
+            </a>
+        </c:forEach>
+    </div>
+    <div class="perfil">
+        <img src="icons/perfil.png" alt="Perfil">
+        <span>Guilherme Silva</span>
+        <button onclick="redirecionar('sair')"><i class="fas fa-sign-out-alt"></i> Sair da Conta</button>
+    </div>
+</div>
+
+<script>
+    function toggleMenu() {
+        var barraLateral = document.getElementById("barraLateral");
+        barraLateral.classList.toggle("aberta");
+    }
+
+    function mostrarConsultaExpandida(valor) {
+        var consultaExpandida = document.getElementById("consultaExpandida");
+        if (valor.length > 0) {
+            consultaExpandida.style.display = "block";
+        } else {
+            consultaExpandida.style.display = "none";
+        }
+    }
+
+    function redirecionar(url) {
+        window.location.href = url;
+    }
+</script>
+
+</body>
+</html>

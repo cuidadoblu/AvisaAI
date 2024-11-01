@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.min.css">
+    <title>AvisaAí - Página Inicial</title>
+</head>
+
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+}
+
+.botao {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #3498DB;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botao:hover {
+    background-color: #2C3E50;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 5rem 2rem;
+}
+
+
+header {
+    position: relative;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2rem;
+}
+
+header .conteudo h4 {
+    margin-bottom: 1rem;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+header .conteudo h1 {
+    color: #2C3E50;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 4rem;
+}
+
+header .conteudo h1 span {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #ccc;
+}
+
+header .conteudo p {
+    margin-bottom: 2rem;
+    color: #2C3E50;
+}
+
+
+header .imagem img {
+    max-width: 600px;
+    margin: auto;
+}
+
+section .cabecalho {
+    margin-bottom: 1rem;
+    color: #000;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+.funcionalidades {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.funcionalidades .cartao {
+    background-color: #3498DB;
+    padding: 1rem;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.funcionalidades .cartao:hover {
+    background-color: #2C3E50;
+    border-color: #fff;
+}
+
+.funcionalidades .cartao span {
+    display: inline-block;
+    padding: 2px 9px;
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.funcionalidades .cartao h4 {
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.secao-avisaai {
+    background-color: #2c3e50;
+    padding: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.titulo-secao {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.conteudo-avisaai {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    text-align: center;
+}
+
+.container-funcionalidades {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.cartao-funcionalidade {
+    padding: 1em;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.cartao-funcionalidade span {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.cartao-funcionalidade img {
+    width: 40px;
+    height: 40px;
+}
+
+.cartao-funcionalidade h4 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0.5em 0;
+}
+
+.cartao-funcionalidade p {
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+
+.container-imagem {
+    display: flex;
+    justify-content: center;
+}
+
+.imagem-esquerda {
+    max-width: max-content;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* FOOTER*/
+
+footer {
+    bottom: 0px;
+    width: 100%;
+    background: #2c3e50;
+
+  }
+
+  .rodape-superior {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-left: 20px;
+    padding-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .rodape-superior .coluna {
+    flex-basis: 25%;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .rodape-superior .coluna .titulo-cabecalho h2 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .rodape-superior .coluna .titulo-cabecalho h2::after {
+    content: "";
+    width: 8%;
+    height: 3px;
+    background: #fff;
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    transition: 0.5s;
+  }
+
+  .rodape-superior .coluna .titulo-cabecalho h2:hover::after {
+    width: 20%;
+  }
+
+  .rodape-superior .coluna .conteudo p {
+    font-size: 14px;
+    color: #8d99ae;
+    padding: 5px 0;
+  }
+
+  .rodape-superior .coluna .conteudo ul li {
+    list-style: none;
+    padding: 3px 0;
+  }
+
+  .rodape-superior .coluna .conteudo ul li a {
+    text-decoration: none;
+    color: #8d99ae;
+    font-size: 14px;
+  }
+
+  .rodape-superior .coluna .conteudo ul li {
+    text-decoration: none;
+    color: #8d99ae;
+    font-size: 14px;
+  }
+
+  .rodape-superior .coluna .conteudo ul li a:hover {
+    color: #fff;
+  }
+
+  .localizacao {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .localizacao img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .localizacao p {
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .lista-redes-sociais {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .lista-redes-sociais li {
+    display: flex;
+    align-items: center;
+  }
+
+  .imagem-rede-social {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+  }
+
+  .rodape-inferior {
+    background: #2b2d42;
+    padding: 15px 6%;
+    font-size: 16px;
+    color: #8d99ae;
+  }
+  @media (max-width: 760px) {
+    .rodape-superior .coluna {
+      flex-basis: 50%;
+    }
+  }
+
+  @media (max-width: 490px) {
+    footer {
+      position: unset;
+    }
+    .rodape-superior .coluna {
+      flex-basis: 100%;
+    }
+  }
+    </style>
+
+    <header class="container">
+        <div class="conteudo">
+            <span class="desfoque"></span>
+            <span class="desfoque"></span>
+            <h1>Avisa <span>Aí!</span></h1>
+            <p>
+                O AvisaAi centraliza informações para ajudar comunidades a se unirem e enfrentarem desastres naturais. 
+            </p>
+            <button class="botao">Seja Parte</button>
+        </div>
+        <div class="imagem">
+            <img src="svg/imagens/imagem-principal.svg" alt="Imagem Principal"/>
+        </div>
+    </header>
+
+    <section class="container">
+        <h2 class="cabecalho">Dentro do AvisaAi, você pode se manter atualizado sobre:</h2>
+        <div class="funcionalidades">
+            <div class="cartao">
+                <span><img src="svg/icones/alagamento.svg" alt="Imagem Alagamento"/></span>
+                <h4>Alagamento</h4>
+            </div>
+            <div class="cartao">
+                <span><img src="svg/icones/enxurrada.svg" alt="Imagem Enxurrada"/></span>
+                <h4>Enxurrada</h4>
+            </div>
+            <div class="cartao">
+                <span><img src="svg/icones/inundacao.svg" alt="Imagem Inundação"/></span>
+                <h4>Inundação</h4>
+            </div>
+            <div class="cartao">
+                <span><img src="svg/icones/deslizamento.svg" alt="Imagem Deslizamento"/></span>
+                <h4>Deslizamento</h4>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="secao-avisaai">
+        <h2 class="titulo-secao">O que você pode fazer no AvisaAi?</h2>
+        <div class="conteudo-avisaai">
+            <div class="container-imagem">
+                <img src="svg/imagens/imagem-secundaria.svg" alt="Imagem secundária" class="imagem-esquerda"/>
+            </div>
+            <div class="container-funcionalidades">
+                <div class="cartao-funcionalidade">
+                    <span><img src="svg/icones/cadastrar-incidente.svg" alt="Imagem cadastrar-incidente"/></span>
+                    <h4>Cadastrar Incidentes</h4>
+                    <p>Informe eventos que estejam ocorrendo em determinada localidade</p>
+                </div>
+                <div class="cartao-funcionalidade">
+                    <span><img src="svg/icones/participar-comunidade.svg" alt="Imagem participar-comunidade"/></span>
+                    <h4>Participar de Comunidade</h4>
+                    <p>Participe de grupos locais para trocar informações e suporte</p>
+                </div>
+                <div class="cartao-funcionalidade">
+                    <span><img src="svg/icones/acompanhar-incidente.svg" alt="Imagem acompanhar-incidente"/></span>
+                    <h4>Acompanhar Incidentes</h4>
+                    <p>Mantenha-se informado sobre o que acontece ao seu redor</p>
+                </div>
+                <div class="cartao-funcionalidade">
+                    <span><img src="svg/icones/avaliar-incidente.svg" alt="Imagem avaliar-incidente"/></span>
+                    <h4>Avaliar Incidentes</h4>
+                    <p>Compartilhe suas experiências para ajudar a construir um banco de dados confiável</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="container">
+        <h2 class="cabecalho">Dentro do AvisaAi, você pode se manter atualizado sobre:</h2>
+        <div class="container-funcionalidades">
+            <div class="cartao-funcionalidade">
+                <span><img src="svg/icones/cadastrar-incidente.svg" alt="Imagem cadastrar-incidente"/></span>
+                <h4>Cadastrar Incidentes</h4>
+                <p>Informe eventos que estejam ocorrendo em determinada localidade</p>
+            </div>
+            <div class="cartao-funcionalidade">
+                <span><img src="svg/icones/participar-comunidade.svg" alt="Imagem participar-comunidade"/></span>
+                <h4>Participar de Comunidade</h4>
+                <p>Participe de grupos locais para trocar informações e suporte</p>
+            </div>
+            <div class="cartao-funcionalidade">
+                <span><img src="svg/icones/acompanhar-incidente.svg" alt="Imagem acompanhar-incidente"/></span>
+                <h4>Acompanhar Incidentes</h4>
+                <p>Mantenha-se informado sobre o que acontece ao seu redor</p>
+            </div>
+            <div class="cartao-funcionalidade">
+                <span><img src="svg/icones/avaliar-incidente.svg" alt="Imagem avaliar-incidente"/></span>
+                <h4>Avaliar Incidentes</h4>
+                <p>Compartilhe suas experiências para ajudar a construir um banco de dados confiável</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container-principal">
+            <!-- Rodapé Superior Início -->
+            <div class="rodape-superior">
+                <img src="svg/footer/imagem-footer.svg" alt="Imagem LinkedIn"/>
+
+                <div class="coluna">
+                    <div class="titulo-cabecalho">
+                        <h2>Páginas</h2>
+                    </div>
+                    <div class="conteudo">
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">AvisaAí!</a></li>
+                            <li><a href="#">Sobre</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="coluna">
+                    <div class="titulo-cabecalho">
+                        <h2>Desenvolvedores</h2>
+                    </div>
+                    <div class="conteudo">
+                        <ul>
+                            <li>Daiane Dasrosci</a></li>
+                            <li>Gabriel Andrei Junges</a></li>
+                            <li>Gustavo Soares de Paula</a></li>
+                            <li>Luis Eduardo Ciatte de Abreu</a></li>
+                            <li>Lysandre Oliveira Barros</a></li>
+                            <li>William Filipe Silva</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="coluna">
+                    <div class="conteudo">
+                        <div class="localizacao">
+                            <img src="svg/footer/localizacao.svg" alt="Imagem Localização"/>
+                            <p>Av. Brasil, 610 - Ponta Aguda, Blumenau - SC, 89050-000</p>
+                        </div>
+                        <ul class="lista-redes-sociais">
+                            <li>
+                                <a href="#">
+                                    <img src="svg/footer/linkedin.svg" alt="Imagem LinkedIn" class="imagem-rede-social"/>LinkedIn
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/cuidadoblu/AvisaAi">
+                                    <img src="svg/footer/github.svg" alt="Imagem Github" class="imagem-rede-social"/>Github
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

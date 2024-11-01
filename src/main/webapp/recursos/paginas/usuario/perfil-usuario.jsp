@@ -1,51 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:include page="../componentes/cabecalho.jsp"/>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AvisaAí - Perfil Usuário</title>
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvisaAí - Perfil Usuário</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
 </head>
 <body>
-	<main>
-		<div class="perfil-container">
-			<!-- perfil do usuário -->
-			<div class="perfil-imagem">
-				<img src="<c:out value='${usuario.fotoPerfil}'/>"
-					alt="Imagem de Perfil do Usuário">
-				<div class="edicao-perfil-imagem">
-					<img src="img/icone_editar.png" alt="Ícone Editar Foto Usuário"
-						class="">
-				</div>
-			</div>
-			<!-- nome do usuário -->
-			<div class="perfil-nome">
-				<h2>
-					<c:out value='${usuario.nome}' />
-					<c:out value='${usuario.sobrenome}' />
-				</h2>
-			</div>
-			<!-- Botão de configuração -->
-			<div class="perfil-botoes">
-				<button type="button"
-					onclick="window.location.href='<!-- Incidentes-acompanhados-->>'">
-					<img src="img/icidente-acompanhados.png"
-						alt="Ícone Incidentes Acompanhados Usuário"
-						class="icone-icidente-acompanhados">
-				</button>
-				<button type="button"
-					onclick="window.location.href='configuracoes.jsp'">
-					<img src="img/icone_configuracao.png"
-						alt="Ícone Configurações Usuário" class="icone-configuracao">
-				</button>
-				<a href='<!-- LOGOUT AQUI-->'> <img src="img/logout.png"
-					alt="Ícone Logout Usuário" class="icone-logout">
-					</button>
-			</div>
-		</div>
-	</main>
+<main>
+    <c:choose>
+        <c:when test="${usuario == null}">
+            <p>Nenhum usuário encontrado.</p>
+        </c:when>
+        <c:otherwise>
+            <div class="perfil-container">
+                <div class="perfil-imagem">
+                    <img src="${usuario.fotoPerfil}" alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
+                    <div class="editar-foto">
+                        <form action="uploadFoto" method="post" enctype="multipart/form-data">
+                            <input type="file" name="foto-perfil" id="foto-perfil">
+                            <input type="hidden" name="id-usuario" value="${usuario.id}">
+                            <button type="submit">Atualizar Foto</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="perfil-nome">
+                    <span class="nome-usuario">${usuario.nome} ${usuario.sobrenome}</span>
+                </div>
+                <div class="perfil-botoes">
+                    <button type="button" onclick="window.location.href='incidentes-acompanhados'">
+                        <img src="img/icidente-acompanhados.png" alt="Ícone Incidentes Acompanhados Usuário"
+                             class="icone-icidente-acompanhados">
+                    </button>
+                    <button type="button" onclick="window.location.href='configuracoes'">
+                        <img src="img/icone-configuracao.png" alt="Configurações" class="icone-configuracao">
+                    </button>
+                    <a href="logout">
+                        <img src="img/icone-logout.png" alt="Logout" class="icone-logout">
+                    </a>
+                </div>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</main>
 </body>
 </html>

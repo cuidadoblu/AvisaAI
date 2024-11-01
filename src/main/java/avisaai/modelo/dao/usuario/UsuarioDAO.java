@@ -13,7 +13,7 @@ public interface UsuarioDAO {
 
 	void atualizarUsuario(Usuario usuario);
 
-	List<Usuario> consultarUsuarioNome(Usuario usuario);
+	List<Usuario> consultarUsuarioNome(String nome);
 
 	List<Usuario> recuperarUsuarios(Usuario usuario);
 
@@ -21,5 +21,9 @@ public interface UsuarioDAO {
 
 	Usuario recuperarUsuarioPorCredenciais(String email, String senha);
 
+	boolean checarCredenciaisUsuario(String email, String senha);
+
 	Contato recuperarContatoUsuario(Usuario usuario);
+
+
 }

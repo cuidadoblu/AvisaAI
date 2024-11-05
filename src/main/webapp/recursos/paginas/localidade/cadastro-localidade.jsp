@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:include page="../componentes/cabecalho.jsp"/>
+<jsp:include page="../componentes/popup.jsp"/>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,90 +19,31 @@
             <div class="formulario-entradas">
                 <div class="formulario-grupo">
                     <label for="estado">Estado</label>
-                    <input
-                            type="text"
-                            id="estado"
-                            name="estado"
-                            list="estados"
-                            placeholder="Digite o estado"
-                            required
-                    />
+                    <input type="text" id="estado" name="estado" list="estados" placeholder="Digite o estado" required/>
                     <datalist id="estados">
-                        <option value="Santa Catarina"></option>
+                        <c:if test="${not empty estados}">
+                            <c:forEach var="estado" items="${estados}">
+                                <option value="${estado}"></option>
+                            </c:forEach>
+                        </c:if>
                     </datalist>
                 </div>
 
                 <div class="formulario-grupo">
                     <label for="cidade">Cidade</label>
-                    <input
-                            type="text"
-                            id="cidade"
-                            name="cidade"
-                            list="cidades"
-                            placeholder="Digite a cidade"
-                            required
-                    />
-                    <datalist id="cidades">
-                        <option value="Blumenau"></option>
-                    </datalist>
+                    <input type="text" id="cidade" name="cidade" list="cidades" placeholder="Digite a cidade" required/>
+                    <datalist id="cidades"></datalist>
                 </div>
 
                 <div class="formulario-grupo">
                     <label for="bairro">Bairro</label>
-                    <input
-                            type="text"
-                            id="bairro"
-                            name="bairro"
-                            list="bairros"
-                            placeholder="Digite o bairro"
-                            required
-                    />
-                    <datalist id="bairros">
-                        <option value="Água Verde"></option>
-                        <option value="Asilo"></option>
-                        <option value="Badenfurt"></option>
-                        <option value="Bom Retiro"></option>
-                        <option value="Boa Vista"></option>
-                        <option value="Centro"></option>
-                        <option value="Da Glória"></option>
-                        <option value="Do Salto"></option>
-                        <option value="Escola Agrícola"></option>
-                        <option value="Fortaleza"></option>
-                        <option value="Fortaleza Alta"></option>
-                        <option value="Garcia"></option>
-                        <option value="Itoupava Central"></option>
-                        <option value="Itoupava Norte"></option>
-                        <option value="Itoupava Rega"></option>
-                        <option value="Itoupava Seca"></option>
-                        <option value="Jardim Blumenau"></option>
-                        <option value="Jardim Europa"></option>
-                        <option value="Ponta Aguda"></option>
-                        <option value="Progresso"></option>
-                        <option value="Ribeirão Fresco"></option>
-                        <option value="Ribeirão da Velha"></option>
-                        <option value="Salto Weissbach"></option>
-                        <option value="Testo Salto"></option>
-                        <option value="Valparaíso"></option>
-                        <option value="Velha"></option>
-                        <option value="Velha Central"></option>
-                        <option value="Velha Grande"></option>
-                        <option value="Vila Formosa"></option>
-                        <option value="Vila Itoupava"></option>
-                        <option value="Vorstadt"></option>
-                    </datalist>
+                    <input type="text" id="bairro" name="bairro" list="bairros" placeholder="Digite o bairro" required/>
+                    <datalist id="bairros"></datalist>
                 </div>
 
                 <div class="formulario-grupo">
                     <label for="tipo">Tipo</label>
-                    <input
-                            type="text"
-                            id="tipo"
-                            name="tipo"
-                            list="tipos"
-                            placeholder="Selecione o tipo"
-                            required
-                    />
-                    <datalist id="tipos">
+                    <select id="tipo" name="tipo" required>
                         <option value="Rua">Rua</option>
                         <option value="Avenida">Avenida</option>
                         <option value="Praça">Praça</option>
@@ -118,41 +60,25 @@
                         <option value="Via">Via</option>
                         <option value="Passeio">Passeio</option>
                         <option value="Parque">Parque</option>
-                    </datalist>
+                    </select>
                 </div>
 
                 <div class="formulario-grupo">
                     <label for="logradouro">Logradouro</label>
-                    <input
-                            type="text"
-                            id="logradouro"
-                            name="logradouro"
-                            placeholder="Escreva o logradouro..."
-                            maxlength="30"
-                            required
-                    />
+                    <input type="text" id="logradouro" name="logradouro" list="logradouros"
+                           placeholder="Digite o logradouro" required/>
+                    <datalist id="logradouros"></datalist>
                 </div>
 
                 <div class="formulario-grupo">
                     <label for="numero">Número</label>
-                    <input
-                            type="number"
-                            id="numero"
-                            name="numero"
-                            placeholder="Número da residência..."
-                            required
-                    />
+                    <input type="number" id="numero" name="numero" placeholder="número" required/>
                 </div>
 
                 <div class="formulario-grupo">
                     <label for="complemento">Complemento</label>
-                    <input
-                            type="text"
-                            id="complemento"
-                            name="complemento"
-                            placeholder="Escreva o complemento..."
-                            maxlength="30"
-                    />
+                    <input type="text" id="complemento" name="complemento" placeholder="Escreva o complemento..."
+                           maxlength="30"/>
                 </div>
 
                 <div class="formulario-botoes">
@@ -163,5 +89,73 @@
         </form>
     </div>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        <c:if test="${not empty mensagemPopup}">
+        mostrarPopup("${mensagemPopup}", "#4caf50", 4000);
+        </c:if>
+
+        carregarCidades();
+
+        async function carregarCidades() {
+            try {
+                const response = await fetch('buscarCidades');
+                const cidades = await response.json();
+                const cidadeDatalist = document.getElementById('cidades');
+                cidades.forEach(cidade => {
+                    const option = document.createElement('option');
+                    option.value = cidade;
+                    cidadeDatalist.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar cidades:', error);
+            }
+        }
+    });
+
+    document.getElementById('cidade').addEventListener('input', async function () {
+
+        const cidade = this.value;
+        const bairroDatalist = document.getElementById('bairros');
+
+        if (cidade) {
+            try {
+                const response = await fetch('buscarBairros?cidade=' + encodeURIComponent(cidade));
+                const bairros = await response.json();
+                bairroDatalist.innerHTML = '';
+                bairros.forEach(bairro => {
+                    const option = document.createElement('option');
+                    option.value = bairro;
+                    bairroDatalist.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar bairros:', error);
+            }
+        }
+    });
+
+    document.getElementById('bairro').addEventListener('input', async function () {
+
+        const bairro = this.value;
+        const logradouroDatalist = document.getElementById('logradouros');
+
+        if (bairro) {
+            try {
+                const response = await fetch('buscarLogradouros?bairro=' + encodeURIComponent(bairro));
+                const logradouros = await response.json();
+                logradouroDatalist.innerHTML = '';
+                logradouros.forEach(logradouro => {
+                    const option = document.createElement('option');
+                    option.value = logradouro;
+                    logradouroDatalist.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar logradouros:', error);
+            }
+        }
+    });
+</script>
 </body>
 </html>

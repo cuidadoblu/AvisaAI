@@ -1,17 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../componentes/cabecalho.jsp"/>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8"/>
     <title>Lista de Localidades</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -75,23 +71,16 @@
                     <td>${localidade.cidade}</td>
                     <td>${localidade.bairro}</td>
                     <td>${localidade.logradouro}</td>
-                    <td>
-                        <c:choose>
-                            <c:when test="${not empty localidade.comunidade}">
-                                <span style="color: green;">● ${localidade.comunidade}</span>
-                            </c:when>
-                            <c:otherwise>
-                                <span style="color: red;">●</span>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td class="acoes">
-                        <a href="editar-localidade?id-localidade=${localidade.id}">
-                            <img src="../../recursos/icones/editar.png" alt="Editar">
-                        </a>
-                        <a href="excluir-localidade?id-localidade=${localidade.id}">
-                            <img src="../../recursos/icones/excluir.png" alt="Excluir">
-                        </a>
+                    <td><c:choose>
+                        <c:when test="${not empty localidade.comunidade}">
+                            <span style="color: green;">● ${localidade.comunidade}</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span style="color: red;">●</span>
+                        </c:otherwise>
+                    </c:choose></td>
+                    <td class="acoes"><a href="editar-localidade?id-localidade=${localidade.id}">Editar<img src="" alt="Editar"></a>
+                        <a href="excluir-localidade?id-localidade=${localidade.id}">Excluir<img src="" alt="Excluir"></a>
                     </td>
                 </tr>
             </c:forEach>

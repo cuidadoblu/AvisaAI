@@ -20,135 +20,128 @@ import avisaai.modelo.entidade.comentario.resposta.Resposta;
 import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.usuario.Usuario;
 
-@WebServlet(urlPatterns = {
-    "/inserir-resposta",
-    "/atualizar-resposta",
-    "/excluir-resposta",
-    "/listar-respostas",
-    "/exibir-resposta",
-    "/resposta-nao-encontrada"
-})
+@WebServlet(urlPatterns = { "/inserir-resposta", "/atualizar-resposta", "/excluir-resposta", "/listar-respostas",
+		"/exibir-resposta", "/resposta-nao-encontrada" })
 public class RespostaServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6207710279638623681L;
+	private RespostaDAO respostaDAO;
+	private ComentarioDAO comentarioDAO;
 
-    private RespostaDAO respostaDAO;
-    private ComentarioDAO comentarioDAO;
+	public void init() {
+		respostaDAO = new RespostaDAOImpl();
+		comentarioDAO = new ComentarioDAOImpl();
+	}
 
-    public void init() {
-        respostaDAO = new RespostaDAOImpl();
-        comentarioDAO = new ComentarioDAOImpl();
-    }
+	protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws ServletException, IOException {
+		doGet(requisicao, resposta);
+	}
 
-    protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws ServletException, IOException {
-        doGet(requisicao, resposta);
-    }
+	protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws ServletException, IOException {
 
-    protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws ServletException, IOException {
+		String action = requisicao.getServletPath();
 
-        String action = requisicao.getServletPath();
+		try {
+			switch (action) {
 
-        try {
-            switch (action) {
+			case "/inserir-resposta":
+				inserirResposta(requisicao, resposta);
+				break;
 
-                case "/inserir-resposta":
-                    inserirResposta(requisicao, resposta);
-                    break;
+			case "/atualizar-resposta":
+				atualizarResposta(requisicao, resposta);
+				break;
 
-                case "/atualizar-resposta":
-                    atualizarResposta(requisicao, resposta);
-                    break;
+			case "/excluir-resposta":
+				excluirResposta(requisicao, resposta);
+				break;
 
-                case "/excluir-resposta":
-                    excluirResposta(requisicao, resposta);
-                    break;
+			case "/listar-respostas":
+				listarRespostas(requisicao, resposta);
+				break;
 
-                case "/listar-respostas":
-                    listarRespostas(requisicao, resposta);
-                    break;
+			case "/exibir-resposta":
+				exibirResposta(requisicao, resposta);
+				break;
 
-                case "/exibir-resposta":
-                    exibirResposta(requisicao, resposta);
-                    break;
+			case "/resposta-nao-encontrada":
+				erro(requisicao, resposta);
+				break;
+			}
+		} catch (SQLException ex) {
+			throw new ServletException(ex);
+		}
+	}
 
-                case "/resposta-nao-encontrada":
-                    erro(requisicao, resposta);
-                    break;
-            }
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
-        }
-    }
+	private void inserirResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
 
-    private void inserirResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws SQLException, ServletException, IOException {
+		String conteudo = requisicao.getParameter("conteudo");
+		Long idComentario = Long.parseLong(requisicao.getParameter("id_comentario"));
 
-        String conteudo = requisicao.getParameter("conteudo");
-        Long idComentario = Long.parseLong(requisicao.getParameter("id_comentario"));
+		HttpSession sessao = requisicao.getSession();
+		Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
-        HttpSession sessao = requisicao.getSession();
-        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+		Comentario comentarioOrigem = comentarioDAO.consultarComentarioId(idComentario);
 
-        Comentario comentarioOrigem = comentarioDAO.consultarComentarioId(idComentario);
+		Resposta novaResposta = new Resposta(conteudo, LocalDateTime.now(), usuario, comentarioOrigem);
+		respostaDAO.inserirResposta(novaResposta);
 
-        Resposta novaResposta = new Resposta(conteudo, LocalDateTime.now(), usuario, comentarioOrigem);
-        respostaDAO.inserirResposta(novaResposta);
+		requisicao.getRequestDispatcher("/exibir-resposta").forward(requisicao, resposta);
+	}
 
-        requisicao.getRequestDispatcher("/exibir-resposta").forward(requisicao, resposta);
-    }
+	private void atualizarResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
 
-    private void atualizarResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws SQLException, ServletException, IOException {
+		Long idResposta = Long.parseLong(requisicao.getParameter("id_resposta"));
+		String conteudo = requisicao.getParameter("conteudo");
 
-        Long idResposta = Long.parseLong(requisicao.getParameter("id_resposta"));
-        String conteudo = requisicao.getParameter("conteudo");
+		Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
+		respostaObj.setConteudo(conteudo);
+		respostaObj.setDataHora(LocalDateTime.now());
 
-        Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
-        respostaObj.setConteudo(conteudo);
-        respostaObj.setDataHora(LocalDateTime.now());
+		respostaDAO.atualizarResposta(respostaObj);
 
-        respostaDAO.atualizarResposta(respostaObj);
+		requisicao.getRequestDispatcher("/exibir-resposta").forward(requisicao, resposta);
+	}
 
-        requisicao.getRequestDispatcher("/exibir-resposta").forward(requisicao, resposta);
-    }
+	private void excluirResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
 
-    private void excluirResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws SQLException, ServletException, IOException {
+		Long idResposta = Long.parseLong(requisicao.getParameter("id_resposta"));
+		Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
+		respostaDAO.deletarResposta(respostaObj);
 
-        Long idResposta = Long.parseLong(requisicao.getParameter("id_resposta"));
-        Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
-        respostaDAO.deletarResposta(respostaObj);
+		requisicao.getRequestDispatcher("/listar-respostas").forward(requisicao, resposta);
+	}
 
-        requisicao.getRequestDispatcher("/listar-respostas").forward(requisicao, resposta);
-    }
+	private void listarRespostas(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
 
-    private void listarRespostas(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws SQLException, ServletException, IOException {
+		Long idComentario = Long.parseLong(requisicao.getParameter("id_comentario"));
+		Comentario comentario = comentarioDAO.consultarComentarioId(idComentario);
 
-        Long idComentario = Long.parseLong(requisicao.getParameter("id_comentario"));
-        Comentario comentario = comentarioDAO.consultarComentarioId(idComentario);
+		List<Resposta> listaRespostas = respostaDAO.consultarRespostaComentarioOrigem(comentario);
 
-        List<Resposta> listaRespostas = respostaDAO.consultarRespostaComentarioOrigem(comentario);
+		requisicao.setAttribute("listaRespostas", listaRespostas);
+		requisicao.getRequestDispatcher("lista-respostas.jsp").forward(requisicao, resposta);
+	}
 
-        requisicao.setAttribute("listaRespostas", listaRespostas);
-        requisicao.getRequestDispatcher("lista-respostas.jsp").forward(requisicao, resposta);
-    }
+	private void exibirResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws SQLException, ServletException, IOException {
 
-    private void exibirResposta(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws SQLException, ServletException, IOException {
+		Long idResposta = Long.parseLong(requisicao.getParameter("id_resposta"));
+		Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
 
-        Long idResposta = Long.parseLong(requisicao.getParameter("id_resposta"));
-        Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
+		requisicao.setAttribute("resposta", respostaObj);
+		requisicao.getRequestDispatcher("resposta.jsp").forward(requisicao, resposta);
+	}
 
-        requisicao.setAttribute("resposta", respostaObj);
-        requisicao.getRequestDispatcher("resposta.jsp").forward(requisicao, resposta);
-    }
+	private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)
+			throws ServletException, IOException {
 
-    private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws ServletException, IOException {
-
-        requisicao.getRequestDispatcher("erro-404.jsp").forward(requisicao, resposta);
-    }
+		requisicao.getRequestDispatcher("erro-404.jsp").forward(requisicao, resposta);
+	}
 }

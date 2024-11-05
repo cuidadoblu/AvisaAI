@@ -16,316 +16,317 @@ import avisaai.modelo.factory.conexao.ConexaoFactory;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
-    private final ConexaoFactory fabrica = new ConexaoFactory();
+	private final ConexaoFactory fabrica = new ConexaoFactory();
 
-    public void inserirUsuario(Usuario usuario) {
-        Session sessao = null;
+	public void inserirUsuario(Usuario usuario) {
+		Session sessao = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            sessao.save(usuario);
+			sessao.save(usuario);
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception sqlException) {
+		} catch (Exception sqlException) {
 
-            sqlException.printStackTrace();
+			sqlException.printStackTrace();
 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
 
-        } finally {
+		} finally {
 
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 
-    }
+	}
 
-    public void deletarUsuario(Usuario usuario) {
-        Session sessao = null;
+	public void deletarUsuario(Usuario usuario) {
+		Session sessao = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            sessao.remove(usuario);
+			sessao.remove(usuario);
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception sqlException) {
+		} catch (Exception sqlException) {
 
-            sqlException.printStackTrace();
+			sqlException.printStackTrace();
 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
 
-        } finally {
+		} finally {
 
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 
-    }
+	}
 
-    public void atualizarUsuario(Usuario usuario) {
-        Session sessao = null;
+	public void atualizarUsuario(Usuario usuario) {
+		Session sessao = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            sessao.update(usuario);
+			sessao.update(usuario);
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception sqlException) {
+		} catch (Exception sqlException) {
 
-            sqlException.printStackTrace();
+			sqlException.printStackTrace();
 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
 
-        } finally {
+		} finally {
 
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 
-    }
+	}
 
-    public List<Usuario> consultarUsuarioNome(String nome) {
-        Session sessao = null;
-        List<Usuario> usuarios = null;
+	public List<Usuario> consultarUsuarioNome(String nome) {
+		Session sessao = null;
+		List<Usuario> usuarios = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-            CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-            Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-            criteria.where(construtor.like(raizUsuario.get(Usuario_.nome), "%" + nome + "%"));
+			criteria.where(construtor.like(raizUsuario.get(Usuario_.nome), "%" + nome + "%"));
 
-            usuarios = sessao.createQuery(criteria).getResultList();
+			usuarios = sessao.createQuery(criteria).getResultList();
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception sqlException) {
+		} catch (Exception sqlException) {
 
-            sqlException.printStackTrace();
+			sqlException.printStackTrace();
 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
 
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 
-        return usuarios;
-    }
+		return usuarios;
+	}
 
-    public List<Usuario> recuperarUsuarios(Usuario usuario) {
-        Session sessao = null;
-        List<Usuario> usuarios = null;
+	public List<Usuario> recuperarUsuarios(Usuario usuario) {
+		Session sessao = null;
+		List<Usuario> usuarios = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-            CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-            Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-            criteria.select(raizUsuario);
+			criteria.select(raizUsuario);
 
-            usuarios = sessao.createQuery(criteria).getResultList();
+			usuarios = sessao.createQuery(criteria).getResultList();
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception sqlException) {
+		} catch (Exception sqlException) {
 
-            sqlException.printStackTrace();
+			sqlException.printStackTrace();
 
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
 
-        } finally {
+		} finally {
 
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 
-        return usuarios;
-    }
+		return usuarios;
+	}
 
-    public Usuario consultarUsuarioId(Long id) {
-        Session sessao = null;
-        Usuario usuario = null;
+	public Usuario consultarUsuarioId(Long id) {
+		Session sessao = null;
+		Usuario usuario = null;
 
-        try {
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-            CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-            Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-            criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), id));
+			criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("id"), id));
 
-            usuario = sessao.createQuery(criteria).uniqueResult();
+			usuario = sessao.createQuery(criteria).uniqueResult();
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception sqlException) {
-            sqlException.printStackTrace();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
 
-            if (sessao != null && sessao.getTransaction().isActive()) {
-                sessao.getTransaction().rollback();
-            }
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
-        return usuario;
-    }
+			if (sessao != null && sessao.getTransaction().isActive()) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return usuario;
+	}
 
-    public boolean checarCredenciaisUsuario(String email, String senha) {
-        Session sessao = null;
-        boolean existeCredenciais = false;
+	public boolean checarCredenciaisUsuario(String email, String senha) {
+		Session sessao = null;
+		boolean existeCredenciais = false;
 
-        try {
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+		try {
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-            CriteriaQuery<Long> criteria = construtor.createQuery(Long.class);
-            Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Long> criteria = construtor.createQuery(Long.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-            Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
+			Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
 
-            Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
-            Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
+			Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
+			Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
 
-            criteria.select(construtor.count(raizUsuario)).where(construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario));
+			criteria.select(construtor.count(raizUsuario))
+					.where(construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario));
 
-            Long resultado = sessao.createQuery(criteria).getSingleResult();
-            existeCredenciais = (resultado != null && resultado > 0);
+			Long resultado = sessao.createQuery(criteria).getSingleResult();
+			existeCredenciais = (resultado != null && resultado > 0);
 
-            sessao.getTransaction().commit();
-        } catch (Exception exception) {
-            if (sessao != null && sessao.getTransaction().isActive()) {
-                sessao.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
+			sessao.getTransaction().commit();
+		} catch (Exception exception) {
+			if (sessao != null && sessao.getTransaction().isActive()) {
+				sessao.getTransaction().rollback();
+			}
+			exception.printStackTrace();
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 
-        return existeCredenciais;
-    }
+		return existeCredenciais;
+	}
 
-    public Usuario recuperarUsuarioPorCredenciais(String email, String senha) {
+	public Usuario recuperarUsuarioPorCredenciais(String email, String senha) {
 
-        Session sessao = null;
-        Usuario usuario = null;
+		Session sessao = null;
+		Usuario usuario = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-            CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
-            Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-            criteria.select(raizUsuario);
+			criteria.select(raizUsuario);
 
-            Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
+			Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
 
-            Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
+			Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
 
-            Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
+			Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
 
-            Predicate predicadoResultado = construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario);
-            criteria.where(predicadoResultado);
+			Predicate predicadoResultado = construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario);
+			criteria.where(predicadoResultado);
 
-            usuario = sessao.createQuery(criteria).getSingleResult();
+			usuario = sessao.createQuery(criteria).getSingleResult();
 
-            sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
-        } catch (Exception exception) {
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
-            exception.printStackTrace();
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
-        return usuario;
-    }
+		} catch (Exception exception) {
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+			exception.printStackTrace();
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return usuario;
+	}
 
-    public Contato recuperarContatoUsuario(Usuario usuario) {
+	public Contato recuperarContatoUsuario(Usuario usuario) {
 
-        Session sessao = null;
-        Contato contato = null;
+		Session sessao = null;
+		Contato contato = null;
 
-        try {
+		try {
 
-            sessao = fabrica.getConexao().openSession();
-            sessao.beginTransaction();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-            CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
-            Root<Contato> raizContato = criteria.from(Contato.class);
+			CriteriaQuery<Contato> criteria = construtor.createQuery(Contato.class);
+			Root<Contato> raizContato = criteria.from(Contato.class);
 
-            criteria.select(raizContato);
+			criteria.select(raizContato);
 
-            Join<Contato, Usuario> juncaoUsuario = raizContato.join((Contato_.usuario));
+			Join<Contato, Usuario> juncaoUsuario = raizContato.join((Contato_.usuario));
 
-            ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
-            criteria.where(construtor.equal(juncaoUsuario.get(Usuario_.id), idUsuario));
+			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoUsuario.get(Usuario_.id), idUsuario));
 
-            contato = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getSingleResult();
+			contato = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getSingleResult();
 
-            sessao.getTransaction().commit();
-        } catch (Exception sqlException) {
-            sqlException.printStackTrace();
-            if (sessao.getTransaction() != null) {
-            }
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
-        }
-        return contato;
-    }
+			sessao.getTransaction().commit();
+		} catch (Exception sqlException) {
+			sqlException.printStackTrace();
+			if (sessao.getTransaction() != null) {
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return contato;
+	}
 }

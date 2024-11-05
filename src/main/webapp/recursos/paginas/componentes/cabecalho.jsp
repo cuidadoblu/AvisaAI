@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AvisaAí - Interface</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -207,7 +206,7 @@
 <header class="cabecalho-avisaai">
     <i class="fas fa-bars icone-menu-avisaai" onclick="alternarMenu()"></i>
     <div class="logo-avisaai">
-        <i class="fas fa-users"></i> AvisaAí!
+        <i class="fas fa-users"></i> <a onclick="voltarPagina()">AvisaAí!</a>
     </div>
     <div class="barra-consulta-avisaai">
         <i class="fas fa-search"></i>
@@ -302,6 +301,10 @@
 
     function redirecionar(url) {
         window.location.href = url;
+    }
+
+    function voltarPagina() {
+        window.history.back();
     }
 </script>
 

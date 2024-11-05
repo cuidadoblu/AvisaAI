@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,20 +10,18 @@
 <link rel="shortcut icon" href="img" type="image/x-icon">
 </head>
 <body>
-	<!-- Logo no topo -->
 	<header>
 		<div class="logo-acesso">
-			<a href="landing-page"><img src="img" alt="AvisaAí Logo"
-				class="logo-avisaai"></a>
+			<a href="pagina-inicial"> <img src="img" alt="Logo do AvisaAí"
+				class="logo-avisaai">
+			</a>
 		</div>
 	</header>
 	<main>
 		<div class="container-acesso">
-			<!-- Div da imagem -->
 			<div class="acesso-esquerda">
-				<img src="" alt="cadastro" class="imagem-tela">
+				<img src="" alt="Cadastro" class="imagem-tela">
 			</div>
-			<!-- Div do formulário -->
 			<div class="acesso-direita">
 				<div class="formulario-entradas">
 					<h2>Definir Senha</h2>
@@ -31,12 +30,10 @@
 							<input type="password" name="senha" id="senha"
 								placeholder="Senha:" required>
 						</div>
-
 						<div class="formulario-grupo">
 							<input type="password" name="confirmarsenha" id="confirmarsenha"
 								placeholder="Confirmar Senha:" required>
 						</div>
-
 						<div class="formulario-botoes">
 							<button type="button"
 								onclick="window.location.href='cadastro-usuario'"
@@ -52,5 +49,4 @@
 		</div>
 	</main>
 </body>
-
 </html>

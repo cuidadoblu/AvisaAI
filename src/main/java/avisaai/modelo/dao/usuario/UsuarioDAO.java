@@ -24,6 +24,4 @@ public interface UsuarioDAO {
 	boolean checarCredenciaisUsuario(String email, String senha);
 
 	Contato recuperarContatoUsuario(Usuario usuario);
-
-
 }

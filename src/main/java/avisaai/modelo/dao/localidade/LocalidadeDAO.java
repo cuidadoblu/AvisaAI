@@ -21,4 +21,14 @@ public interface LocalidadeDAO {
 	List<Localidade> consultarLocalidadePorBairro(String bairro);
 
 	Localidade consultarLocalidadeId(Long id);
+
+	public List<String> recuperarEstados();
+
+	public List<String> recuperarCidadesPorEstado(String estado);
+
+	public List<String> recuperarBairrosPorCidade(String estado, String cidade);
+
+	public List<String> recuperarLogradourosPorBairro(String estado, String cidade, String bairro);
+
+	List<Localidade> consultarLocalidadePorParametro(String parametro);
 }

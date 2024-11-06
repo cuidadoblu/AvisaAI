@@ -242,7 +242,7 @@
         <a href="notificacoes">
             <img src="icons/notificacoes.png" alt="Notificações">
         </a>
-        <a href="perfil-usuario">
+        <a href="perfil-usuario-logado">
             <img src="icons/perfil.png" alt="Perfil">
         </a>
     </div>
@@ -264,7 +264,7 @@
     <div class="perfil-avisaai">
         <img src="icons/perfil.png" alt="Perfil">
         <span>Usuário Logado</span>
-        <button onclick="redirecionar('sair')"><i class="fas fa-sign-out-alt"></i> Sair da Conta</button>
+        <button onclick="redirecionar('deslogar')"><i class="fas fa-sign-out-alt"></i> Sair da Conta</button>
     </div>
 </div>
 

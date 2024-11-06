@@ -19,8 +19,8 @@ import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.entidade.usuario.contato.Contato;
 
-@WebServlet(urlPatterns = {"/usuarios", "/login", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
-        "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/usuario-nao-encontrado"})
+@WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
+        "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/usuario-nao-encontrado"})
 public class UsuarioServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1959126762240015341L;
@@ -54,6 +54,14 @@ public class UsuarioServlet extends HttpServlet {
                     mostrarTelaLogin(requisicao, resposta);
                     break;
 
+                case "/fazer-login":
+                    fazerLogin(requisicao, resposta);
+                    break;
+
+                case "/deslogar":
+                    deslogar(requisicao, resposta);
+                    break;
+
                 case "/cadastro-usuario":
                     mostrarTelaCadastro(requisicao, resposta);
                     break;
@@ -68,6 +76,10 @@ public class UsuarioServlet extends HttpServlet {
 
                 case "/perfil-usuario":
                     mostrarTelaPerfilUsuario(requisicao, resposta);
+                    break;
+
+                case "/perfil-usuario-logado":
+                    mostrarTelaPerfilUsuarioLogado(requisicao, resposta);
                     break;
 
                 case "/inserir-usuario":
@@ -104,19 +116,29 @@ public class UsuarioServlet extends HttpServlet {
         String email = requisicao.getParameter("email");
         String senha = requisicao.getParameter("senha");
 
-        // Verifica as credenciais e recupera o usuário em uma única operação
+        if (!usuarioDAO.checarCredenciaisUsuario(email, senha)) {
+            requisicao.setAttribute("mensagemErro", "Email ou senha incorretos.");
+            RequestDispatcher dispatcher = requisicao.getRequestDispatcher("login");
+            dispatcher.forward(requisicao, resposta);
+        }
+
         Usuario usuario = usuarioDAO.recuperarUsuarioPorCredenciais(email, senha);
 
         if (usuario != null) {
             HttpSession sessao = requisicao.getSession();
             sessao.setAttribute("usuario-logado", usuario);
-            RequestDispatcher dispatcher = requisicao.getRequestDispatcher("cadastro-incidente");
-            dispatcher.forward(requisicao, resposta);
-        } else {
-            requisicao.setAttribute("mensagemErro", "Email ou senha incorretos.");
-            RequestDispatcher dispatcher = requisicao.getRequestDispatcher("login");
+            RequestDispatcher dispatcher = requisicao.getRequestDispatcher("");
             dispatcher.forward(requisicao, resposta);
         }
+    }
+
+    private void deslogar(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
+
+        HttpSession sessao = requisicao.getSession();
+        sessao.setAttribute("usuario-logado", null);
+
+        resposta.sendRedirect("login");
     }
 
     private void mostrarTelaCadastro(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -135,7 +157,7 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession sessao = requisicao.getSession();
-        requisicao.getRequestDispatcher("/recursos/paginas/usuario/redefinir-senha.jsp").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("/recursos/paginas/usuario/definir-senha.jsp").forward(requisicao, resposta);
     }
 
     private void mostrarTelaConsultaUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -157,15 +179,29 @@ public class UsuarioServlet extends HttpServlet {
     private void mostrarTelaPerfilUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
-        long id = Long.parseLong(requisicao.getParameter("id-usuario"));
-
         HttpSession sessao = requisicao.getSession();
 
-        Usuario usuario = usuarioDAO.consultarUsuarioId(id);
+        Usuario usuario = null;
+
+        long id = Long.parseLong(requisicao.getParameter("id-usuario"));
+
+        usuario = usuarioDAO.consultarUsuarioId(id);
 
         sessao.setAttribute("usuario", usuario);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
+    }
+
+    private void mostrarTelaPerfilUsuarioLogado(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
+
+        HttpSession sessao = requisicao.getSession();
+
+        Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuario-logado");
+
+        sessao.setAttribute("usuario", usuarioLogado);
+
+        requisicao.getRequestDispatcher(("/recursos/paginas/usuario/perfil-usuario.jsp")).forward(requisicao, resposta);
     }
 
     private void inserirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)

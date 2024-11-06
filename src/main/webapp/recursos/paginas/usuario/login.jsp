@@ -24,18 +24,18 @@
 			<div class="acesso-direita">
 				<h2>Login</h2>
 				<div class="formulario-entradas">
-					<form action="login" method="POST">
+					<form action="fazer-login" method="POST">
 						<div class="formulario-grupo">
-							<input type="email" name="email" placeholder="E-mail:" required>
+							<input type="email" name="email" id="email" placeholder="E-mail:" required>
 						</div>
 						<div class="formulario-grupo">
-							<input type="password" name="senha" placeholder="Senha:" required>
+							<input type="password" name="senha" id="senha" placeholder="Senha:" required>
 						</div>
 						<div class="formulario-botoes">
 							<button type="submit" class="botao-confirmar">Confirmar</button>
 							<button type="button"
-								onclick="window.location.href='cadastro-usuario'"
-								class="botao-cadastrar">Cadastrar-se</button>
+									onclick="window.location.href='cadastro-usuario'"
+									class="botao-cadastrar">Cadastrar-se</button>
 						</div>
 						<div class="botao-cadastro">
 							<a href="alterar-senha" class="link">Esqueceu a senha?</a>

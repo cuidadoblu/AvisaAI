@@ -233,7 +233,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 					.where(construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario));
 
 			Long resultado = sessao.createQuery(criteria).getSingleResult();
-			existeCredenciais = (resultado != null && resultado > 0);
+
+			if (resultado != null && resultado > 0) {
+				existeCredenciais = true;
+			}
 
 			sessao.getTransaction().commit();
 		} catch (Exception exception) {
@@ -246,7 +249,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				sessao.close();
 			}
 		}
-
 		return existeCredenciais;
 	}
 
@@ -269,12 +271,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			Join<Usuario, Contato> juncaoContato = raizUsuario.join(Usuario_.contato);
 
-			Predicate predicadoSenhaUsuario = construtor.equal(raizUsuario.get(Usuario_.senha), senha);
-
-			Predicate predicadoEmailUsuario = construtor.equal(juncaoContato.get(Contato_.email), email);
-
-			Predicate predicadoResultado = construtor.and(predicadoSenhaUsuario, predicadoEmailUsuario);
-			criteria.where(predicadoResultado);
+			criteria.where(construtor.and(construtor.equal(raizUsuario.get(Usuario_.senha), senha),
+					construtor.equal(juncaoContato.get(Contato_.email), email)));
 
 			usuario = sessao.createQuery(criteria).getSingleResult();
 

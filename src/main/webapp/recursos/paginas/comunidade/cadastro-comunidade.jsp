@@ -176,7 +176,7 @@ select.formulario-controle:hover {
 				</a>
 				<h2>Cadastrar Comunidade</h2>
 			</div>
-			<form action="cadastro-comunidade" method="post">
+			<form action="inserir-comunidade" method="post">
 				<div class="formulario-entradas">
 					<div class="formulario-grupo">
 						<label for="foto" class="arquivo-foto">Escolha uma foto</label> <input
@@ -197,17 +197,6 @@ select.formulario-controle:hover {
 							class="formulario-controle"
 							placeholder="Escreva uma descrição para a comunidade..." rows="4"
 							required></textarea>
-					</div>
-
-					<div class="formulario-grupo">
-						<label for="bairro">Bairro</label> <select id="bairro"
-							name="id-bairro" class="formulario-controle" required>
-							<option value="" disabled selected>Selecione o seu
-								bairro</option>
-							<c:forEach var="bairro" items="${bairros}">
-								<option value="${bairro}">${bairro}</option>
-							</c:forEach>
-						</select>
 					</div>
 
 					<div class="formulario-botoes">

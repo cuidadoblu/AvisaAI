@@ -23,168 +23,192 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = { "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente",
-		"/incidente-nao-encontrado" })
+@WebServlet(urlPatterns = {"/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/feed-pessoal", "/incidente-nao-encontrado"})
 public class IncidenteServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -2732576384429342823L;
-	private IncidenteDAO incidenteDAO;
-	private ComunidadeDAO comunidadeDAO;
-	private LocalidadeDAO localidadeDAO;
-	private UsuarioDAO usuarioDAO;
+    private static final long serialVersionUID = -2732576384429342823L;
+    private IncidenteDAO incidenteDAO;
+    private ComunidadeDAO comunidadeDAO;
+    private LocalidadeDAO localidadeDAO;
+    private UsuarioDAO usuarioDAO;
 
-	public void init() {
-		incidenteDAO = new IncidenteDAOImpl();
-		comunidadeDAO = new ComunidadeDAOImpl();
-		localidadeDAO = new LocalidadeDAOImpl();
-		usuarioDAO = new UsuarioDAOImpl();
-	}
+    public void init() {
+        incidenteDAO = new IncidenteDAOImpl();
+        comunidadeDAO = new ComunidadeDAOImpl();
+        localidadeDAO = new LocalidadeDAOImpl();
+        usuarioDAO = new UsuarioDAOImpl();
+    }
 
-	protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
-		doGet(requisicao, resposta);
-	}
+    protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
+        doGet(requisicao, resposta);
+    }
 
-	protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
+    protected void doGet(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
 
-		String action = requisicao.getServletPath();
+        String action = requisicao.getServletPath();
 
-		try {
+        try {
 
-			switch (action) {
+            switch (action) {
 
-			case "/perfil-incidente":
-				mostrarTelaPerfilIncidente(requisicao, resposta);
-				break;
+                case "/perfil-incidente":
+                    mostrarTelaPerfilIncidente(requisicao, resposta);
+                    break;
 
-			case "/incidentes":
-				mostrarTelaConsultaIncidente(requisicao, resposta);
-				break;
+                case "/incidentes":
+                    mostrarTelaConsultaIncidente(requisicao, resposta);
+                    break;
 
-			case "/cadastro-incidente":
-				mostrarTelaCadastroIncidente(requisicao, resposta);
-				break;
+                case "/cadastro-incidente":
+                    mostrarTelaCadastroIncidente(requisicao, resposta);
+                    break;
 
-			case "/inserir-incidente":
-				inserirIncidente(requisicao, resposta);
-				break;
+                case "/inserir-incidente":
+                    inserirIncidente(requisicao, resposta);
+                    break;
 
-			case "/atualizar-incidente":
-				atualizarIncidente(requisicao, resposta);
-				break;
+                case "/atualizar-incidente":
+                    atualizarIncidente(requisicao, resposta);
+                    break;
 
-			case "/excluir-incidente":
-				excluirIncidente(requisicao, resposta);
-				break;
+                case "/excluir-incidente":
+                    excluirIncidente(requisicao, resposta);
+                    break;
 
-			case "/incidente-nao-encontrado":
-				erro(requisicao, resposta);
-				break;
-			}
+                case "/feed-pessoal":
+                    mostrarTelaFeedPessoal(requisicao, resposta);
+                    break;
 
-		} catch (SQLException ex) {
-			throw new ServletException(ex);
-		}
-	}
+                case "/incidente-nao-encontrado":
+                    erro(requisicao, resposta);
+                    break;
+            }
 
-	private void mostrarTelaPerfilIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
+    }
 
-		//Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+    private void mostrarTelaPerfilIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao,
-				resposta);
-	}
+        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-	private void mostrarTelaConsultaIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
+        requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
+    }
 
-		//Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+    private void mostrarTelaConsultaIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("/recursos/paginas/incidente/consulta-incidente.jsp").forward(requisicao,
-				resposta);
-	}
+        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-	private void mostrarTelaCadastroIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
+        requisicao.getRequestDispatcher("/recursos/paginas/incidente/consulta-incidente.jsp").forward(requisicao, resposta);
+    }
 
-		//Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+    private void mostrarTelaFeedPessoal(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
 
-		String listaLocalidades = requisicao.getParameter("listaLocalidades");
+        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-		if(listaLocalidades == null) {
-			List<Localidade> localidades = localidadeDAO.recuperarLocalidades();
-			List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
-			requisicao.setAttribute("listaLocalidades", localidades);
-			requisicao.setAttribute("listaComunidades", comunidades);
-		}
+        String listaIncidentes = requisicao.getParameter("listaIncidentes");
 
-		requisicao.getRequestDispatcher("/recursos/paginas/incidente/cadastro-incidente.jsp").forward(requisicao, resposta);
-	}
+        if (listaIncidentes == null) {
+            List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
+            List<Incidente> incidentes = new ArrayList<>();
 
-	private void inserirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws SQLException, ServletException, IOException {
+            for (Comunidade comunidade : comunidades) {
+                List<Incidente> incidentesComunidade = incidenteDAO.consultarIncidentesComunidade(comunidade);
+                if (incidentesComunidade != null) {
+                    incidentes.addAll(incidentesComunidade);
+                }
+            }
+            requisicao.setAttribute("listaIncidentes", incidentes);
+        }
 
-		String titulo = requisicao.getParameter("titulo");
-		String descricao = requisicao.getParameter("descricao");
-		LocalDateTime dataHora = LocalDateTime.now();
-		Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
-		Situacao situacao = Situacao.ATIVO;
+        requisicao.getRequestDispatcher("/recursos/paginas/incidente/feed-pessoal.jsp").forward(requisicao, resposta);
+    }
 
-		incidenteDAO.inserirIncidente(new Incidente(titulo, descricao, dataHora, categoria,
-				comunidadeDAO.consultarComunidadeId(Long.parseLong(requisicao.getParameter("id-localidade"))),
-				usuarioDAO.consultarUsuarioId(Long.parseLong(requisicao.getParameter("id-usuario"))),
-				localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
-				situacao));
+    private void mostrarTelaCadastroIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
-	}
+        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-	private void atualizarIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws SQLException, ServletException, IOException {
+        String listaLocalidades = requisicao.getParameter("listaLocalidades");
 
-		Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
+        if (listaLocalidades == null) {
+            List<Localidade> localidades = localidadeDAO.recuperarLocalidades();
+            List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
+            requisicao.setAttribute("listaLocalidades", localidades);
+            requisicao.setAttribute("listaComunidades", comunidades);
+        }
 
-		String titulo = requisicao.getParameter("titulo");
-		String descricao = requisicao.getParameter("descricao");
-		LocalDateTime dataHora = LocalDateTime.parse(requisicao.getParameter("data-hora"));
-		Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
-		Situacao situacao = Situacao.valueOf(requisicao.getParameter("situacao"));
+        requisicao.getRequestDispatcher("/recursos/paginas/incidente/cadastro-incidente.jsp").forward(requisicao, resposta);
+    }
 
-		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
+    private void inserirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws SQLException, ServletException, IOException {
 
-		Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
+        String titulo = requisicao.getParameter("titulo");
+        String descricao = requisicao.getParameter("descricao");
+        LocalDateTime dataHora = LocalDateTime.now();
+        Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
+        Situacao situacao = Situacao.ATIVO;
 
-		if (incidenteDAO.consultarIncidenteId(idUsuario) != null) {
-			resposta.sendRedirect("incidentes");
-		}
+        incidenteDAO.inserirIncidente(new Incidente(titulo, descricao, dataHora, categoria,
+                comunidadeDAO.consultarComunidadeId(Long.parseLong(requisicao.getParameter("id-localidade"))),
+                usuarioDAO.consultarUsuarioId(Long.parseLong(requisicao.getParameter("id-usuario"))),
+                localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
+                situacao));
 
-		incidenteDAO.atualizarIncidente(new Incidente(idIncidente, titulo, descricao, dataHora, categoria,
-				comunidadeDAO.consultarComunidadeBairro(localidadeDAO.consultarLocalidadeId(idLocalidade)),
-				usuarioDAO.consultarUsuarioId(idUsuario), localidadeDAO.consultarLocalidadeId(idLocalidade), situacao));
+        requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+    }
 
-		requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
-	}
+    private void atualizarIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws SQLException, ServletException, IOException {
 
-	private void excluirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws SQLException, ServletException, IOException {
+        Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
 
-		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+        String titulo = requisicao.getParameter("titulo");
+        String descricao = requisicao.getParameter("descricao");
+        LocalDateTime dataHora = LocalDateTime.parse(requisicao.getParameter("data-hora"));
+        Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
+        Situacao situacao = Situacao.valueOf(requisicao.getParameter("situacao"));
 
-		Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
+        Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 
-		incidenteDAO.deletarIncidente(incidenteDAO.consultarIncidenteId(idIncidente));
+        Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
 
-		resposta.sendRedirect("feed-pessoal");
-	}
+        if (incidenteDAO.consultarIncidenteId(idUsuario) != null) {
+            resposta.sendRedirect("incidentes");
+        }
 
-	private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
+        incidenteDAO.atualizarIncidente(new Incidente(idIncidente, titulo, descricao, dataHora, categoria,
+                comunidadeDAO.consultarComunidadeBairro(localidadeDAO.consultarLocalidadeId(idLocalidade)),
+                usuarioDAO.consultarUsuarioId(idUsuario), localidadeDAO.consultarLocalidadeId(idLocalidade), situacao));
 
-		requisicao.getRequestDispatcher("/recursos/paginas/erro/erro-404.jsp").forward(requisicao, resposta);
-	}
+        requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
+    }
 
+    private void excluirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws SQLException, ServletException, IOException {
+
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
+        Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
+
+        incidenteDAO.deletarIncidente(incidenteDAO.consultarIncidenteId(idIncidente));
+
+        resposta.sendRedirect("feed-pessoal");
+    }
+
+    private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
+
+        requisicao.getRequestDispatcher("/recursos/paginas/erro/erro-404.jsp").forward(requisicao, resposta);
+    }
 }

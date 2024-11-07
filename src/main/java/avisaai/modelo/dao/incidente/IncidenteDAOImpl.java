@@ -1,16 +1,5 @@
 package avisaai.modelo.dao.incidente;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
 import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.comentario.Comentario_;
 import avisaai.modelo.entidade.comunidade.Comunidade;
@@ -24,6 +13,11 @@ import avisaai.modelo.entidade.usuario.Usuario_;
 import avisaai.modelo.enumeracao.categoria.Categoria;
 import avisaai.modelo.enumeracao.situacao.Situacao;
 import avisaai.modelo.factory.conexao.ConexaoFactory;
+import org.hibernate.Session;
+
+import javax.persistence.criteria.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class IncidenteDAOImpl implements IncidenteDAO {
 
@@ -205,7 +199,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 	}
 
-	public List<Incidente> consultarIncidentesCategoria(Incidente incidente) {
+	public List<Incidente> consultarIncidentesCategoria(Categoria categoria) {
 
 		Session sessao = null;
 		List<Incidente> incidentes = null;
@@ -224,12 +218,10 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 			Join<Incidente, Categoria> juncaoCategoria = raizIncidente.join(Incidente_.categoria);
 
-			Predicate predicadoCategoriaIncidente = construtor
-					.equal(juncaoCategoria.get(Incidente_.categoria.getName()), incidente.getCategoria());
+			ParameterExpression<Enum> valorCategoria = construtor.parameter(Enum.class);
+			criteria.where(construtor.equal(juncaoCategoria.get(categoria.name()), valorCategoria));
 
-			criteria.where(predicadoCategoriaIncidente);
-
-			incidentes = sessao.createQuery(criteria).getResultList();
+			incidentes = sessao.createQuery(criteria).setParameter(valorCategoria.getName(), categoria.name()).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -251,10 +243,11 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 	}
 
-	public List<Incidente> consultarIncidentesUsuarioPorData(Usuario usuario, Incidente incidente) {
+	public List<Incidente> consultarIncidentesUsuarioPorData(Usuario usuario) {
 
 		Session sessao = null;
 		List<Incidente> incidentes = null;
+		LocalDateTime horaAtual = LocalDateTime.now();
 
 		try {
 
@@ -272,8 +265,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 			Predicate predicadoIdUsuario = construtor.equal(juncaoUsuario.get(Usuario_.id), usuario.getId());
 
-			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora),
-					incidente.getDataHora());
+			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora), horaAtual);
 
 			Predicate predicadoResultado = construtor.and(predicadoIdUsuario, predicadoDataHoraIncidente);
 			criteria.where(predicadoResultado);
@@ -300,10 +292,11 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 	}
 
-	public List<Incidente> consultarIncidentesLocalidadePorData(Localidade localidade, Incidente incidente) {
+	public List<Incidente> consultarIncidentesLocalidadePorData(Localidade localidade) {
 
 		Session sessao = null;
 		List<Incidente> incidentes = null;
+		LocalDateTime dataAtual = LocalDateTime.now();
 
 		try {
 
@@ -323,7 +316,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 					localidade.getId());
 
 			Predicate predicadoDataHoraIncidente = construtor.equal(raizIncidente.get(Incidente_.dataHora),
-					incidente.getDataHora());
+					dataAtual);
 
 			Predicate predicadoResultado = construtor.and(predicadoIncidentesLocalidade, predicadoDataHoraIncidente);
 			criteria.where(predicadoResultado);
@@ -350,7 +343,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 	}
 
-	public List<Incidente> consultarIncidentesSituacao(Incidente incidente) {
+	public List<Incidente> consultarIncidentesSituacao(Situacao situacao) {
 
 		Session sessao = null;
 		List<Incidente> incidentes = null;
@@ -369,11 +362,10 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 			Join<Incidente, Situacao> juncaoSituacao = raizIncidente.join(Incidente_.situacao);
 
-			Predicate predicadoSituacaoIncidente = construtor.equal(juncaoSituacao.get(Incidente_.situacao.getName()), incidente.getSituacao());
+			ParameterExpression<Enum> valorSituacao = construtor.parameter(Enum.class);
+			criteria.where(construtor.equal(juncaoSituacao.get(situacao.name()), valorSituacao.getName()));
 
-			criteria.where(predicadoSituacaoIncidente);
-
-			incidentes = sessao.createQuery(criteria).getResultList();
+			incidentes = sessao.createQuery(criteria).setParameter(valorSituacao.getName(), situacao.name()).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -395,7 +387,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
 	}
 
-	public List<Incidente> consultarIncidentesLocalidade(Localidade localidade, Incidente incidente) {
+	public List<Incidente> consultarIncidentesLocalidade(Localidade localidade) {
 
 		Session sessao = null;
 		List<Incidente> incidentes = null;

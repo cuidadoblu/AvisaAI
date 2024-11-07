@@ -1,27 +1,15 @@
 package avisaai.modelo.entidade.comunidade;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import avisaai.modelo.entidade.foto.Foto;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.entidade.usuario.Usuario;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "comunidade")
@@ -56,20 +44,18 @@ public class Comunidade implements Serializable {
 	public Comunidade() {
 	}
 
-	public Comunidade(String nome, String descricao, Localidade localidade, Foto fotoPerfil) {
+	public Comunidade(String nome, String descricao, Foto fotoPerfil) {
 		setNome(nome);
 		setDescricao(descricao);
-		setLocalidade(localidade);
 		setFotoPerfil(fotoPerfil);
 		usuarios = new ArrayList<Usuario>();
 		incidentes = new ArrayList<Incidente>();
 	}
 	
-	public Comunidade(Long id, String nome, String descricao, Localidade localidade, Foto fotoPerfil) {
+	public Comunidade(Long id, String nome, String descricao, Foto fotoPerfil) {
 		setId(id);
 		setNome(nome);
 		setDescricao(descricao);
-		setLocalidade(localidade);
 		setFotoPerfil(fotoPerfil);
 		usuarios = new ArrayList<Usuario>();
 		incidentes = new ArrayList<Incidente>();
@@ -97,14 +83,6 @@ public class Comunidade implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public Localidade getLocalidade() {
-		return localidade;
-	}
-
-	public void setLocalidade(Localidade localidade) {
-		this.localidade = localidade;
 	}
 
 	public Foto getFotoPerfil() {

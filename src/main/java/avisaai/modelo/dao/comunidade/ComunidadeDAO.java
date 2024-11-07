@@ -1,9 +1,9 @@
 package avisaai.modelo.dao.comunidade;
 
-import java.util.List;
-
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.localidade.Localidade;
+
+import java.util.List;
 
 public interface ComunidadeDAO {
 
@@ -16,6 +16,8 @@ public interface ComunidadeDAO {
 	Comunidade consultarComunidadeBairro(Localidade localidade);
 
 	List<Comunidade> recuperarComunidades();
-	
+
+	List<Comunidade> consultarComunidadePorNome(String nome);
+
 	Comunidade consultarComunidadeId(Long id);
 }

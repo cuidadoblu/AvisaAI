@@ -1,15 +1,5 @@
 package avisaai.controle.servlet;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import avisaai.modelo.dao.comunidade.ComunidadeDAO;
 import avisaai.modelo.dao.comunidade.ComunidadeDAOImpl;
 import avisaai.modelo.dao.incidente.IncidenteDAO;
@@ -18,9 +8,21 @@ import avisaai.modelo.dao.localidade.LocalidadeDAO;
 import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
+import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.incidente.Incidente;
+import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.enumeracao.categoria.Categoria;
 import avisaai.modelo.enumeracao.situacao.Situacao;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @WebServlet(urlPatterns = { "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente",
 		"/incidente-nao-encontrado" })
@@ -104,8 +106,16 @@ public class IncidenteServlet extends HttpServlet {
 	private void mostrarTelaCadastroIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
-		requisicao.getRequestDispatcher("/recursos/paginas/incidente/cadastro-incidente.jsp").forward(requisicao,
-				resposta);
+		String listaLocalidades = requisicao.getParameter("listaLocalidades");
+
+		if(listaLocalidades == null) {
+			List<Localidade> localidades = localidadeDAO.recuperarLocalidades();
+			List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
+			requisicao.setAttribute("listaLocalidades", localidades);
+			requisicao.setAttribute("listaComunidades", comunidades);
+		}
+
+		requisicao.getRequestDispatcher("/recursos/paginas/incidente/cadastro-incidente.jsp").forward(requisicao, resposta);
 	}
 
 	private void inserirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -113,23 +123,19 @@ public class IncidenteServlet extends HttpServlet {
 
 		String titulo = requisicao.getParameter("titulo");
 		String descricao = requisicao.getParameter("descricao");
-		LocalDateTime dataHora = LocalDateTime.parse(requisicao.getParameter("dataHora"));
+		LocalDateTime dataHora = LocalDateTime.now();
 		Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
-		Situacao situacao = Situacao.valueOf(requisicao.getParameter("situacao"));
-
-		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
-
+		Situacao situacao = Situacao.ATIVO;
+		Localidade localidade = localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-localidade")));
+		Comunidade comunidade= comunidadeDAO.consultarComunidadeId(Long.parseLong(requisicao.getParameter("id-comunidade")));
 		Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
 
-		if (incidenteDAO.consultarIncidenteId(idUsuario) != null) {
-			resposta.sendRedirect("incidentes");
-		}
-
 		incidenteDAO.inserirIncidente(new Incidente(titulo, descricao, dataHora, categoria,
-				comunidadeDAO.consultarComunidadeBairro(localidadeDAO.consultarLocalidadeId(idLocalidade)),
-				usuarioDAO.consultarUsuarioId(idUsuario), localidadeDAO.consultarLocalidadeId(idLocalidade), situacao));
+				comunidade,
+				usuarioDAO.consultarUsuarioId(idUsuario),
+				localidade, situacao));
 
-		requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
+		requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
 	}
 
 	private void atualizarIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)

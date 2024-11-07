@@ -430,10 +430,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
 
     public List<Localidade> consultarLocalidadePorParametro(String parametro) {
         List<Localidade> localidades = new ArrayList<>();
-        Session sessao = null;
-
-        try {
-            sessao = fabrica.getConexao().openSession();
+        try (Session sessao = fabrica.getConexao().openSession()) {
             sessao.beginTransaction();
 
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -443,50 +440,24 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
             criteria.select(raizLocalidade)
                     .where(construtor.like(raizLocalidade.get("logradouro"), "%" + parametro + "%"))
                     .orderBy(construtor.asc(raizLocalidade.get("logradouro")));
-            List<Localidade> logradouroList = sessao.createQuery(criteria).getResultList();
+            localidades.addAll(sessao.createQuery(criteria).getResultList());
 
-            criteria.select(raizLocalidade)
-                    .where(construtor.like(raizLocalidade.get("bairro"), "%" + parametro + "%"))
-                    .orderBy(construtor.asc(raizLocalidade.get("bairro")));
-            List<Localidade> bairroList = sessao.createQuery(criteria).getResultList();
+            String[] campos = {"bairro", "cidade", "estado"};
+            for (String campo : campos) {
+                criteria.select(raizLocalidade)
+                        .where(construtor.like(raizLocalidade.get(campo), "%" + parametro + "%"))
+                        .orderBy(construtor.asc(raizLocalidade.get(campo)));
 
-            criteria.select(raizLocalidade)
-                    .where(construtor.like(raizLocalidade.get("cidade"), "%" + parametro + "%"))
-                    .orderBy(construtor.asc(raizLocalidade.get("cidade")));
-            List<Localidade> cidadeList = sessao.createQuery(criteria).getResultList();
-
-            criteria.select(raizLocalidade)
-                    .where(construtor.like(raizLocalidade.get("estado"), "%" + parametro + "%"))
-                    .orderBy(construtor.asc(raizLocalidade.get("estado")));
-            List<Localidade> estadoList = sessao.createQuery(criteria).getResultList();
-
-            localidades.addAll(logradouroList);
-            for (Localidade localidade : bairroList) {
-                if (!localidades.contains(localidade)) {
-                    localidades.add(localidade);
-                }
-            }
-            for (Localidade localidade : cidadeList) {
-                if (!localidades.contains(localidade)) {
-                    localidades.add(localidade);
-                }
-            }
-            for (Localidade localidade : estadoList) {
-                if (!localidades.contains(localidade)) {
-                    localidades.add(localidade);
+                for (Localidade localidade : sessao.createQuery(criteria).getResultList()) {
+                    if (!localidades.contains(localidade)) {
+                        localidades.add(localidade);
+                    }
                 }
             }
 
             sessao.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            if (sessao.getTransaction() != null) {
-                sessao.getTransaction().rollback();
-            }
-        } finally {
-            if (sessao != null) {
-                sessao.close();
-            }
         }
 
         return localidades;

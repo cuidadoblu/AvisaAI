@@ -177,73 +177,61 @@ select.formulario-controle:hover {
 				</a>
 				<h2>Cadastrar Incidente</h2>
 			</div>
-			<form action="inserir-incidente" method="post"
-				enctype="multipart/form-data">
+			<form action="inserir-incidente" method="post">
 				<div class="formulario-entradas">
 					<div class="formulario-grupo">
-						<label for="titulo">Título</label> <input type="text" id="titulo"
-							name="titulo" class="formulario-controle"
-							placeholder="Escreva o título do incidente..." maxlength="50"
-							required>
+						<label for="titulo">Título</label>
+                        <input type="text" id="titulo" name="titulo" class="formulario-controle" placeholder="Escreva o título do incidente..." maxlength="50" required>
 					</div>
 
 					<div class="formulario-grupo">
 						<label for="descricao">Descrição</label>
-						<textarea id="descricao" name="descricao"
-							class="formulario-controle"
-							placeholder="Escreva uma descrição para o seu incidente..."
-							required></textarea>
+						<textarea id="descricao" name="descricao" class="formulario-controle" placeholder="Escreva uma descrição para o seu incidente..." required></textarea>
 					</div>
 
 					<div class="formulario-grupo">
-						<label for="foto" class="arquivo-foto">Escolha uma foto</label> <input
-							type="file" id="foto" name="foto" class="arquivo-foto"
-							accept="image/*">
+						<label for="foto" class="arquivo-foto">Escolha uma foto</label>
+                        <input type="file" id="foto" name="foto" class="arquivo-foto" accept="image/*">
 					</div>
 
 					<div class="formulario-grupo">
-						<label for="usuario">Usuário</label> <input type="text"
-							id="usuario" name="usuario" class="formulario-controle"
-							placeholder="Insira o autor" maxlength="50" required>
+						<label for="usuario">Usuário</label>
+                        <input type="text" id="usuario" name="id-usuario" class="formulario-controle" placeholder="Insira o id do autor" maxlength="50" required>
 					</div>
 
 					<div class="formulario-grupo">
-						<label for="bairro">Bairro</label> <select id="bairro"
-							name="bairro" class="formulario-controle" required>
-							<option value="" disabled selected>Selecione o seu
-								bairro...</option>
-							<c:forEach var="localidade" items="${localidades}">
-								<option value="${localidade.bairro}">${localidade.bairro}</option>
+						<label for="logradouro">Logradouro</label>
+						<select id="logradouro" name="id-localidade" class="formulario-controle" required>
+							<option value="" disabled selected>Selecione o seu Logradouro</option>
+							<c:forEach var="localidade" items="${listaLocalidades}">
+								<option value="${localidade.id}">${localidade.cidade},${localidade.bairro},${localidade.logradouro}</option>
 							</c:forEach>
 						</select>
 					</div>
 
-					<div class="formulario-grupo">
-						<label for="logradouro">Logradouro</label> <select id="logradouro"
-							name="id-logradouro" class="formulario-controle" required>
-							<option value="" disabled selected>Selecione o seu
-								logradouro...</option>
-							<c:forEach var="localidade" items="${localidades}">
-								<option value="${localidade.id}">${localidade.logradouro}</option>
-							</c:forEach>
-						</select>
-					</div>
+                    <div class="formulario-grupo">
+                        <label for="comunidade">Comunidade</label>
+                        <select id="comunidade" name="id-comunidade" class="formulario-controle" required>
+                            <option value="" disabled selected>Selecione a Comunidade</option>
+                            <c:forEach var="comunidade" items="${listaComunidades}">
+                                <option value="${comunidade.id}">${comunidade.nome}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
 
 					<div class="formulario-grupo">
-						<label for="categoria">Categoria</label> <select id="categoria"
-							name="categoria" class="formulario-controle" required>
-							<option value="Enxurrada">Enxurrada</option>
-							<option value="Alagamento">Alagamento</option>
-							<option value="Inundacao">Inundação</option>
-							<option value="Enchente">Enchente</option>
-							<option value="Deslizamento">Deslizamento</option>
-							<option value="Outros">Outros</option>
+						<label for="categoria">Categoria</label>
+                        <select id="categoria" name="categoria" class="formulario-controle" required>
+							<option value="ENXURRADA">Enxurrada</option>
+							<option value="ALAGAMENTO">Alagamento</option>
+							<option value="INUNDACAO">Inundação</option>
+							<option value="DESLIZAMENTO">Deslizamento</option>
+							<option value="OUTROS">Outros</option>
 						</select>
 					</div>
 
 					<div class="formulario-botoes">
-						<button type="button" class="botao-limpar"
-							onclick="window.location.href='feed-pessoal'">Limpar</button>
+						<button type="reset" class="botao-limpar">Limpar</button>
 						<button type="submit" class="botao-confirmar">Confirmar</button>
 					</div>
 				</div>

@@ -182,7 +182,6 @@ public class LocalidadeServlet extends HttpServlet {
         requisicao.getRequestDispatcher("/recursos/paginas/localidade/consultar-localidades.jsp").forward(requisicao, resposta);
     }
 
-
     private void buscarEstados(HttpServletRequest requisicao, HttpServletResponse resposta) throws IOException {
 
         List<String> estados = localidadeDAO.recuperarEstados();

@@ -16,6 +16,7 @@ import avisaai.modelo.dao.localidade.LocalidadeDAO;
 import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.localidade.Localidade;
+import avisaai.util.Utilitario;
 
 @WebServlet(urlPatterns = { "/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
 		"/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada" })
@@ -87,6 +88,8 @@ public class ComunidadeServlet extends HttpServlet {
 	private void mostrarTelaCadastroComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
 		HttpSession sessao = requisicao.getSession();
 		requisicao.getRequestDispatcher("/recursos/paginas/comunidade/cadastro-comunidade.jsp").forward(requisicao,
 				resposta);
@@ -95,6 +98,8 @@ public class ComunidadeServlet extends HttpServlet {
 	private void mostrarTelaPerfilComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
 		HttpSession sessao = requisicao.getSession();
 		requisicao.getRequestDispatcher("/recursos/paginas/comunidade/perfil-comunidade.jsp").forward(requisicao,
 				resposta);
@@ -102,6 +107,7 @@ public class ComunidadeServlet extends HttpServlet {
 
 	private void inserirComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
+
 		String nome = requisicao.getParameter("nome");
 		String descricao = requisicao.getParameter("descricao");
 		Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
@@ -180,6 +186,8 @@ public class ComunidadeServlet extends HttpServlet {
 	private void mostrarTelaAtualizaComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
 		HttpSession sessao = requisicao.getSession();
 		requisicao.getRequestDispatcher("/recursos/paginas/comunidade/cadastro-comunidade.jsp").forward(requisicao,
 				resposta);
@@ -187,6 +195,9 @@ public class ComunidadeServlet extends HttpServlet {
 
 	private void mostrarTelaConsultaComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
+
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
 		requisicao.getRequestDispatcher("/recursos/paginas/comunidade/consulta-comunidade.jsp").forward(requisicao,
 				resposta);
 	}

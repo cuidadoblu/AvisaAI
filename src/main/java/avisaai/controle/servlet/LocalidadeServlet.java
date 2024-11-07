@@ -3,6 +3,7 @@ package avisaai.controle.servlet;
 import avisaai.modelo.dao.localidade.LocalidadeDAO;
 import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.entidade.localidade.Localidade;
+import avisaai.util.Utilitario;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +92,8 @@ public class LocalidadeServlet extends HttpServlet {
 
     private void mostrarTelaCadastroLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {
 
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
         List<String> estados = localidadeDAO.recuperarEstados();
 
         requisicao.setAttribute("estados", estados);
@@ -164,10 +168,14 @@ public class LocalidadeServlet extends HttpServlet {
 
     private void mostrarTelaAtualizaLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {
 
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
         requisicao.getRequestDispatcher("/recursos/paginas/localidade/cadastro-localidade.jsp").forward(requisicao, resposta);
     }
 
     private void mostrarTelaConsultaLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {
+
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
         String parametro = requisicao.getParameter("parametro");
 

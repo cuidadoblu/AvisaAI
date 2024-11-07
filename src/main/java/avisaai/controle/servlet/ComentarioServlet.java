@@ -20,6 +20,7 @@ import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.usuario.Usuario;
+import avisaai.util.Utilitario;
 
 @WebServlet(urlPatterns = { "/inserir-comentario", "/atualizar-comentario", "/excluir-comentario", "/comentarios",
 		"/exibir-comentario", "/comentario-nao-encontrado" })
@@ -84,6 +85,8 @@ public class ComentarioServlet extends HttpServlet {
 
 	private void mostrarCadastroComentario(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
+
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
 		requisicao.getRequestDispatcher("cadastro-comentario.jsp").forward(requisicao, resposta);
 	}

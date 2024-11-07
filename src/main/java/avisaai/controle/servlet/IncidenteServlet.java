@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import avisaai.modelo.dao.comunidade.ComunidadeDAO;
 import avisaai.modelo.dao.comunidade.ComunidadeDAOImpl;
@@ -19,8 +20,10 @@ import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.incidente.Incidente;
+import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.enumeracao.categoria.Categoria;
 import avisaai.modelo.enumeracao.situacao.Situacao;
+import avisaai.util.Utilitario;
 
 @WebServlet(urlPatterns = { "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente",
 		"/incidente-nao-encontrado" })
@@ -90,6 +93,8 @@ public class IncidenteServlet extends HttpServlet {
 	private void mostrarTelaPerfilIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
 		requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao,
 				resposta);
 	}
@@ -97,12 +102,16 @@ public class IncidenteServlet extends HttpServlet {
 	private void mostrarTelaConsultaIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
 
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
 		requisicao.getRequestDispatcher("/recursos/paginas/incidente/consulta-incidente.jsp").forward(requisicao,
 				resposta);
 	}
 
 	private void mostrarTelaCadastroIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws ServletException, IOException {
+
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
 		requisicao.getRequestDispatcher("/recursos/paginas/incidente/cadastro-incidente.jsp").forward(requisicao,
 				resposta);
@@ -160,6 +169,8 @@ public class IncidenteServlet extends HttpServlet {
 
 	private void excluirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
+
+		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
 		Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
 

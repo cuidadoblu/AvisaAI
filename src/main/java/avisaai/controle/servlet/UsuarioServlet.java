@@ -18,6 +18,7 @@ import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.entidade.usuario.contato.Contato;
+import avisaai.util.Utilitario;
 
 @WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
         "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/usuario-nao-encontrado"})
@@ -163,6 +164,8 @@ public class UsuarioServlet extends HttpServlet {
     private void mostrarTelaConsultaUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
         String nome = requisicao.getParameter("nome");
 
         if (nome != null) {
@@ -179,6 +182,8 @@ public class UsuarioServlet extends HttpServlet {
     private void mostrarTelaPerfilUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
         HttpSession sessao = requisicao.getSession();
 
         Usuario usuario = null;
@@ -194,6 +199,8 @@ public class UsuarioServlet extends HttpServlet {
 
     private void mostrarTelaPerfilUsuarioLogado(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
+
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
         HttpSession sessao = requisicao.getSession();
 

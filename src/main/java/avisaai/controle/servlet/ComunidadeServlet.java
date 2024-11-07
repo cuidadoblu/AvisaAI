@@ -2,8 +2,6 @@ package avisaai.controle.servlet;
 
 import avisaai.modelo.dao.comunidade.ComunidadeDAO;
 import avisaai.modelo.dao.comunidade.ComunidadeDAOImpl;
-import avisaai.modelo.dao.localidade.LocalidadeDAO;
-import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.util.Utilitario;
 
@@ -15,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = { "/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
 		"/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada" })
@@ -24,11 +23,9 @@ public class ComunidadeServlet extends HttpServlet {
 	private static final long serialVersionUID = 9041251404722080496L;
 
 	private ComunidadeDAO comunidadeDAO;
-	private LocalidadeDAO localidadeDAO;
 
 	public void init() {
 		comunidadeDAO = new ComunidadeDAOImpl();
-		localidadeDAO = new LocalidadeDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -178,6 +175,16 @@ public class ComunidadeServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
+		String nome = requisicao.getParameter("nome");
+
+		if (nome != null) {
+			List<Comunidade> listaComunidades = comunidadeDAO.consultarComunidadePorNome(nome);
+
+			if (listaComunidades != null && !listaComunidades.isEmpty()) {
+				requisicao.setAttribute("listaComunidades", listaComunidades);
+			}
+		}
 
 		requisicao.getRequestDispatcher("/recursos/paginas/comunidade/consulta-comunidade.jsp").forward(requisicao,
 				resposta);

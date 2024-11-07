@@ -1,17 +1,15 @@
 package avisaai.modelo.dao.localidade;
 
-import java.util.ArrayList;
-import java.util.List;
+import avisaai.modelo.entidade.localidade.Localidade;
+import avisaai.modelo.factory.conexao.ConexaoFactory;
+import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
-import avisaai.modelo.entidade.localidade.Localidade;
-import avisaai.modelo.factory.conexao.ConexaoFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocalidadeDAOImpl implements LocalidadeDAO {
 
@@ -429,8 +427,13 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
     }
 
     public List<Localidade> consultarLocalidadePorParametro(String parametro) {
+
+        Session sessao = null;
         List<Localidade> localidades = new ArrayList<>();
-        try (Session sessao = fabrica.getConexao().openSession()) {
+
+        try {
+
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();

@@ -1,20 +1,15 @@
 package avisaai.modelo.dao.comunidade;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.comunidade.Comunidade_;
 import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.entidade.localidade.Localidade_;
 import avisaai.modelo.factory.conexao.ConexaoFactory;
+import org.hibernate.Session;
+
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 
@@ -141,6 +136,42 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			}
 		}
 
+		return comunidades;
+	}
+
+	public List<Comunidade> consultarComunidadePorNome(String nome) {
+
+		Session sessao = null;
+		List<Comunidade> comunidades = new ArrayList<Comunidade>();
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+
+			criteria.where(construtor.equal(raizComunidade.get(Comunidade_.nome), "%" + nome + "%"));
+
+			comunidades = sessao.createQuery(criteria).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+		} finally {
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
 		return comunidades;
 	}
 

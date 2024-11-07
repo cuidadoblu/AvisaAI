@@ -1,17 +1,15 @@
 package avisaai.modelo.dao.localidade;
 
-import java.util.ArrayList;
-import java.util.List;
+import avisaai.modelo.entidade.localidade.Localidade;
+import avisaai.modelo.entidade.localidade.Localidade_;
+import avisaai.modelo.factory.conexao.ConexaoFactory;
+import org.hibernate.Session;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
-import avisaai.modelo.entidade.localidade.Localidade;
-import avisaai.modelo.factory.conexao.ConexaoFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocalidadeDAOImpl implements LocalidadeDAO {
 
@@ -83,6 +81,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         Localidade localidade = null;
 
         try {
+
             sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
@@ -90,8 +89,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
             CriteriaQuery<Localidade> criteria = construtor.createQuery(Localidade.class);
             Root<Localidade> raizLocalidade = criteria.from(Localidade.class);
 
-            ParameterExpression<Long> idLocalidade = construtor.parameter(Long.class);
-            criteria.select(raizLocalidade).where(construtor.equal(raizLocalidade.get("id"), idLocalidade));
+            criteria.select(raizLocalidade).where(construtor.equal(raizLocalidade.get(Localidade_.id), id));
 
             localidade = sessao.createQuery(criteria).getSingleResult();
 
@@ -304,6 +302,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         Session sessao = null;
 
         try {
+
             sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
@@ -334,6 +333,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         Session sessao = null;
 
         try {
+
             sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
@@ -365,6 +365,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         Session sessao = null;
 
         try {
+
             sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
@@ -399,6 +400,7 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
         Session sessao = null;
 
         try {
+
             sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
@@ -429,8 +431,12 @@ public class LocalidadeDAOImpl implements LocalidadeDAO {
     }
 
     public List<Localidade> consultarLocalidadePorParametro(String parametro) {
+
         List<Localidade> localidades = new ArrayList<>();
-        try (Session sessao = fabrica.getConexao().openSession()) {
+
+        try {
+
+            Session sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();

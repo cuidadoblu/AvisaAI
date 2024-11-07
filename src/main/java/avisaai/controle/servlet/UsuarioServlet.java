@@ -1,8 +1,12 @@
 package avisaai.controle.servlet;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
+import avisaai.modelo.dao.contato.ContatoDAO;
+import avisaai.modelo.dao.contato.ContatoDAOImpl;
+import avisaai.modelo.dao.usuario.UsuarioDAO;
+import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
+import avisaai.modelo.entidade.usuario.Usuario;
+import avisaai.modelo.entidade.usuario.contato.Contato;
+import avisaai.util.Utilitario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,14 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import avisaai.modelo.dao.contato.ContatoDAO;
-import avisaai.modelo.dao.contato.ContatoDAOImpl;
-import avisaai.modelo.dao.usuario.UsuarioDAO;
-import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
-import avisaai.modelo.entidade.usuario.Usuario;
-import avisaai.modelo.entidade.usuario.contato.Contato;
-import avisaai.util.Utilitario;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
         "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/usuario-nao-encontrado"})

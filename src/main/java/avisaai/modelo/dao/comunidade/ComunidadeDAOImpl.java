@@ -1,220 +1,214 @@
 package avisaai.modelo.dao.comunidade;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.comunidade.Comunidade_;
 import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.entidade.localidade.Localidade_;
 import avisaai.modelo.factory.conexao.ConexaoFactory;
+import org.hibernate.Session;
+
+import javax.persistence.criteria.*;
+import java.util.List;
 
 public class ComunidadeDAOImpl implements ComunidadeDAO {
 
-	private final ConexaoFactory fabrica = new ConexaoFactory();
+    private final ConexaoFactory fabrica = new ConexaoFactory();
 
-	public void inserirComunidade(Comunidade comunidade) {
+    public void inserirComunidade(Comunidade comunidade) {
 
-		Session sessao = null;
+        Session sessao = null;
 
-		try {
+        try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sessao.save(comunidade);
+            sessao.save(comunidade);
 
-			sessao.getTransaction().commit();
+            sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
+        } catch (Exception sqlException) {
 
-			sqlException.printStackTrace();
+            sqlException.printStackTrace();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
 
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
 
-	}
+    }
 
-	public void deletarComunidade(Comunidade comunidade) {
+    public void deletarComunidade(Comunidade comunidade) {
 
-		Session sessao = null;
+        Session sessao = null;
 
-		try {
+        try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sessao.remove(comunidade);
+            sessao.remove(comunidade);
 
-			sessao.getTransaction().commit();
+            sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
+        } catch (Exception sqlException) {
 
-			sqlException.printStackTrace();
+            sqlException.printStackTrace();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
 
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-	}
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+    }
 
-	public void atualizarComunidade(Comunidade comunidade) {
+    public void atualizarComunidade(Comunidade comunidade) {
 
-		Session sessao = null;
+        Session sessao = null;
 
-		try {
+        try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sessao.update(comunidade);
+            sessao.update(comunidade);
 
-			sessao.getTransaction().commit();
+            sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
+        } catch (Exception sqlException) {
 
-			sqlException.printStackTrace();
+            sqlException.printStackTrace();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
 
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-	}
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+    }
 
-	public List<Comunidade> recuperarComunidades() {
+    public List<Comunidade> recuperarComunidades() {
 
-		Session sessao = null;
-		List<Comunidade> comunidades = null;
+        Session sessao = null;
+        List<Comunidade> comunidades = null;
 
-		try {
+        try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
-			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+            CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+            Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-			criteria.select(raizComunidade);
+            criteria.select(raizComunidade);
 
-			comunidades = sessao.createQuery(criteria).getResultList();
+            comunidades = sessao.createQuery(criteria).getResultList();
 
-			sessao.getTransaction().commit();
+            sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
+        } catch (Exception sqlException) {
 
-			sqlException.printStackTrace();
+            sqlException.printStackTrace();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
 
-		} finally {
+        } finally {
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
 
-		return comunidades;
-	}
+        return comunidades;
+    }
 
-	public Comunidade consultarComunidadeBairro(Localidade localidade) {
+    public Comunidade consultarComunidadeBairro(Localidade localidade) {
 
-		Session sessao = null;
-		Comunidade comunidade = null;
+        Session sessao = null;
+        Comunidade comunidade = null;
 
-		try {
+        try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
-			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+            CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+            Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-			Join<Comunidade, Localidade> juncaoLocalidade = raizComunidade.join(Comunidade_.localidade);
+            Join<Comunidade, Localidade> juncaoLocalidade = raizComunidade.join(Comunidade_.localidade);
 
-			ParameterExpression<String> bairro = construtor.parameter(String.class);
-			criteria.where(construtor.equal(juncaoLocalidade.get(Localidade_.bairro), bairro));
+            ParameterExpression<String> bairro = construtor.parameter(String.class);
+            criteria.where(construtor.equal(juncaoLocalidade.get(Localidade_.bairro), bairro));
 
-			comunidade = sessao.createQuery(criteria).setParameter(bairro, localidade.getBairro()).getSingleResult();
+            comunidade = sessao.createQuery(criteria).setParameter(bairro, localidade.getBairro()).getSingleResult();
 
-			sessao.getTransaction().commit();
+            sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
+        } catch (Exception sqlException) {
 
-			sqlException.printStackTrace();
+            sqlException.printStackTrace();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
 
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return comunidade;
-	}
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return comunidade;
+    }
 
-	public Comunidade consultarComunidadeId(Long id) {
-		
-		Session sessao = null;
-		Comunidade comunidade = null;
-		
-		try {
-			
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
-			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+    public Comunidade consultarComunidadeId(Long id) {
 
-			ParameterExpression<Long> idComunidade = construtor.parameter(Long.class);
-			criteria.select(raizComunidade).where(construtor.equal(raizComunidade.get("id"), idComunidade));
+        Session sessao = null;
+        Comunidade comunidade = null;
 
-			comunidade = sessao.createQuery(criteria).getSingleResult();
-			sessao.getTransaction().commit();
+        try {
 
-		} catch (Exception exception) {
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-			exception.printStackTrace();
-		} finally {
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-		return comunidade;
-	}
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
+            Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
+
+            criteria.select(raizComunidade)
+                    .where(construtor.equal(raizComunidade.get(Comunidade_.id), id));
+
+            comunidade = sessao.createQuery(criteria).getSingleResult();
+            sessao.getTransaction().commit();
+
+        } catch (Exception exception) {
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+            exception.printStackTrace();
+        } finally {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+
+        return comunidade;
+    }
 }

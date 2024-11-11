@@ -6,42 +6,12 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Localidades</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #2d3e50;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .acoes {
-            display: flex;
-            gap: 10px;
-        }
-
-        .acoes img {
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../css/localidade/localidade.css">
+    <link rel="shortcut icon" href="img" type="image/x-icon">
 </head>
-<body>
+<body class="consultar-localidades">>
 <h2>Consulta de Localidades</h2>
 <form method="get" action="localidades">
     <input type="text" name="parametro" id="parametro" placeholder="Digite o endereço">
@@ -88,5 +58,6 @@
         </table>
     </c:otherwise>
 </c:choose>
+<script src="<%= request.getContextPath() %>/recursos/js/localidade/localidade.js"></script>
 </body>
 </html>

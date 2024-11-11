@@ -6,9 +6,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AvisaAí - Alterar Senha</title>
+<link rel="stylesheet" type="text/css" href="../../css/usuario/usuario.css">
 <link rel="shortcut icon" href="" type="image/x-icon" />
 </head>
-<body>
+<body class="adentrar">
 	<header>
 		<div class="logo-acesso">
 			<a href="landing-Page"> <img src="img" alt="AvisaAí Logo"
@@ -50,5 +51,7 @@
 			</div>
 		</div>
 	</main>
+		<script
+		src="<%=request.getContextPath()%>/recursos/js/usuario/usuario.js"></script>
 </body>
 </html>

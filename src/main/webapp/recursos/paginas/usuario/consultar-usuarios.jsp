@@ -1,45 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../componentes/cabecalho.jsp" />
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
-<title>Lista de Usuários</title>
-<style>
-.lista-usuarios {
-	list-style-type: none;
-	padding: 0;
-}
-
-.card-usuario {
-	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
-	text-decoration: none;
-	color: inherit;
-}
-
-.card-usuario img {
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	margin-right: 15px;
-}
-
-.nome-usuario {
-	font-size: 18px;
-	color: #2d3e50;
-}
-
-.card-usuario:hover {
-	background-color: #f0f0f0;
-	cursor: pointer;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvisaAí - Consulta Usuario</title>
+<link rel="stylesheet" type="text/css" href="../../css/usuario/usuario.css">
+<link rel="shortcut icon" href="" type="image/x-icon">
 </head>
-<body>
+<body class="consultar-usuario">
 	<form action="usuarios" method="get">
 		<input type="text" name="nome" id="nome" placeholder="Nome de usuário" />
 		<button type="submit">Consultar</button>
@@ -61,4 +31,6 @@
 		</c:otherwise>
 	</c:choose>
 </body>
+	<script
+		src="<%=request.getContextPath()%>/recursos/js/usuario/usuario.js"></script>
 </html>

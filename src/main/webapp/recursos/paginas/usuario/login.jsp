@@ -6,9 +6,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AvisaAí - Login</title>
+<link rel="stylesheet" type="text/css" href="../../css/usuario/usuario.css">
 <link rel="shortcut icon" href="img" type="image/x-icon">
 </head>
-<body>
+<body class="adentrar">
 	<header>
 		<div class="logo-acesso">
 			<a href="pagina-inicial"> <img src="img" alt="Logo do AvisaAí"
@@ -45,5 +46,7 @@
 			</div>
 		</div>
 	</main>
+		<script
+		src="<%=request.getContextPath()%>/recursos/js/usuario/usuario.js"></script>
 </body>
 </html>

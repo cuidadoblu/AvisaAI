@@ -1,1 +1,264 @@
-1
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.adentrar body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+	background-color: #FFFFFF;
+	color: #2C3E50;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100vh;
+}
+
+.adentrar header {
+	width: 100%;
+}
+
+.adentrar .logo {
+	display: flex;
+	justify-content: left;
+	padding-left: 20px;
+}
+
+.adentrar .logo-avisaai {
+	width: 300px;
+}
+
+.adentrar main .secao {
+	display: flex;
+	flex-direction: row;
+	height: calc(100vh - 120px);
+	width: 100vw;
+}
+
+.adentrar .esquerda {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+}
+
+.adentrar .imagem-tela {
+	width: 620px;
+}
+
+.adentrar .direita {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 100vw;
+}
+
+.adentrar .entradas {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: fit-content;
+}
+
+.adentrar h2 {
+	font-size: 64px;
+	text-align: center;
+	color: #3498DB;
+	width: 550px;
+}
+
+.adentrar h3 {
+	font-size: 18px;
+	text-align: center;
+	color: #3498DB;
+	width: 550px;
+	margin-bottom: 10px;
+}
+
+.adentrar form {
+	display: flex;
+	flex-direction: column;
+	width: 550px;
+}
+
+.adentrar input {
+	margin-bottom: 15px;
+	padding: 20px;
+	border: 1px solid #3498DB;
+	border-radius: 20px;
+	font-size: 24px;
+}
+
+.adentrar input::placeholder {
+	color: #2C3E50;
+}
+
+.adentrar button {
+	padding: 15px 60px 15px 60px;
+	background-color: #3498DB;
+	color: white;
+	border: none;
+	border-radius: 15px;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.adentrar button:hover {
+	background-color: #2980B9;
+}
+
+.adentrar .buttons {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.adentrar .botao-login {
+	margin-bottom: 15px;
+}
+
+.adentrar .link {
+	color: #2980B9;
+	text-decoration: none; /* Remove o sublinhado do link */
+}
+
+<!--
+Perfil Usuario-->.consultar-usuario .lista-usuarios {
+	list-style-type: none;
+	padding: 0;
+}
+
+.consultar-usuario .card-usuario {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	text-decoration: none;
+	color: inherit;
+}
+
+.consultar-usuario .card-usuario img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 15px;
+}
+
+.consultar-usuario .nome-usuario {
+	font-size: 18px;
+	color: #2d3e50;
+}
+
+.consultar-usuario .card-usuario:hover {
+	background-color: #f0f0f0;
+	cursor: pointer;
+}
+
+/* Perfil Usuario */
+
+.perfil-usuario body {
+	font-family: Arial, sans-serif;
+	background-color: #f7f7f7;
+}
+
+.perfil-usuario main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.perfil-usuario .perfil-container {
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	gap: 20px;
+	width: 300px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.perfil-usuario .perfil-imagem {
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+
+.perfil-usuario .perfil-imagem img {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.perfil-usuario .editar-foto {
+	position: absolute;
+	bottom: 10px;
+}
+
+.perfil-usuario .editar-foto input[type="file"] {
+	display: none;
+}
+
+.perfil-usuario .editar-foto button {
+	background-color: #007BFF;
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.perfil-usuario .editar-foto button:hover {
+	background-color: #0056b3;
+}
+
+.perfil-usuario .perfil-nome span {
+	font-size: 20px;
+	font-weight: bold;
+	color: #333;
+}
+
+.perfil-usuario .perfil-botoes {
+	display: grid;
+	gap: 10px;
+}
+
+.perfil-usuario .perfil-botoes button {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.perfil-usuario .perfil-botoes button:hover {
+	background-color: #f0f0f0;
+}
+
+.perfil-usuario .perfil-botoes img {
+	width: 24px;
+	height: 24px;
+	margin-right: 10px;
+}
+
+.perfil-usuario .perfil-logout {
+	margin-top: 10px;
+	color: #007BFF;
+	font-weight: bold;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+.perfil-usuario .perfil-logout:hover {
+	color: #0056b3;
+}

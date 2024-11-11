@@ -1,1 +1,389 @@
-1
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+/* ---- PERFIL-INCIDENTE ---- */
+.perfil-incidente .container-postagem {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-incidente h2 {
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .cabecalho-postagem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .titulo-postagem {
+    color: #555;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.perfil-incidente .icone-situacao {
+    display: flex;
+    align-items: center;
+    color: #3498DB;
+    font-size: 14px;
+}
+
+.perfil-incidente .informacao-postagem {
+    display: ruby;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .imagem-usuario {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.perfil-incidente .nome {
+    color: #555;
+    font-size: 14px;
+}
+
+.perfil-incidente .data {
+    color: #888;
+    font-size: 12px;
+}
+
+.perfil-incidente .mensagem-postagem {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .imagem-postagem {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .miniaturas {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .miniaturas img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.perfil-incidente .miniaturas img:hover {
+    transform: scale(1.1);
+}
+
+.perfil-incidente .reacoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .botao-curtir {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.perfil-incidente .botao-curtir:hover {
+    background-color: #2C3E50;
+    transform: scale(1.05);
+}
+
+.perfil-incidente .botao-curtir:active {
+    transform: scale(0.98);
+}
+
+.perfil-incidente .contador-comentarios {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.perfil-incidente .campo-comentario {
+    margin-bottom: 20px;
+}
+
+.perfil-incidente .formulario-grupo {
+    margin-bottom: 10px;
+}
+
+.perfil-incidente label {
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.perfil-incidente textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    resize: vertical;
+    height: 80px;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.perfil-incidente textarea:focus {
+    border-color: #3498DB;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+.perfil-incidente .botao-enviar {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498DB;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.perfil-incidente .botao-enviar:hover {
+    background-color: #2C3E50;
+    transform: scale(1.05);
+}
+
+.perfil-incidente .comentarios {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.perfil-incidente .comentario {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.perfil-incidente .respostas {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.perfil-incidente .botao-responder {
+    font-size: 12px;
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.perfil-incidente .botao-responder:hover {
+    background-color: #2C3E50;
+}
+
+.perfil-incidente .fechar-resposta {
+    position: relative;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+}
+
+
+@media (max-width: 600px) {
+    .perfil-incidente .container-postagem {
+        padding: 10px;
+    }
+    .perfil-incidente .titulo-postagem {
+        font-size: 20px;
+    }
+    .perfil-incidente .mensagem-postagem {
+        font-size: 14px;
+    }
+    .perfil-incidente .reacoes {
+        font-size: 12px;
+    }
+    .perfil-incidente textarea {
+        height: 60px;
+    }
+}
+
+/* ---- CADASTRO-INCIDENTE ---- */
+.cadastro-incidente .container-cadastro {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cadastro-incidente h2 {
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    margin-bottom: auto;
+}
+
+.cadastro-incidente .cabecalho-cadastro {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.cadastro-incidente .botao-retornar {
+    display: inline-block;
+    text-decoration: none;
+    color: #2C3E50;
+    margin-right: 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.cadastro-incidente .botao-retornar:hover {
+    color: #2C3E50;
+    transform: scale(1.05);
+}
+
+.cadastro-incidente .formulario-entradas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.cadastro-incidente .formulario-grupo {
+    position: relative;
+}
+
+.cadastro-incidente label {
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.cadastro-incidente .formulario-controle {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.cadastro-incidente .formulario-controle:focus {
+    border-color: #2C3E50;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+.cadastro-incidente textarea.formulario-controle {
+    resize: vertical;
+    height: 100px;
+}
+
+.cadastro-incidente select.formulario-controle {
+    cursor: pointer;
+}
+
+.cadastro-incidente select.formulario-controle:hover {
+    border-color: #2C3E50;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.cadastro-incidente .formulario-botoes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cadastro-incidente .botao-limpar, .cadastro-incidente .botao-confirmar {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cadastro-incidente .botao-limpar {
+    background-color: #f5f5f5;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.cadastro-incidente .botao-limpar:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.cadastro-incidente .botao-confirmar {
+    background-color: #3498DB;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cadastro-incidente .botao-confirmar:hover {
+    background-color: #2C3E50;
+    transform: scale(1.05);
+}
+
+.cadastro-incidente .botao-limpar:active, .cadastro-incidente .botao-confirmar:active {
+    transform: scale(0.98);
+}
+
+
+@media (max-width: 600px) {
+    .cadastro-incidente .formulario-entradas {
+        grid-template-columns: 1fr;
+    }
+    .cadastro-incidente .formulario-botoes {
+        grid-template-columns: 1fr;
+    }
+}

@@ -54,5 +54,6 @@
         </c:forEach>
     </div>
 </div>
+<script src="<%= request.getContextPath() %>/recursos/js/incidente/incidente.js"></script>
 </body>
 </html>

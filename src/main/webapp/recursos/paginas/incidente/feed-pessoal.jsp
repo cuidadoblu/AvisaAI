@@ -26,5 +26,6 @@
         </c:forEach>
     </c:otherwise>
 </c:choose>
+<script src="<%= request.getContextPath() %>/recursos/js/incidente/incidente.js"></script>
 </body>
 </html>

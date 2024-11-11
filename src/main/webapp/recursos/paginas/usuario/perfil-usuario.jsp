@@ -8,108 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AvisaAí - Perfil Usuário</title>
+<link rel="stylesheet" type="text/css" href="../../css/usuario/usuario.css">
 <link rel="shortcut icon" href="" type="image/x-icon">
-
-<style>
-    /* Estilo geral */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-    }
-    main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    /* Estilo do container do perfil */
-    .perfil-container {
-        display: grid;
-        grid-template-rows: auto auto 1fr auto;
-        gap: 20px;
-        width: 300px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-    }
-    /* Estilo da imagem de perfil */
-    .perfil-imagem {
-        position: relative;
-        display: flex;
-        justify-content: center;
-    }
-    .perfil-imagem img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-    .editar-foto {
-        position: absolute;
-        bottom: 10px;
-    }
-    .editar-foto input[type="file"] {
-        display: none;
-    }
-    .editar-foto button {
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-    }
-    .editar-foto button:hover {
-        background-color: #0056b3;
-    }
-    /* Nome do usuário */
-    .perfil-nome span {
-        font-size: 20px;
-        font-weight: bold;
-        color: #333;
-    }
-    /* Botões de ação */
-    .perfil-botoes {
-        display: grid;
-        gap: 10px;
-    }
-    .perfil-botoes button {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .perfil-botoes button:hover {
-        background-color: #f0f0f0;
-    }
-    .perfil-botoes img {
-        width: 24px;
-        height: 24px;
-        margin-right: 10px;
-    }
-    /* Estilo para o link de Log-out */
-    .perfil-logout {
-        margin-top: 10px;
-        color: #007BFF;
-        font-weight: bold;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .perfil-logout:hover {
-        color: #0056b3;
-    }
-</style>
 </head>
 <body>
   <main>
@@ -195,5 +95,7 @@
 			</c:otherwise>
 		</c:choose>
 	</main>
+	<script
+		src="<%=request.getContextPath()%>/recursos/js/usuario/usuario.js"></script>
 </body>
 </html>

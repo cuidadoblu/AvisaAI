@@ -171,9 +171,9 @@ public class UsuarioServlet extends HttpServlet {
             List<Usuario> usuarios = usuarioDAO.consultarUsuarioNome(nome);
             if (usuarios.isEmpty()) {
                 requisicao.getRequestDispatcher("/recursos/paginas/usuario/usuario-nao-encontrado.jsp").forward(requisicao, resposta);
+                return;
             }
             requisicao.setAttribute("listaUsuarios", usuarios);
-            requisicao.getRequestDispatcher("/recursos/paginas/usuario/consultar-usuarios.jsp").forward(requisicao, resposta);
         }
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/consultar-usuarios.jsp").forward(requisicao, resposta);
     }

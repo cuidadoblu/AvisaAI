@@ -71,14 +71,6 @@
                     <td>${localidade.cidade}</td>
                     <td>${localidade.bairro}</td>
                     <td>${localidade.logradouro}</td>
-                    <td><c:choose>
-                        <c:when test="${not empty localidade.comunidade}">
-                            <span style="color: green;">● ${localidade.comunidade}</span>
-                        </c:when>
-                        <c:otherwise>
-                            <span style="color: red;">●</span>
-                        </c:otherwise>
-                    </c:choose></td>
                     <td class="acoes"><a href="editar-localidade?id-localidade=${localidade.id}">Editar<img src="" alt="Editar"></a>
                         <a href="excluir-localidade?id-localidade=${localidade.id}">Excluir<img src="" alt="Excluir"></a>
                     </td>

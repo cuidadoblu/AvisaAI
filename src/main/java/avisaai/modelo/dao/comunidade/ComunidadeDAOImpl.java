@@ -154,7 +154,10 @@ public class ComunidadeDAOImpl implements ComunidadeDAO {
 			CriteriaQuery<Comunidade> criteria = construtor.createQuery(Comunidade.class);
 			Root<Comunidade> raizComunidade = criteria.from(Comunidade.class);
 
-			criteria.where(construtor.equal(raizComunidade.get(Comunidade_.nome), "%" + nome + "%"));
+			criteria.select(raizComunidade)
+					.where(construtor.like(raizComunidade.get("nome"), "%" + nome + "%"))
+					.orderBy(construtor.asc(raizComunidade.get("nome")));
+			comunidades.addAll(sessao.createQuery(criteria).getResultList());
 
 			comunidades = sessao.createQuery(criteria).getResultList();
 

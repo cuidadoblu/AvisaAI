@@ -16,7 +16,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #ECF0F1;
+            color: #2C3E50;
         }
 
         /* Estilos para a barra superior (header) */
@@ -36,7 +36,7 @@
         .icone-menu-avisaai {
             font-size: 24px;
             cursor: pointer;
-            color: #ECF0F1;
+            color: #ffffff;
             transition: transform 0.3s;
         }
         .icone-menu-avisaai:hover {
@@ -46,7 +46,7 @@
         .logo-avisaai {
             font-size: 18px;
             margin-left: 10px;
-            color: #ECF0F1;
+            color: #ffffff;
             display: flex;
             align-items: center;
             transition: transform 0.3s;
@@ -98,7 +98,7 @@
             left: 0;
             width: 100%;
             background-color: #34495E;
-            color: #ECF0F1;
+            color: #ffffff;
             padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -146,7 +146,7 @@
             width: 250px;
             height: 100%;
             background-color: #2C3E50;
-            color: #ECF0F1;
+            color: #ffffff;
             overflow: auto;
             transition: left 0.3s ease;
             z-index: 999;
@@ -168,7 +168,7 @@
 
         .menu-avisaai a {
             display: block;
-            color: #ECF0F1;
+            color: #ffffff;
             padding: 10px;
             text-decoration: none;
             transition: background-color 0.3s, color 0.3s;
@@ -277,11 +277,10 @@
     </div>
 </header>
 
-<!-- Barra lateral -->
 <div class="barra-lateral-avisaai" id="barraLateral">
     <div class="menu-avisaai">
         <h2>Menu</h2>
-        <a href="cadastrar-incidente"><i class="fas fa-exclamation-triangle"></i> Cadastrar Incidente</a>
+        <a href="cadastro-incidente"><i class="fas fa-exclamation-triangle"></i> Cadastrar Incidente</a>
         <a href="feed-pessoal"><i class="fas fa-newspaper"></i> Feed</a>
         <h3>Comunidades</h3>
         <a href="perfil-comunidade?id=1"><img src="images/centro.jpg" alt="Centro"> Centro</a>

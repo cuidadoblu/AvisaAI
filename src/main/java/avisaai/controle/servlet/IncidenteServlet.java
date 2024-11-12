@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/feed-pessoal", "/incidente-nao-encontrado"})
+@WebServlet(urlPatterns = {"/incidentes", "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/feed-pessoal", "/incidente-nao-encontrado"})
 public class IncidenteServlet extends HttpServlet {
 
     private static final long serialVersionUID = -2732576384429342823L;
@@ -97,7 +97,7 @@ public class IncidenteServlet extends HttpServlet {
     private void mostrarTelaPerfilIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
-        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
         requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
     }
@@ -105,7 +105,7 @@ public class IncidenteServlet extends HttpServlet {
     private void mostrarTelaConsultaIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
-        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
         requisicao.getRequestDispatcher("/recursos/paginas/incidente/consulta-incidente.jsp").forward(requisicao, resposta);
     }
@@ -113,20 +113,18 @@ public class IncidenteServlet extends HttpServlet {
     private void mostrarTelaFeedPessoal(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
-        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-        String listaIncidentes = requisicao.getParameter("listaIncidentes");
+        List<Incidente> incidentes = (List<Incidente>) requisicao.getAttribute("listaIncidentes");
 
-        if (listaIncidentes == null) {
+        if (incidentes == null) {
             List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
-            List<Incidente> incidentes = new ArrayList<>();
+            incidentes = new ArrayList<>();
 
             for (Comunidade comunidade : comunidades) {
-                List<Incidente> incidentesComunidade = incidenteDAO.consultarIncidentesComunidade(comunidade);
-                if (incidentesComunidade != null) {
-                    incidentes.addAll(incidentesComunidade);
-                }
+                incidentes.addAll(incidenteDAO.consultarIncidentesComunidade(comunidade));
             }
+
             requisicao.setAttribute("listaIncidentes", incidentes);
         }
 
@@ -136,7 +134,7 @@ public class IncidenteServlet extends HttpServlet {
     private void mostrarTelaCadastroIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException {
 
-        //Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
         String listaLocalidades = requisicao.getParameter("listaLocalidades");
 

@@ -2,7 +2,6 @@ package avisaai.modelo.entidade.comunidade;
 
 import avisaai.modelo.entidade.foto.Foto;
 import avisaai.modelo.entidade.incidente.Incidente;
-import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.entidade.usuario.Usuario;
 
 import javax.persistence.*;
@@ -27,10 +26,6 @@ public class Comunidade implements Serializable {
 
 	@Column(name = "descricao_comunidade", length = 300)
 	private String descricao;
-
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
-	private Localidade localidade;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.REMOVE)
 	private Foto fotoPerfil;

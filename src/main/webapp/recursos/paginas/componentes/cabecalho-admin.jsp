@@ -7,7 +7,6 @@
   <title>AvisaAí</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* Estilos Globais */
     *, *::before, *::after {
       box-sizing: border-box;
     }
@@ -19,11 +18,10 @@
       color: #ECF0F1;
     }
 
-    /* Estilos para a barra superior (header) */
     .cabecalho-avisaai {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Espaça logo, barra de pesquisa e ícones */
+    justify-content: space-between;
     padding: 15px 20px;
     background-color: #34495E;
     position: sticky;
@@ -58,9 +56,9 @@
 
 .barra-consulta-container {
     display: flex;
-    justify-content: center; /* Centraliza a barra de pesquisa */
-    flex: 1; /* Permite que o contêiner ocupe o espaço disponível */
-    width: 100%; /* Garantindo que ocupe 100% da largura disponível */
+    justify-content: center;
+    flex: 1;
+    width: 100%;
     
 }
 
@@ -72,8 +70,8 @@
     background-color: #FFFFFF;
     border-radius: 50px;
     padding: 5px 10px;
-    margin: 0; /* Removido para centralizar corretamente */
-    width: 800px; /* Aumente este valor conforme necessário */
+    margin: 0;
+    width: 800px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
 }
@@ -85,7 +83,7 @@
     border: none;
     background: none;
     outline: none;
-    width: 100%; /* A barra de pesquisa ocupa todo o espaço disponível */
+    width: 100%;
     font-size: 16px;
     color: #2C3E50;
 }
@@ -94,7 +92,7 @@
 .consulta-expandida-avisaai {
     display: none;
     position: absolute;
-    top: calc(100% + 8px); /* Exibe logo abaixo do campo de pesquisa */
+    top: calc(100% + 8px);
     left: 0;
     width: 100%;
     background-color: #34495E;
@@ -119,18 +117,18 @@
 }
 
 .item-consulta-avisaai:hover {
-    background-color: #4E6A88; /* Cor de fundo ao passar o mouse */
+    background-color: #4E6A88;
   } 
 
   .icones-avisaai {
   display: flex;
   align-items: center;
-  margin-left: auto; /* Adiciona margem automática à esquerda para empurrar os ícones para a direita */
+  margin-left: auto;
 }
 
 .icones-avisaai a img {
-  width: auto; /* Define a largura automática */
-  margin-left: 10px; /* Corrigido a sintaxe para adicionar margem à esquerda */
+  width: auto;
+  margin-left: 10px;
   transition: transform 0.3s;
 }
 
@@ -138,7 +136,6 @@
       transform: scale(1.1);
     }
 
-    /* Estilos para a barra lateral */
     .barra-lateral-avisaai {
       position: fixed;
       top: 50px;
@@ -212,7 +209,6 @@
       background-color: #3498DB;
     }
 
-    /* Fundo transparente */
     .fundo-transparente-avisaai {
       display: none;
       position: fixed;
@@ -230,14 +226,12 @@
   </style>
 </head>
 <body>
-  <!-- Fundo transparente -->
   <div class="fundo-transparente-avisaai" id="fundoTransparente" onclick="fecharMenu()"></div>
 
-  <!-- Cabeçalho -->
   <header class="cabecalho-avisaai">
     <i class="fas fa-bars icone-menu-avisaai" onclick="alternarMenu()"></i>
     <div class="logo-avisaai">
-      <a href="feed">
+      <a href="feed-pessoal">
         <img src="icons/logo.png" alt="Logo">
       </a>
     </div>
@@ -277,14 +271,13 @@
   </div>
   </header>
 
-  <!-- Barra lateral -->
   <div class="barra-lateral-avisaai" id="barraLateral">
     <div class="menu-avisaai">
       <h2>Menu</h2>
-      <a href="cadastrar-incidente"><i class="fas fa-exclamation-triangle"></i> Cadastrar Incidente</a>
-      <a href="cadastrar-comunidade"><i class="fas fa-exclamation-triangle"></i> Cadastrar Comunidade</a>
-      <a href="cadastrar-localidade"><i class="fas fa-exclamation-triangle"></i> Cadastrar Localidade</a>
-      <a href="feed"><i class="fas fa-newspaper"></i> Feed</a>
+      <a href="cadastro-incidente"><i class="fas fa-exclamation-triangle"></i> Cadastrar Incidente</a>
+      <a href="cadastro-comunidade"><i class="fas fa-exclamation-triangle"></i> Cadastrar Comunidade</a>
+      <a href="cadastro-localidade"><i class="fas fa-exclamation-triangle"></i> Cadastrar Localidade</a>
+      <a href="feed-pessoal"><i class="fas fa-newspaper"></i> Feed</a>
       <h3>Comunidades</h3>
       <a href="perfil-comunidade?id=1"><img src="images/centro.jpg" alt="Centro"> Centro</a>
       <a href="perfil-comunidade?id=2"><img src="images/vila_nova.jpg" alt="Vila Nova"> Vila Nova</a>
@@ -297,7 +290,6 @@
     </div>
   </div>
 
-  <!-- JavaScript para interatividade -->
   <script>
     function alternarMenu() {
       var barraLateral = document.getElementById("barraLateral");

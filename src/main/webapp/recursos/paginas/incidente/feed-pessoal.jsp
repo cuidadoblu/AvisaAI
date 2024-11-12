@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AvisaAí - Feed Pessoal</title>
     <style>
-        /* Estilos para o feed e mensagem vazia */
         .mensagem-vazia {
             text-align: center;
             margin-top: 40px;
@@ -29,21 +28,25 @@
     </style>
 </head>
 <body>
-<main class="feed-container">
+<div class="container-feed">
     <c:choose>
         <c:when test="${empty listaIncidentes}">
-            <div class="mensagem-vazia">
-                Você ainda não acompanha nenhuma comunidade.
-            </div>
+            <p class="mensagem-vazia">Você ainda não acompanha nenhuma comunidade.</p>
         </c:when>
         <c:otherwise>
             <c:forEach var="incidente" items="${listaIncidentes}">
-                <jsp:include page="../componentes/incidente.jsp">
-                    <jsp:param name="incidente" value="${incidente}"/>
-                </jsp:include>
+                <!-- Card do incidente sem uso de lista -->
+                <div class="incidente-card">
+                    <!-- Link para o servlet perfil-incidente com o parâmetro id-incidente -->
+                    <a href="perfil-incidente?id-incidente=${incidente.id}" class="link-incidente">
+                        <jsp:include page="../componentes/incidente.jsp">
+                            <jsp:param name="incidente" value="${incidente}"/>
+                        </jsp:include>
+                    </a>
+                </div>
             </c:forEach>
         </c:otherwise>
     </c:choose>
-</main>
+</div>
 </body>
 </html>

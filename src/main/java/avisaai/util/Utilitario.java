@@ -18,7 +18,7 @@ public class Utilitario {
         Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuario-logado");
 
         if (usuarioLogado == null) {
-            requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
+            //requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
         }
     }
 }

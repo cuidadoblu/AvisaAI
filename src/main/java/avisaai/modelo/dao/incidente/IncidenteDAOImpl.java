@@ -17,6 +17,7 @@ import org.hibernate.Session;
 
 import javax.persistence.criteria.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IncidenteDAOImpl implements IncidenteDAO {
@@ -158,45 +159,37 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 	public List<Incidente> consultarIncidentesComunidade(Comunidade comunidade) {
 
 		Session sessao = null;
-		List<Incidente> incidentes = null;
+		List<Incidente> incidentes = new ArrayList<>();
 
 		try {
-
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
 			CriteriaQuery<Incidente> criteria = construtor.createQuery(Incidente.class);
 			Root<Incidente> raizIncidente = criteria.from(Incidente.class);
 
-			criteria.select(raizIncidente);
-
+			// Realiza o join e aplica o filtro
 			Join<Incidente, Comunidade> juncaoComunidade = raizIncidente.join(Incidente_.comunidade);
+			criteria.select(raizIncidente)
+					.where(construtor.equal(juncaoComunidade.get(Comunidade_.id), comunidade.getId()));
 
-			ParameterExpression<Long> idComunidade = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoComunidade.get(Comunidade_.id), idComunidade));
-
-			incidentes = sessao.createQuery(criteria).setParameter(idComunidade, comunidade.getId()).getResultList();
-
+			incidentes = sessao.createQuery(criteria).getResultList();
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
+			sqlException.printStackTrace();  // Considere substituir por um Logger em produção
 
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}
 		}
 
 		return incidentes;
-
 	}
 
 	public List<Incidente> consultarIncidentesCategoria(Categoria categoria) {

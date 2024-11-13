@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
-        "/acompanhar", "/desacompanhar", "/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada"})
+        "/acompanhar-comunidade", "/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada"})
 
 public class ComunidadeServlet extends HttpServlet {
 
@@ -59,12 +59,8 @@ public class ComunidadeServlet extends HttpServlet {
                     atualizarComunidade(requisicao, resposta);
                     break;
 
-                case "/acompanhar":
-                    acompanharComunidade(requisicao, resposta);
-                    break;
-
-                case "/desacompanhar":
-                    desacompanharComunidade(requisicao, resposta);
+                case "/acompanhar-comunidade":
+                    acompanharDesacompanharComunidade(requisicao, resposta);
                     break;
 
                 case "/inserir-comunidade":
@@ -170,7 +166,7 @@ public class ComunidadeServlet extends HttpServlet {
 
     }
 
-    private void acompanharComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
+    private void acompanharDesacompanharComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws SQLException, ServletException, IOException {
 
         Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
@@ -181,21 +177,14 @@ public class ComunidadeServlet extends HttpServlet {
 
         Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
 
-        usuarioLogado.entrarNaComunidade(comunidadeDAO.consultarComunidadeId(idComunidade));
-    }
+        if(!usuarioLogado.getComunidadesAcompanhadas().contains(idComunidade)) {
+            usuarioLogado.sairDaComunidade(comunidadeDAO.consultarComunidadeId(idComunidade));
+            requisicao.setAttribute("mensagemPopup", "Deixou de acompanhar!");
+        } else {
+            usuarioLogado.entrarNaComunidade(comunidadeDAO.consultarComunidadeId(idComunidade));
+            requisicao.setAttribute("mensagemPopup", "Acompanhando comunidade!");
+        }
 
-    private void desacompanharComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws SQLException, ServletException, IOException {
-
-        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
-
-        HttpSession sessao = requisicao.getSession();
-
-        Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuario-logado");
-
-        Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
-
-        usuarioLogado.sairDaComunidade(comunidadeDAO.consultarComunidadeId(idComunidade));
     }
 
     private void mostrarTelaAtualizaComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)

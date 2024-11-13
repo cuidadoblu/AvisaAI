@@ -27,7 +27,7 @@ public class Comunidade implements Serializable {
     @Column(name = "descricao_comunidade", length = 300)
     private String descricao;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Foto fotoPerfil;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "comunidade", cascade = CascadeType.DETACH)

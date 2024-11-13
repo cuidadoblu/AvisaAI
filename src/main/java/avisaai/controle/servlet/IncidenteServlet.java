@@ -118,11 +118,14 @@ public class IncidenteServlet extends HttpServlet {
         List<Incidente> incidentes = (List<Incidente>) requisicao.getAttribute("listaIncidentes");
 
         if (incidentes == null) {
-            List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
             incidentes = new ArrayList<>();
+            List<Comunidade> comunidades = comunidadeDAO.recuperarComunidades();
 
             for (Comunidade comunidade : comunidades) {
-                incidentes.addAll(incidenteDAO.consultarIncidentesComunidade(comunidade));
+                List<Incidente> incidentesComunidade = incidenteDAO.consultarIncidentesComunidade(comunidade);
+                if (incidentesComunidade != null) {
+                    incidentes.addAll(incidentesComunidade);
+                }
             }
 
             requisicao.setAttribute("listaIncidentes", incidentes);
@@ -177,6 +180,8 @@ public class IncidenteServlet extends HttpServlet {
         Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
         Situacao situacao = Situacao.valueOf(requisicao.getParameter("situacao"));
 
+        Long idComunidade = Long.parseLong(requisicao.getParameter("id-comunidade"));
+
         Long idLocalidade = Long.parseLong(requisicao.getParameter("id-localidade"));
 
         Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
@@ -186,7 +191,7 @@ public class IncidenteServlet extends HttpServlet {
         }
 
         incidenteDAO.atualizarIncidente(new Incidente(idIncidente, titulo, descricao, dataHora, categoria,
-                comunidadeDAO.consultarComunidadeBairro(localidadeDAO.consultarLocalidadeId(idLocalidade)),
+                comunidadeDAO.consultarComunidadeId(idComunidade),
                 usuarioDAO.consultarUsuarioId(idUsuario), localidadeDAO.consultarLocalidadeId(idLocalidade), situacao));
 
         requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);

@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Comunidade implements Serializable {
 
     private static final long serialVersionUID = -9216497520338583127L;
-
+  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comunidade")

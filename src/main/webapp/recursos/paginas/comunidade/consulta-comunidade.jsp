@@ -71,14 +71,20 @@
             <img src="${comunidade.fotoPerfil}" alt="Foto da comunidade ${comunidade.nome}"/>
             <div class="titulo-comunidade">${comunidade.nome}</div>
             <div class="descricao-comunidade">Sobre:<br/> ${comunidade.descricao}</div>
-            <c:choose>
-                <c:when test="${comunidade.acompanhando}">
-                    <a href="desacompanhar?id=${comunidade.id}" class="botao-acompanhar desacompanhar">Desacompanhar</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="acompanhar?id=${comunidade.id}" class="botao-acompanhar">Acompanhar</a>
-                </c:otherwise>
-            </c:choose>
+            <div class="botao-acompanhar">
+            </div>
+            <form>
+                <button type="submit" class="botao-acompanhar">
+                    <c:choose>
+                        <c:when test="${comunidade.usuarios.contains(usuarioLogado)}">
+                            <a href="desacompanhar?id-comunidade=${comunidade.id}" class="botao-acompanhar desacompanhar">Desacompanhar</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="acompanhar?id-comunidade=${comunidade.id}" class="botao-acompanhar">Acompanhar</a>
+                        </c:otherwise>
+                    </c:choose>
+                </button>
+            </form>
         </div>
     </c:forEach>
 </div>

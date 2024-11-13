@@ -60,7 +60,6 @@
                 <th>Cidade</th>
                 <th>Bairro</th>
                 <th>Logradouro</th>
-                <th>Comunidade</th>
                 <th>Funções</th>
             </tr>
             </thead>

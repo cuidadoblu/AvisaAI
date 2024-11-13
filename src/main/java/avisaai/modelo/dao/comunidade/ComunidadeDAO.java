@@ -13,8 +13,6 @@ public interface ComunidadeDAO {
 
 	void atualizarComunidade(Comunidade comunidade);
 
-	Comunidade consultarComunidadeBairro(Localidade localidade);
-
 	List<Comunidade> recuperarComunidades();
 
 	List<Comunidade> consultarComunidadePorNome(String nome);

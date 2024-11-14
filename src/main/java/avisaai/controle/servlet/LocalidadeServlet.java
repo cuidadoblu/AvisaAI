@@ -113,7 +113,7 @@ public class LocalidadeServlet extends HttpServlet {
         localidadeDAO.inserirLocalidade(localidade);
 
         requisicao.setAttribute("mensagemPopup", "Localidade Cadastrada!");
-        requisicao.getRequestDispatcher("/recursos/paginas/localidade/cadastro-localidade.jsp").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("localidades").forward(requisicao, resposta);
     }
 
     private void excluirLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {
@@ -129,6 +129,7 @@ public class LocalidadeServlet extends HttpServlet {
 
         localidadeDAO.deletarLocalidade(localidade);
 
+        requisicao.setAttribute("mensagemPopup", "Localidade Excluída!");
         resposta.sendRedirect("localidades");
     }
 
@@ -162,6 +163,8 @@ public class LocalidadeServlet extends HttpServlet {
 
         resposta.sendRedirect("localidades");
 
+        requisicao.setAttribute("mensagemPopup", "Localidade Atualizada!");
+        requisicao.getRequestDispatcher("/recursos/paginas/localidade/atualizar-localidade.jsp").forward(requisicao, resposta);
     }
 
     private void mostrarTelaAtualizaLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {

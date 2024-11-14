@@ -1,9 +1,12 @@
 package avisaai.controle.servlet;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.List;
+import avisaai.modelo.dao.comentario.ComentarioDAO;
+import avisaai.modelo.dao.comentario.ComentarioDAOImpl;
+import avisaai.modelo.dao.resposta.RespostaDAO;
+import avisaai.modelo.dao.resposta.RespostaDAOImpl;
+import avisaai.modelo.entidade.comentario.Comentario;
+import avisaai.modelo.entidade.comentario.resposta.Resposta;
+import avisaai.modelo.entidade.usuario.Usuario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,14 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import avisaai.modelo.dao.resposta.RespostaDAO;
-import avisaai.modelo.dao.resposta.RespostaDAOImpl;
-import avisaai.modelo.dao.comentario.ComentarioDAO;
-import avisaai.modelo.dao.comentario.ComentarioDAOImpl;
-import avisaai.modelo.entidade.comentario.resposta.Resposta;
-import avisaai.modelo.entidade.comentario.Comentario;
-import avisaai.modelo.entidade.usuario.Usuario;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @WebServlet(urlPatterns = { "/inserir-resposta", "/atualizar-resposta", "/excluir-resposta", "/listar-respostas",
 		"/exibir-resposta", "/resposta-nao-encontrada" })
@@ -89,6 +88,7 @@ public class RespostaServlet extends HttpServlet {
 		Resposta novaResposta = new Resposta(conteudo, LocalDateTime.now(), usuario, comentarioOrigem);
 		respostaDAO.inserirResposta(novaResposta);
 
+		requisicao.setAttribute("mensagemPopup", "Resposta Cadastrada!");
 		requisicao.getRequestDispatcher("/exibir-resposta").forward(requisicao, resposta);
 	}
 
@@ -104,6 +104,7 @@ public class RespostaServlet extends HttpServlet {
 
 		respostaDAO.atualizarResposta(respostaObj);
 
+		requisicao.setAttribute("mensagemPopup", "Resposta Atualizada!");
 		requisicao.getRequestDispatcher("/exibir-resposta").forward(requisicao, resposta);
 	}
 
@@ -114,6 +115,7 @@ public class RespostaServlet extends HttpServlet {
 		Resposta respostaObj = respostaDAO.consultarRespostaId(idResposta);
 		respostaDAO.deletarResposta(respostaObj);
 
+		requisicao.setAttribute("mensagemPopup", "Resposta Excluída!");
 		requisicao.getRequestDispatcher("/listar-respostas").forward(requisicao, resposta);
 	}
 

@@ -1,0 +1,114 @@
+/*Estilo feed-incidente*/
+
+.container-postagem {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cabecalho-postagem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.titulo-postagem {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.icone-situacao {
+    color: #3498DB;
+    font-size: 14px;
+}
+
+.conteudo-cabeçalho {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.imagem-postagem {
+    width: 50%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.informacao-postagem {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #444;
+}
+
+.informacao-postagem .imagem-usuario {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.nome-data {
+    font-weight: bold;
+}
+
+.data {
+    color: #888;
+    font-size: 12px;
+}
+
+.mensagem-postagem {
+    margin-top: 10px;
+}
+
+.miniaturas {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.miniaturas img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.miniaturas img:hover {
+    transform: scale(1.1);
+}
+
+.reacoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.botao-curtir {
+    background-color: #3498DB;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.botao-curtir:hover {
+    background-color: #2C3E50;
+}
+
+.comentarios {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+    margin-top: 10px;
+}

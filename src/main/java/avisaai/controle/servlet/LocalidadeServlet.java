@@ -161,7 +161,6 @@ public class LocalidadeServlet extends HttpServlet {
         localidadeDAO.atualizarLocalidade(localidade);
 
         resposta.sendRedirect("localidades");
-
     }
 
     private void mostrarTelaAtualizaLocalidade(HttpServletRequest requisicao, HttpServletResponse resposta) throws ServletException, IOException {

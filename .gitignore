@@ -5,3 +5,4 @@ target/
 .apt_generated_tests/
 .mvn/
 .idea/
+/avisaai.iml

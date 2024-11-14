@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="../componentes/cabecalho.jsp"/>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,27 +11,26 @@
 </head>
 <body>
 <div class="layout-container">
-    <div class="colunas">
-        <h2>Esquerda</h2>
+    <div class="colunas" id="esquerda"></div>
+
+    <div class="colunas" id="principal">
+        <jsp:include page="../componentes/feed-incidentes.jsp"/>
     </div>
 
-    <div class="colunas">
-        <jsp:include page="../componentes/feed-incidentes.jsp" />
-    </div>
-
-    <div class="colunas">
-        <h2>Direita</h2>
-    </div>
+    <div class="colunas" id="direita"></div>
 </div>
 </body>
 <style>
-    body {
+    * {
         margin: 0;
+        padding: 0;
         font-family: Arial, sans-serif;
+    }
+
+    body {
         background-color: #ffffff;
-        display: flex;
-        justify-content: center;
         height: 100vh;
+        width: 100vw;
     }
 
     .layout-container {
@@ -38,13 +38,8 @@
         grid-template-columns: 2fr 8fr 2fr;
         gap: 20px;
         width: 100%;
-        height: 100%;
+        height: calc(100vh - 80px);
         box-sizing: border-box;
-    }
-
-    .colunas {
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 </style>
 </html>

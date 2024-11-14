@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../componentes/cabecalho.jsp" />
+<jsp:include page="../componentes/cabecalho.jsp"/>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -241,7 +240,6 @@ textarea:focus {
 	cursor: pointer;
 }
 
-/* Responsividade */
 @media ( max-width : 600px) {
 	.container-postagem {
 		padding: 10px;
@@ -261,19 +259,16 @@ textarea:focus {
 }
 </style>
 <script>
-	// Função para trocar a imagem principal com a miniatura clicada
 	function trocarImagemPrincipal(imagemUrl) {
 		document.getElementById("imagem-principal").src = imagemUrl;
 	}
 
-	// Função para mostrar campo de resposta
 	function responderComentario(comentarioId) {
 		const respostaContainer = document.getElementById("resposta-"
 				+ comentarioId);
 		respostaContainer.style.display = 'block';
 	}
 
-	// Função para fechar o campo de resposta
 	function fecharResposta(comentarioId) {
 		const respostaContainer = document.getElementById("resposta-"
 				+ comentarioId);
@@ -290,11 +285,9 @@ textarea:focus {
 				<div class="icone-situacao">${incidente.categoria}</div>
 			</div>
 
-			<!-- Imagem principal da postagem -->
 			<img id="imagem-principal" src="https://via.placeholder.com/600x300"
 				alt="Imagem da enxurrada" class="imagem-postagem">
 
-			<!-- Miniaturas de imagens -->
 			<div class="miniaturas">
 				<img src="https://via.placeholder.com/600x300/ff0000" alt="Imagem 1"
 					onclick="trocarImagemPrincipal('https://via.placeholder.com/600x300/ff0000')">
@@ -313,7 +306,7 @@ textarea:focus {
 				</div>
 				<div class="mensagem-postagem">${incidente.descricao}</div>
 			</div>
-			<!-- Reações: Curtidas e Comentários -->
+
 			<div class="reacoes">
 				<button class="botao-curtir">
 					<img src="" alt="">Curtir
@@ -322,7 +315,6 @@ textarea:focus {
 					class="contador-comentarios">Comentários</span>
 			</div>
 
-			<!-- Campo para novo comentário -->
 			<div class="campo-comentario">
 				<form action="inserir-comentario" method="post">
 					<div class="formulario-grupo">
@@ -335,7 +327,6 @@ textarea:focus {
 				</form>
 			</div>
 
-			<!-- Comentários existentes -->
 			<div class="comentarios">
 				<div class="comentario">
 					<div>
@@ -345,7 +336,6 @@ textarea:focus {
 					<button class="botao-responder"
 						onclick="responderComentario('comentario1')">Responder</button>
 
-					<!-- Respostas -->
 					<div id="resposta-comentario" class="respostas"
 						style="display: none;">
 						<span class="fechar-resposta"

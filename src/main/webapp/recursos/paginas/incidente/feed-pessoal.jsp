@@ -10,17 +10,16 @@
 </head>
 <body>
 <div class="layout-container">
-    <div class="coluna-esquerda">
+    <div class="colunas">
         <h2>Esquerda</h2>
     </div>
 
-    <div class="coluna-principal">
+    <div class="colunas">
         <jsp:include page="../componentes/feed-incidentes.jsp" />
     </div>
 
-    <div class="coluna-direita">
+    <div class="colunas">
         <h2>Direita</h2>
-
     </div>
 </div>
 </body>
@@ -28,9 +27,10 @@
     body {
         margin: 0;
         font-family: Arial, sans-serif;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
-        background-color: #ffffff;
+        height: 100vh;
     }
 
     .layout-container {
@@ -38,23 +38,12 @@
         grid-template-columns: 2fr 8fr 2fr;
         gap: 20px;
         width: 100%;
-        max-width: 1200px;
-        padding: 20px;
+        height: 100%;
         box-sizing: border-box;
     }
 
-    .coluna-esquerda,
-    .coluna-direita {
-        background-color: #ffffff;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .coluna-principal {
-        background-color: #ffffff;
-        padding: 15px;
-        border-radius: 8px;
+    .colunas {
+        padding: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 </style>

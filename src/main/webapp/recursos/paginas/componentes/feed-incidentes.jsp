@@ -3,7 +3,6 @@
 <style>
     .container-postagem {
         width: 100%;
-        max-width: 1000px;
         margin: 20px auto;
         padding: 20px;
         border-radius: 10px;

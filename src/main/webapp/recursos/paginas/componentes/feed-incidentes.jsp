@@ -116,6 +116,8 @@
 
 </style>
 
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/componentes/feed-incidentes.css">
 <div class="feed-incidentes">
     <c:forEach var="incidente" items="${listaIncidentes}">
         <div class="container-postagem">

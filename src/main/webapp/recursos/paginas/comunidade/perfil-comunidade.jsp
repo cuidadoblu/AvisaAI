@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AvisaAí - Perfil Comunidade</title>
-<link rel="shortcut icon" href="" type="image/x-icon">
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
 </head>
 <body>
 	<main>

@@ -118,6 +118,7 @@ public class ComunidadeServlet extends HttpServlet {
         Comunidade comunidade = new Comunidade(nome, descricao, null);
         comunidadeDAO.inserirComunidade(comunidade);
 
+        requisicao.setAttribute("mensagemPopup", "Comunidade Cadastrada!");
         resposta.sendRedirect("perfil-comunidade");
     }
 
@@ -135,6 +136,7 @@ public class ComunidadeServlet extends HttpServlet {
 
         comunidadeDAO.deletarComunidade(comunidade);
 
+        requisicao.setAttribute("mensagemPopup", "Comunidade Excluída!");
         resposta.sendRedirect("comunidades");
     }
 
@@ -162,6 +164,7 @@ public class ComunidadeServlet extends HttpServlet {
 
         comunidadeDAO.atualizarComunidade(comunidade);
 
+        requisicao.setAttribute("mensagemPopup", "Comunidade Atualizada!");
         resposta.sendRedirect("comunidades");
 
     }

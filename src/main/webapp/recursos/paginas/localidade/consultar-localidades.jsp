@@ -7,39 +7,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Lista de Localidades</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #2d3e50;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .acoes {
-            display: flex;
-            gap: 10px;
-        }
-
-        .acoes img {
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-        }
-    </style>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/localidade/localidade.css">
 </head>
 <body>
 <h2>Consulta de Localidades</h2>
@@ -47,7 +16,6 @@
     <input type="text" name="parametro" id="parametro" placeholder="Digite o endereço">
     <button type="submit">Pesquisar</button>
 </form>
-
 <c:choose>
     <c:when test="${empty listaLocalidades}">
         <p>Nenhuma localidade encontrada.</p>

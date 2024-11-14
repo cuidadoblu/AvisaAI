@@ -220,6 +220,9 @@
             display: block;
         }
     </style>
+  
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/componentes/cabecalho.css">
 </head>
 <div class="fundo-transparente-avisaai" id="fundoTransparente" onclick="fecharMenu()"></div>
 
@@ -285,7 +288,6 @@
     </div>
 </div>
 
-<!-- JavaScript para interatividade -->
 <script>
     function alternarMenu() {
         var barraLateral = document.getElementById("barraLateral");

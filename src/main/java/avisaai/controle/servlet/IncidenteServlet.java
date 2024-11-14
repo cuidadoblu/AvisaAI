@@ -166,7 +166,8 @@ public class IncidenteServlet extends HttpServlet {
                 localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
                 situacao));
 
-        requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+        requisicao.setAttribute("mensagemPopup", "Incidente Cadastrado!");
+        requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
     }
 
     private void atualizarIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -194,6 +195,7 @@ public class IncidenteServlet extends HttpServlet {
                 comunidadeDAO.consultarComunidadeId(idComunidade),
                 usuarioDAO.consultarUsuarioId(idUsuario), localidadeDAO.consultarLocalidadeId(idLocalidade), situacao));
 
+        requisicao.setAttribute("mensagemPopup", "Incidente Atualizado!");
         requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
     }
 
@@ -206,6 +208,7 @@ public class IncidenteServlet extends HttpServlet {
 
         incidenteDAO.deletarIncidente(incidenteDAO.consultarIncidenteId(idIncidente));
 
+        requisicao.setAttribute("mensagemPopup", "Incidente Excluído!");
         resposta.sendRedirect("feed-pessoal");
     }
 

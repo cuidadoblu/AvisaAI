@@ -1,16 +1,5 @@
 package avisaai.controle.servlet;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import avisaai.modelo.dao.comentario.ComentarioDAO;
 import avisaai.modelo.dao.comentario.ComentarioDAOImpl;
 import avisaai.modelo.dao.incidente.IncidenteDAO;
@@ -21,6 +10,16 @@ import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.util.Utilitario;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @WebServlet(urlPatterns = { "/inserir-comentario", "/atualizar-comentario", "/excluir-comentario", "/comentarios",
 		"/exibir-comentario", "/comentario-nao-encontrado" })
@@ -102,6 +101,7 @@ public class ComentarioServlet extends HttpServlet {
 		Comentario comentario = new Comentario(conteudo, LocalDateTime.now(), usuario, incidente);
 		comentarioDAO.inserirComentario(comentario);
 
+		requisicao.setAttribute("mensagemPopup", "Comentario Cadastrada!");
 		requisicao.getRequestDispatcher("/comentarios").forward(requisicao, resposta);
 	}
 
@@ -117,6 +117,7 @@ public class ComentarioServlet extends HttpServlet {
 
 		comentarioDAO.atualizarComentario(comentario);
 
+		requisicao.setAttribute("mensagemPopup", "Comunidade Atualizada!");
 		requisicao.getRequestDispatcher("/comentarios").forward(requisicao, resposta);
 	}
 
@@ -127,6 +128,7 @@ public class ComentarioServlet extends HttpServlet {
 		Comentario comentario = comentarioDAO.consultarComentarioId(idComentario);
 		comentarioDAO.deletarComentario(comentario);
 
+		requisicao.setAttribute("mensagemPopup", "Comunidade Excluída!");
 		requisicao.getRequestDispatcher("/comentarios").forward(requisicao, resposta);
 	}
 

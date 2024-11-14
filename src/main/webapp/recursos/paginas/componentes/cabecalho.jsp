@@ -1,35 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AvisaAí</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos Globais */
         *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #2C3E50;
-        }
-
-        /* Estilos para a barra superior (header) */
         .cabecalho-avisaai {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Espaça logo, barra de pesquisa e ícones */
-            padding: 15px 20px;
+            justify-content: space-between;
+            padding: 10px 20px;
             background-color: #34495E;
             position: sticky;
             width: 100%;
+            height: fit-content;
             top: 0;
-            z-index: 1000;
+            z-index: 3;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
@@ -39,31 +27,37 @@
             color: #ffffff;
             transition: transform 0.3s;
         }
+
         .icone-menu-avisaai:hover {
             transform: scale(1.1);
         }
 
         .logo-avisaai {
-            font-size: 18px;
             margin-left: 10px;
-            color: #ffffff;
             display: flex;
             align-items: center;
             transition: transform 0.3s;
+            width: min-content;
+            height: 30px;
         }
+
+        .logo-avisaai-img {
+            justify-items: center;
+            width: auto;
+            height: 75%;
+        }
+
         .logo-avisaai:hover {
             transform: scale(1.1);
         }
 
-
         .barra-consulta-container {
             display: flex;
-            justify-content: center; /* Centraliza a barra de pesquisa */
-            flex: 1; /* Permite que o contêiner ocupe o espaço disponível */
-            width: 100%; /* Garantindo que ocupe 100% da largura disponível */
+            justify-content: center;
+            flex: 1;
+            width: 100%;
 
         }
-
 
         .barra-consulta-avisaai {
             position: relative;
@@ -72,29 +66,29 @@
             background-color: #FFFFFF;
             border-radius: 50px;
             padding: 5px 10px;
-            margin: 0; /* Removido para centralizar corretamente */
-            width: 800px; /* Aumente este valor conforme necessário */
+            margin: 0;
+            width: 30%;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
-        .barra-consulta-avisaai:hover {
-            transform: scale(1.01);}
 
+        .barra-consulta-avisaai:hover {
+            transform: scale(1.01);
+        }
 
         .input-pesquisa {
             border: none;
             background: none;
             outline: none;
-            width: 100%; /* A barra de pesquisa ocupa todo o espaço disponível */
+            width: 100%;
             font-size: 16px;
             color: #2C3E50;
         }
 
-
         .consulta-expandida-avisaai {
             display: none;
             position: absolute;
-            top: calc(100% + 8px); /* Exibe logo abaixo do campo de pesquisa */
+            top: calc(100% + 8px);
             left: 0;
             width: 100%;
             background-color: #34495E;
@@ -102,7 +96,7 @@
             padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            z-index: 3;
         }
 
         .consulta-expandida-avisaai h4 {
@@ -119,18 +113,18 @@
         }
 
         .item-consulta-avisaai:hover {
-            background-color: #4E6A88; /* Cor de fundo ao passar o mouse */
+            background-color: #4E6A88;
         }
 
         .icones-avisaai {
             display: flex;
             align-items: center;
-            margin-left: auto; /* Adiciona margem automática à esquerda para empurrar os ícones para a direita */
+            margin-left: auto;
         }
 
         .icones-avisaai a img {
-            width: auto; /* Define a largura automática */
-            margin-left: 10px; /* Corrigido a sintaxe para adicionar margem à esquerda */
+            width: auto;
+            margin-left: 10px;
             transition: transform 0.3s;
         }
 
@@ -138,7 +132,6 @@
             transform: scale(1.1);
         }
 
-        /* Estilos para a barra lateral */
         .barra-lateral-avisaai {
             position: fixed;
             top: 50px;
@@ -149,7 +142,7 @@
             color: #ffffff;
             overflow: auto;
             transition: left 0.3s ease;
-            z-index: 999;
+            z-index: 2;
         }
 
         .barra-lateral-avisaai.aberta {
@@ -212,7 +205,6 @@
             background-color: #3498DB;
         }
 
-        /* Fundo transparente */
         .fundo-transparente-avisaai {
             display: none;
             position: fixed;
@@ -221,7 +213,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 998;
+            z-index: 1;
         }
 
         .fundo-transparente-avisaai.ativo {
@@ -229,22 +221,20 @@
         }
     </style>
 </head>
-<body>
-<!-- Fundo transparente -->
 <div class="fundo-transparente-avisaai" id="fundoTransparente" onclick="fecharMenu()"></div>
 
-<!-- Cabeçalho -->
 <header class="cabecalho-avisaai">
     <i class="fas fa-bars icone-menu-avisaai" onclick="alternarMenu()"></i>
     <div class="logo-avisaai">
-        <a href="feed-pessoal">
-            <img src="icons/logo.png" alt="Logo">
+        <a class="logo-avisaai" href="feed-pessoal">
+            <img class="logo-avisaai-img" src="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo%20branco.png" alt="Logo">
         </a>
     </div>
     <div class="barra-consulta-container">
         <div class="barra-consulta-avisaai">
             <i class="fas fa-search"></i>
-            <input type="text" class="input-pesquisa" placeholder="Consultar" onkeyup="mostrarConsultaExpandida(this.value)">
+            <input type="text" class="input-pesquisa" placeholder="Consultar"
+                   onkeyup="mostrarConsultaExpandida(this.value)">
             <div class="consulta-expandida-avisaai" id="consultaExpandida">
                 <h4>Comunidades</h4>
                 <c:forEach var="comunidade" items="${comunidades}">
@@ -290,7 +280,8 @@
         <img src="icons/perfil.png" alt="Perfil">
 
         <span>Usuário Logado</span>
-        <button class="sair-botao" onclick="redirecionar('deslogar')"><i class="fas fa-sign-out-alt"></i> Sair da Conta</button>
+        <button class="sair-botao" onclick="redirecionar('deslogar')"><i class="fas fa-sign-out-alt"></i> Sair da Conta
+        </button>
     </div>
 </div>
 
@@ -326,5 +317,4 @@
         window.location.href = url;
     }
 </script>
-</body>
 </html>

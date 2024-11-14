@@ -6,59 +6,8 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Consulta de Comunidades</title>
-    <style>
-        .container-comunidades {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .card-comunidade {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-comunidade img {
-            width: 100%;
-            max-width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-
-        .titulo-comunidade {
-            font-size: 20px;
-            font-weight: bold;
-            color: #2d3e50;
-            margin: 10px 0;
-        }
-
-        .descricao-comunidade {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .botao-acompanhar {
-            display: inline-block;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4f8ef7;
-            color: white;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .botao-acompanhar.desacompanhar {
-            background-color: #ccc;
-        }
-    </style>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
 </head>
 <body>
 <form action="comunidades" method="get">

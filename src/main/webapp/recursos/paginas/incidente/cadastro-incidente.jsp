@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../componentes/cabecalho.jsp" />
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,160 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AvisaAí - Cadastro Incidente</title>
-<link rel="shortcut icon" href="img" type="image/x-icon">
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Manrope', sans-serif;
-}
-
-body {
-	background-color: #ffffff;
-}
-
-.container-cadastro {
-	width: 100%;
-	max-width: 1000px;
-	margin: 40px auto;
-	padding: 20px;
-	background-color: #fff;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-	font-size: 30px;
-	color: #333;
-	text-align: center;
-	margin-bottom: auto;
-}
-
-.cabecalho-cadastro {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-bottom: 20px;
-}
-
-.botao-retornar {
-	display: inline-block;
-	text-decoration: none;
-	color: #2C3E50;
-	margin-right: 15px;
-	transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.botao-retornar:hover {
-	color: #2C3E50;
-	transform: scale(1.05);
-}
-
-.formulario-entradas {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 20px;
-}
-
-.formulario-grupo {
-	position: relative;
-}
-
-label {
-	font-weight: bold;
-	display: block;
-	font-size: 14px;
-	margin-bottom: 5px;
-	color: #555;
-}
-
-.formulario-controle {
-	width: 100%;
-	padding: 10px;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	font-size: 14px;
-	color: #333;
-	transition: border 0.3s, box-shadow 0.3s;
-}
-
-.formulario-controle:focus {
-	border-color: #2C3E50;
-	box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-	outline: none;
-}
-
-textarea.formulario-controle {
-	resize: vertical;
-	height: 100px;
-}
-
-select.formulario-controle {
-	cursor: pointer;
-}
-
-select.formulario-controle:hover {
-	border-color: #2C3E50;
-	box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-}
-
-.formulario-botoes {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 10px;
-	margin-top: 20px;
-}
-
-.botao-limpar, .botao-confirmar {
-	padding: 10px 20px;
-	font-size: 14px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	transition: background-color 0.3s, transform 0.2s;
-}
-
-.botao-limpar {
-	background-color: #f5f5f5;
-	color: #333;
-	transition: background-color 0.3s ease;
-}
-
-.botao-limpar:hover {
-	background-color: #e0e0e0;
-	transform: scale(1.05);
-}
-
-.botao-confirmar {
-	background-color: #3498DB;
-	color: #fff;
-	transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.botao-confirmar:hover {
-	background-color: #2C3E50;
-	transform: scale(1.05);
-}
-
-.botao-limpar:active, .botao-confirmar:active {
-	transform: scale(0.98);
-}
-
-/* Responsividade */
-@media ( max-width : 600px) {
-	.formulario-entradas {
-		grid-template-columns: 1fr;
-	}
-	.formulario-botoes {
-		grid-template-columns: 1fr;
-	}
-}
-</style>
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/incidente/incidente.css">
 </head>
 <body>
-
-
 	<main>
 		<div class="container-cadastro">
 			<div class="cabecalho-cadastro">

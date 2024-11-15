@@ -1,14 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="../componentes/cabecalho.jsp"/>
+<jsp:include page="/recursos/paginas/componentes/cabecalho.jsp" />
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AvisaAí - Perfil Comunidade</title>
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
+<meta charset="UTF-8" />
+<title>Perfil da Comunidade</title>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png"
+	type="image/x-icon">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
+
+<script>
+    function toggleAcompanhamento(button, comunidadeId) {
+        // Altera o texto do botão entre "Acompanhar" e "Desacompanhar"
+        if (button.textContent === 'Acompanhar') {
+            button.textContent = 'Desacompanhar'; // Altera o texto para "Desacompanhar"
+            window.location.href = 'acompanhar-comunidade?id-comunidade=' + comunidadeId; // Redireciona para acompanhar
+        } else {
+            button.textContent = 'Acompanhar'; // Altera o texto para "Acompanhar"
+            window.location.href = 'acompanhar-comunidade?id-comunidade=' + comunidadeId; // Redireciona para desacompanhar
+        }
+    }
+</script>
 </head>
 <body>
 	<main>
@@ -35,11 +52,10 @@
 				</h2>
 			</div>
 			<div class="perfil-botoes">
-				<button type="submit" value='${usuario.id}'
-					onclick="window.location.href='acompanhar'">Acompanhar</button>
+				<!-- Aqui o botão alterna entre "Acompanhar" e "Desacompanhar" -->
 				<button type="button"
-					onclick="window.location.href='usuariosComunidade'">Ver
-					Usuários</button>
+					onclick="toggleAcompanhamento(this, ${comunidade.id})"
+					class="botao-acompanhar">Acompanhar</button>
 			</div>
 		</div>
 	</main>

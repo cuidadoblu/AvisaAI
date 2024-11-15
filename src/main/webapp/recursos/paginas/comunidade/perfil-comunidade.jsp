@@ -56,6 +56,9 @@
 				<button type="button"
 					onclick="toggleAcompanhamento(this, ${comunidade.id})"
 					class="botao-acompanhar">Acompanhar</button>
+			<button type="button"
+					onclick="window.location.href='usuariosComunidade'">Ver
+					Usuários</button>
 			</div>
 		</div>
 	</main>

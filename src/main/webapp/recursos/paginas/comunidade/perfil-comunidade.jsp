@@ -13,6 +13,8 @@
 	type="image/x-icon">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/recursos/css/geral.css">
 
 <script>
     function toggleAcompanhamento(button, comunidadeId) {

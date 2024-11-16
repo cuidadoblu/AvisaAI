@@ -1,28 +1,28 @@
-/*Estilo cadastro-localidade*/
+/* Estilo cadastro-localidade */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--fonte-principal);
 }
 
 body {
-    background-color: #f4f4f4;
+    background-color: var(--cor-clara);
 }
 
 .container-cadastro {
     width: 100%;
-    max-width: 1000px;
+    max-width: var(--largura-maxima-container);
     margin: 40px auto;
-    padding: 20px;
+    padding: var(--padding-padrao);
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
 }
 
 h2 {
-    font-size: 30px;
-    color: #333;
+    font-size: var(--tamanho-titulo);
+    color: var(--texto-padrao);
     text-align: center;
     margin-bottom: auto;
 }
@@ -37,13 +37,13 @@ h2 {
 .botao-retornar {
     display: inline-block;
     text-decoration: none;
-    color: #2C3E50;
+    color: var(--cor-30);
     margin-right: 15px;
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: color var(--transicao), transform var(--transicao);
 }
 
 .botao-retornar:hover {
-    color: #2C3E50;
+    color: var(--cor-30);
     transform: scale(1.05);
 }
 
@@ -60,24 +60,24 @@ h2 {
 label {
     font-weight: bold;
     display: block;
-    font-size: 14px;
+    font-size: var(--tamanho-texto);
     margin-bottom: 5px;
-    color: #555;
+    color: var(--texto-secundario);
 }
 
 .formulario-controle {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-    transition: border 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-borda);
+    font-size: var(--tamanho-texto);
+    color: var(--texto-padrao);
+    transition: border var(--transicao), box-shadow var(--transicao);
 }
 
 .formulario-controle:focus {
-    border-color: #2C3E50;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    border-color: var(--cor-30);
+    box-shadow: 0 0 8px rgba(44, 62, 80, 0.3);
     outline: none;
 }
 
@@ -91,8 +91,8 @@ select.formulario-controle {
 }
 
 select.formulario-controle:hover {
-    border-color: #2C3E50;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    border-color: var(--cor-30);
+    box-shadow: 0 0 8px rgba(44, 62, 80, 0.3);
 }
 
 .formulario-botoes {
@@ -104,32 +104,29 @@ select.formulario-controle:hover {
 
 .botao-limpar, .botao-confirmar {
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: var(--tamanho-texto);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--raio-borda);
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color var(--transicao), transform var(--transicao);
 }
 
 .botao-limpar {
-    background-color: #f5f5f5;
-    color: #333;
-    transition: background-color 0.3s ease;
+    color: var(--texto-padrao);
 }
 
 .botao-limpar:hover {
-    background-color: #e0e0e0;
+    background-color: var(--cor-borda);
     transform: scale(1.05);
 }
 
 .botao-confirmar {
-    background-color: #3498DB;
-    color: #fff;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: var(--cor-10);
+    color: var(--cor-clara);
 }
 
 .botao-confirmar:hover {
-    background-color: #2C3E50;
+    background-color: var(--cor-30);
     transform: scale(1.05);
 }
 
@@ -138,7 +135,7 @@ select.formulario-controle:hover {
 }
 
 /* Responsividade */
-@media ( max-width : 600px) {
+@media (max-width: var(--largura-maxima-mobile)) {
     .formulario-entradas {
         grid-template-columns: 1fr;
     }
@@ -147,8 +144,7 @@ select.formulario-controle:hover {
     }
 }
 
-/*
-Estilo consultar-localidade*/
+/* Estilo consultar-localidade */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -156,18 +152,18 @@ table {
 }
 
 th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--cor-borda);
     padding: 8px;
     text-align: left;
 }
 
 th {
-    background-color: #2d3e50;
-    color: white;
+    background-color: var(--fundo-header);
+    color: #fff;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: var(--cor-clara);
 }
 
 .acoes {

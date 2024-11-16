@@ -1,4 +1,4 @@
-/*Estilo Popup*/
+/* Estilo Popup */
 
 .popup {
     display: none;
@@ -7,9 +7,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--cor-clara);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--sombra-popup);
     z-index: 1000;
     max-width: 350px;
     text-align: center;
@@ -33,7 +33,7 @@
 .fechar-popup {
     background: none;
     border: none;
-    color: #333;
+    color: var(--texto-padrao);
     font-size: 1.2em;
     position: absolute;
     top: 5px;

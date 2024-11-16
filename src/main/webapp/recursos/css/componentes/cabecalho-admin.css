@@ -1,216 +1,447 @@
 *, *::before, *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #ECF0F1;
+	font-family: var(--fonte-principal);
+	margin: 0;
+	padding: 0;
+	color: var(--texto-padrao);
 }
 
+/* Estilos para a barra superior (header) */
 .cabecalho-avisaai {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 20px;
-    background-color: #34495E;
-    position: sticky;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--padding-padrao);
+	background-color: var(--cor-30);
+	position: sticky;
+	width: 100%;
+	top: 0;
+	z-index: 1000;
+	box-shadow: var(--sombra-card);
 }
 
 .icone-menu-avisaai {
-    font-size: 24px;
-    cursor: pointer;
-    color: #ECF0F1;
-    transition: transform 0.3s;
+	font-size: 24px;
+	cursor: pointer;
+	color: var(--cor-clara);
+	transition: transform var(--transicao);
 }
+
 .icone-menu-avisaai:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
 
 .logo-avisaai {
-    font-size: 18px;
-    margin-left: 10px;
-    color: #ECF0F1;
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s;
-}
-.logo-avisaai:hover {
-    transform: scale(1.1);
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	transition: transform 0.3s;
+	width: min-content;
+	height: 30px;
 }
 
+.logo-avisaai-img {
+	justify-items: center;
+	width: auto;
+	height: 75%;
+}
+
+.logo-avisaai:hover {
+	transform: scale(1.1);
+}
 
 .barra-consulta-container {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    width: 100%;
-
+	display: flex;
+	justify-content: center;
+	flex: 1;
+	width: 100%;
 }
-
 
 .barra-consulta-avisaai {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background-color: #FFFFFF;
-    border-radius: 50px;
-    padding: 5px 10px;
-    margin: 0;
-    width: 800px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+	position: relative;
+	display: flex;
+	align-items: center;
+	background-color: var(--cor-clara);
+	border-radius: 50px;
+	padding: 5px 10px;
+	margin: 0;
+	width: 800px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	transition: transform var(--transicao);
 }
-.barra-consulta-avisaai:hover {
-    transform: scale(1.01);}
 
+.barra-consulta-avisaai:hover {
+	transform: scale(1.01);
+}
 
 .input-pesquisa {
-    border: none;
-    background: none;
-    outline: none;
-    width: 100%;
-    font-size: 16px;
-    color: #2C3E50;
+	border: none;
+	background: none;
+	outline: none;
+	width: 100%;
+	font-size: 16px;
+	color: var(--texto-padrao);
 }
 
-
 .consulta-expandida-avisaai {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    width: 100%;
-    background-color: #34495E;
-    color: #ECF0F1;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10;
+	display: none;
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 0;
+	width: 100%;
+	background-color: var(--cor-30);
+	color: var(--cor-clara);
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	z-index: 10;
 }
 
 .consulta-expandida-avisaai h4 {
-    font-size: 14px;
-    color: #BDC3C7;
-    margin-top: 10px;
+	font-size: 14px;
+	color: var(--cor-clara);
+	margin-top: 10px;
 }
 
 .item-consulta-avisaai {
-    padding: 8px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
+	padding: 8px;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
 }
 
 .item-consulta-avisaai:hover {
-    background-color: #4E6A88;
+	background-color: var(--cor-10);
 }
 
 .icones-avisaai {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
+	display: flex;
+	align-items: center;
+	margin-left: auto;
 }
 
 .icones-avisaai a img {
-    width: auto;
-    margin-left: 10px;
-    transition: transform 0.3s;
+	width: auto;
+	margin-left: 10px;
+	transition: transform var(--transicao);
 }
 
 .icones-avisaai a img:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
 
+/* Estilos para a barra lateral */
 .barra-lateral-avisaai {
-    position: fixed;
-    top: 50px;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: #2C3E50;
-    color: #ECF0F1;
-    overflow: auto;
-    transition: left 0.3s ease;
-    z-index: 999;
+	position: fixed;
+	top: 50px;
+	left: -250px;
+	width: 250px;
+	height: 100%;
+	background-color: var(--cor-30);
+	color: var(--cor-clara);
+	overflow: auto;
+	transition: left var(--transicao);
+	z-index: 999;
 }
 
 .barra-lateral-avisaai.aberta {
-    left: 0;
+	left: 0;
 }
 
 .menu-avisaai {
-    padding: 20px;
+	padding: 20px;
 }
 
 .menu-avisaai h2, .menu-avisaai h3 {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #BDC3C7;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: var(--cor-clara);
 }
 
 .menu-avisaai a {
-    display: block;
-    color: #ECF0F1;
-    padding: 10px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
+	display: block;
+	color: var(--cor-clara);
+	padding: 10px;
+	text-decoration: none;
+	transition: background-color var(--transicao), color var(--transicao);
 }
 
 .menu-avisaai a:hover {
-    background-color: #34495E;
-    color: #3498DB;
+	background-color: var(--cor-30);
+	color: var(--cor-10);
 }
 
 .menu-avisaai img {
-    width: 20px;
-    margin-right: 10px;
-    vertical-align: middle;
+	width: 20px;
+	margin-right: 10px;
+	vertical-align: middle;
 }
 
 .perfil-avisaai {
-    padding: 20px;
-    text-align: center;
+	padding: 20px;
+	text-align: center;
 }
 
 .perfil-avisaai img {
-    width: 50px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+	width: 50px;
+	border-radius: 50%;
+	margin-bottom: 10px;
 }
 
 .sair-botao {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #fff;
-    color: #000;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    transition: background 0.3s ease;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: var(--cor-clara);
+	color: var(--texto-padrao);
+	border: none;
+	cursor: pointer;
+	text-align: center;
+	transition: background var(--transicao);
 }
 
 .sair-botao:hover {
-    background-color: #3498DB;
+	background-color: var(--cor-10);
 }
 
+/* Fundo transparente */
 .fundo-transparente-avisaai {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 998;
 }
 
 .fundo-transparente-avisaai.ativo {
-    display: block;
+	display: block;
+}*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--fonte-principal);
+	margin: 0;
+	padding: 0;
+	color: var(--texto-padrao);
+}
+
+/* Estilos para a barra superior (header) */
+.cabecalho-avisaai {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--padding-padrao);
+	background-color: var(--cor-30);
+	position: sticky;
+	width: 100%;
+	top: 0;
+	z-index: 1000;
+	box-shadow: var(--sombra-card);
+}
+
+.icone-menu-avisaai {
+	font-size: 24px;
+	cursor: pointer;
+	color: var(--cor-clara);
+	transition: transform var(--transicao);
+}
+
+.icone-menu-avisaai:hover {
+	transform: scale(1.1);
+}
+
+.logo-avisaai {
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	transition: transform 0.3s;
+	width: min-content;
+	height: 30px;
+}
+
+.logo-avisaai-img {
+	justify-items: center;
+	width: auto;
+	height: 75%;
+}
+
+.logo-avisaai:hover {
+	transform: scale(1.1);
+}
+
+.barra-consulta-container {
+	display: flex;
+	justify-content: center;
+	flex: 1;
+	width: 100%;
+}
+
+.barra-consulta-avisaai {
+	position: relative;
+	display: flex;
+	align-items: center;
+	background-color: var(--cor-clara);
+	border-radius: 50px;
+	padding: 5px 10px;
+	margin: 0;
+	width: 800px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	transition: transform var(--transicao);
+}
+
+.barra-consulta-avisaai:hover {
+	transform: scale(1.01);
+}
+
+.input-pesquisa {
+	border: none;
+	background: none;
+	outline: none;
+	width: 100%;
+	font-size: 16px;
+	color: var(--texto-padrao);
+}
+
+.consulta-expandida-avisaai {
+	display: none;
+	position: absolute;
+	top: calc(100% + 8px);
+	left: 0;
+	width: 100%;
+	background-color: var(--cor-30);
+	color: var(--cor-clara);
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	z-index: 10;
+}
+
+.consulta-expandida-avisaai h4 {
+	font-size: 14px;
+	color: var(--cor-clara);
+	margin-top: 10px;
+}
+
+.item-consulta-avisaai {
+	padding: 8px;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+}
+
+.item-consulta-avisaai:hover {
+	background-color: var(--cor-10);
+}
+
+.icones-avisaai {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+}
+
+.icones-avisaai a img {
+	width: auto;
+	margin-left: 10px;
+	transition: transform var(--transicao);
+}
+
+.icones-avisaai a img:hover {
+	transform: scale(1.1);
+}
+
+/* Estilos para a barra lateral */
+.barra-lateral-avisaai {
+	position: fixed;
+	top: 50px;
+	left: -250px;
+	width: 250px;
+	height: 100%;
+	background-color: var(--cor-30);
+	color: var(--cor-clara);
+	overflow: auto;
+	transition: left var(--transicao);
+	z-index: 999;
+}
+
+.barra-lateral-avisaai.aberta {
+	left: 0;
+}
+
+.menu-avisaai {
+	padding: 20px;
+}
+
+.menu-avisaai h2, .menu-avisaai h3 {
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: var(--cor-clara);
+}
+
+.menu-avisaai a {
+	display: block;
+	color: var(--cor-clara);
+	padding: 10px;
+	text-decoration: none;
+	transition: background-color var(--transicao), color var(--transicao);
+}
+
+.menu-avisaai a:hover {
+	background-color: var(--cor-30);
+	color: var(--cor-10);
+}
+
+.menu-avisaai img {
+	width: 20px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.perfil-avisaai {
+	padding: 20px;
+	text-align: center;
+}
+
+.perfil-avisaai img {
+	width: 50px;
+	border-radius: 50%;
+	margin-bottom: 10px;
+}
+
+.sair-botao {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	background-color: var(--cor-clara);
+	color: var(--texto-padrao);
+	border: none;
+	cursor: pointer;
+	text-align: center;
+	transition: background var(--transicao);
+}
+
+.sair-botao:hover {
+	background-color: var(--cor-10);
+}
+
+/* Fundo transparente */
+.fundo-transparente-avisaai {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 998;
+}
+
+.fundo-transparente-avisaai.ativo {
+	display: block;
 }

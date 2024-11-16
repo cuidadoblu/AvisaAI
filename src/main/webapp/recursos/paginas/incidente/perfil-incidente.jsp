@@ -9,6 +9,7 @@
     <title>AvisaAí - Postagem de Incidente</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/incidente/incidente.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
     <script>
         function trocarImagemPrincipal(imagemUrl) {
             document.getElementById("imagem-principal").src = imagemUrl;

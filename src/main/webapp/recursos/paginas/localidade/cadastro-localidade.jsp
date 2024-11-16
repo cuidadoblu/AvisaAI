@@ -9,13 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AvisaAí - Cadastrar Localidade</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/localidade/localidade.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/localidade/localidade.css	">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
+
 </head>
 <body>
 <main>
     <div class="container-cadastro">
         <div class="cabecalho-cadastro">
-            <a href="feed-usuario" class="botao-retornar">
+            <a href="feed-pessoal" class="botao-retornar">
                 <svg
                         width="24" height="25" viewBox="0 0 24 25" fill="none"
                         xmlns="http://www.w3.org/2000/svg">

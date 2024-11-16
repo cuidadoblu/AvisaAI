@@ -11,6 +11,7 @@ import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.localidade.Localidade;
+import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.enumeracao.categoria.Categoria;
 import avisaai.modelo.enumeracao.situacao.Situacao;
 import avisaai.util.Utilitario;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -154,6 +156,9 @@ public class IncidenteServlet extends HttpServlet {
     private void inserirIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws SQLException, ServletException, IOException {
 
+        HttpSession sessao = requisicao.getSession();
+
+        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
         String titulo = requisicao.getParameter("titulo");
         String descricao = requisicao.getParameter("descricao");
         LocalDateTime dataHora = LocalDateTime.now();
@@ -162,7 +167,7 @@ public class IncidenteServlet extends HttpServlet {
 
         incidenteDAO.inserirIncidente(new Incidente(titulo, descricao, dataHora, categoria,
                 comunidadeDAO.consultarComunidadeId(Long.parseLong(requisicao.getParameter("id-localidade"))),
-                usuarioDAO.consultarUsuarioId(Long.parseLong(requisicao.getParameter("id-usuario"))),
+                usuario,
                 localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
                 situacao));
 

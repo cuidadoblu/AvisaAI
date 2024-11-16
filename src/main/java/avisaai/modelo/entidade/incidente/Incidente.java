@@ -51,15 +51,15 @@ public class Incidente implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
 	private Comunidade comunidade;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
 	private Localidade localidade;
 
@@ -67,7 +67,7 @@ public class Incidente implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
 	private List<Foto> fotoIncidente;
 
 	public Incidente() {

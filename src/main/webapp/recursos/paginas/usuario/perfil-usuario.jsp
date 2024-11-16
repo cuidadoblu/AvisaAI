@@ -16,6 +16,7 @@
     <c:choose>
         <c:when test="${usuarioLogado != null}">
             <div class="perfil-container">
+                <jsp:include page="${pageContext.request.contextPath}/recursos/paginas/usuario/editar-usuario.jsp"/>
                 <div class="perfil-imagem">
                     <img src="${usuarioLogado.fotoPerfil}"
                          alt="Foto de ${usuarioLogado.nome} ${usuarioLogado.sobrenome}">
@@ -40,7 +41,7 @@
                              class="icone-icidente-acompanhados">
                     </button>
                     <button type="button"
-                            onclick="window.location.href='configuracoes'">
+                            onclick="window.location.href='editar-usuario'">
                         <img src="img/icone-configuracao.png" alt="Configurações"
                              class="icone-configuracao">
                     </button>
@@ -57,6 +58,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="perfil-container">
+                        <jsp:include page="${pageContext.request.contextPath}/recursos/paginas/usuario/editar-usuario.jsp"/>
                         <div class="perfil-imagem">
                             <img src="${usuario.fotoPerfil}"
                                  alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
@@ -81,7 +83,7 @@
                                      class="icone-icidente-acompanhados">
                             </button>
                             <button type="button"
-                                    onclick="window.location.href='configuracoes'">
+                                    onclick="window.location.href='editar-usuario'">
                                 <img src="img/icone-configuracao.png" alt="Configurações"
                                      class="icone-configuracao">
                             </button>

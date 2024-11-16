@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
-        "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/usuario-nao-encontrado"})
+        "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/editar-usuario", "/usuario-nao-encontrado"})
 public class UsuarioServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1959126762240015341L;
@@ -82,6 +82,10 @@ public class UsuarioServlet extends HttpServlet {
                     mostrarTelaPerfilUsuarioLogado(requisicao, resposta);
                     break;
 
+                case "/editar-usuario":
+                    mostrarTelaEditarUsuario(requisicao, resposta);
+                    break;
+
                 case "/inserir-usuario":
                     inserirUsuario(requisicao, resposta);
                     break;
@@ -122,11 +126,11 @@ public class UsuarioServlet extends HttpServlet {
             dispatcher.forward(requisicao, resposta);
         }
 
-        Usuario usuario = usuarioDAO.recuperarUsuarioPorCredenciais(email, senha);
+        Usuario usuarioLogado = usuarioDAO.recuperarUsuarioPorCredenciais(email, senha);
 
-        if (usuario != null) {
+        if (usuarioLogado != null) {
             HttpSession sessao = requisicao.getSession();
-            sessao.setAttribute("usuario-logado", usuario);
+            sessao.setAttribute("usuario-logado", usuarioLogado);
             RequestDispatcher dispatcher = requisicao.getRequestDispatcher("");
             dispatcher.forward(requisicao, resposta);
         }
@@ -207,7 +211,15 @@ public class UsuarioServlet extends HttpServlet {
 
         sessao.setAttribute("usuario", usuarioLogado);
 
-        requisicao.getRequestDispatcher(("/recursos/paginas/usuario/perfil-usuario.jsp")).forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
+    }
+
+    private void mostrarTelaEditarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException {
+
+        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
+        requisicao.getRequestDispatcher("/recursos/paginas/usuario/editar-usuario.jsp").forward(requisicao, resposta);
     }
 
     private void inserirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -223,6 +235,8 @@ public class UsuarioServlet extends HttpServlet {
         Contato contato = new Contato(telefone, email);
         contatoDAO.inserirContato(contato);
 
+        // Adicionar papel aqui e trocar o null no construtor
+
         usuarioDAO.inserirUsuario(new Usuario(nome, sobrenome, senha, contato, null, null));
 
         requisicao.getRequestDispatcher("login").forward(requisicao, resposta);
@@ -230,6 +244,8 @@ public class UsuarioServlet extends HttpServlet {
 
     private void atualizarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws SQLException, ServletException, IOException {
+
+        HttpSession sessao = requisicao.getSession();
 
         Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
 
@@ -241,22 +257,15 @@ public class UsuarioServlet extends HttpServlet {
         String sobrenome = requisicao.getParameter("sobrenome");
         String senha = requisicao.getParameter("senha");
 
-        Long idContato = Long.parseLong(requisicao.getParameter("id-contato"));
+        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
 
-        if (contatoDAO.consultarContatoId(idContato) == null) {
-            resposta.sendRedirect("perfil-usuario");
-        }
+        usuario.setNome(nome);
+        usuario.setSobrenome(sobrenome);
+        usuario.setSenha(senha);
 
-        String telefone = requisicao.getParameter("telefone");
-        String email = requisicao.getParameter("email");
+        usuarioDAO.atualizarUsuario(usuario);
 
-        contatoDAO.atualizarContato(new Contato(idContato, email, telefone));
-
-        // Adicionar papel aqui e trocar o null no construtor
-
-        usuarioDAO.atualizarUsuario(
-                new Usuario(idUsuario, nome, sobrenome, senha, contatoDAO.consultarContatoId(idContato), null, null));
-
+        requisicao.setAttribute("mensagemPopup", "Usuário Atualizado!");
         requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
     }
 

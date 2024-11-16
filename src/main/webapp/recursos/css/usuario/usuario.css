@@ -126,3 +126,9 @@ main {
 .perfil-logout:hover {
     color: #0056b3;
 }
+/*
+Estilo editar-usuario*/
+
+#perfil-container {
+    z-index: 2;
+}

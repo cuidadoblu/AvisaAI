@@ -44,11 +44,6 @@
 					</div>
 
 					<div class="formulario-grupo">
-						<label for="usuario">Usuário</label>
-                        <input type="text" id="usuario" name="id-usuario" class="formulario-controle" placeholder="Insira o id do autor" maxlength="50" required>
-					</div>
-
-					<div class="formulario-grupo">
 						<label for="logradouro">Logradouro</label>
 						<select id="logradouro" name="id-localidade" class="formulario-controle" required>
 							<option value="" disabled selected>Selecione o seu Logradouro</option>

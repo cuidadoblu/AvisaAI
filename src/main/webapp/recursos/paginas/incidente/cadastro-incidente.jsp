@@ -10,12 +10,13 @@
 <title>AvisaAí - Cadastro Incidente</title>
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/incidente/incidente.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
 </head>
 <body>
 	<main>
 		<div class="container-cadastro">
 			<div class="cabecalho-cadastro">
-				<a href="feed-usuario" class="botao-retornar"> <svg
+				<a href="feed-pessoal" class="botao-retornar"> <svg
 						width="24" height="25" viewBox="0 0 24 25" fill="none"
 						xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.5" y="1" width="23" height="23" rx="3.5"

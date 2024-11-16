@@ -1,11 +1,14 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/componentes/popup.css">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/recursos/css/componentes/popup.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/recursos/css/geral.css">
 <div id="popupMensagem" class="popup">
-    <div class="popup-conteudo">
-        <img src="../imagens/icon-success.png" alt="Ícone de sucesso" class="popup-icone"/>
-        <span id="popupTexto"></span>
-        <button id="fecharPopup" class="fechar-popup">&times;</button>
-    </div>
+	<div class="popup-conteudo">
+		<img src="../imagens/icon-success.png" alt="Ícone de sucesso"
+			class="popup-icone" /> <span id="popupTexto"></span>
+		<button id="fecharPopup" class="fechar-popup">&times;</button>
+	</div>
 </div>
 <script>
     function mostrarPopup(mensagem, cor = '#fff', tempo = 2000) {

@@ -1,12 +1,11 @@
-/*Estilo feed-incidente*/
-
+/* Estilo feed-incidente */
 .container-postagem {
     width: 100%;
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--sombra-card);
 }
 
 .cabecalho-postagem {
@@ -19,11 +18,11 @@
 .titulo-postagem {
     font-size: 20px;
     font-weight: bold;
-    color: #333;
+    color: var(--texto-padrao);
 }
 
 .icone-situacao {
-    color: #3498DB;
+    color: var(--cor-10);
     font-size: 14px;
 }
 
@@ -42,7 +41,7 @@
 .informacao-postagem {
     flex-grow: 1;
     font-size: 14px;
-    color: #444;
+    color: var(--texto-claro);
 }
 
 .informacao-postagem .imagem-usuario {
@@ -58,7 +57,7 @@
 }
 
 .data {
-    color: #888;
+    color: var(--texto-secundario);
     font-size: 12px;
 }
 
@@ -93,8 +92,8 @@
 }
 
 .botao-curtir {
-    background-color: #3498DB;
-    color: #fff;
+    background-color: var(--cor-10);
+    color: var(--cor-clara);
     border: none;
     border-radius: 5px;
     padding: 8px 12px;
@@ -104,11 +103,11 @@
 }
 
 .botao-curtir:hover {
-    background-color: #2C3E50;
+    background-color: var(--cor-30);
 }
 
 .comentarios {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--cor-linha);
     padding-top: 10px;
     margin-top: 10px;
 }

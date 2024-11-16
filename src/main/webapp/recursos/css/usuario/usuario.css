@@ -1,4 +1,4 @@
-/*Estilo do consultar-usuario*/
+/* Estilo do consultar-usuario */
 .lista-usuarios {
     list-style-type: none;
     padding: 0;
@@ -7,7 +7,7 @@
 .card-usuario {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--padding-padrao);
     text-decoration: none;
     color: inherit;
 }
@@ -16,16 +16,16 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 15px;
+    margin-right: var(--padding-padrao);
 }
 
 .nome-usuario {
-    font-size: 18px;
-    color: #2d3e50;
+    font-size: var(--tamanho-texto);
+    color: var(--cor-30);
 }
 
 .card-usuario:hover {
-    background-color: #f0f0f0;
+    background-color: var(--cor-clara);
     cursor: pointer;
 }
 /* Estilo do perfil-usuario */
@@ -35,8 +35,8 @@
     box-sizing: border-box;
 }
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-clara);
 }
 main {
     display: flex;
@@ -48,11 +48,11 @@ main {
 .perfil-container {
     display: grid;
     grid-template-rows: auto auto 1fr auto;
-    gap: 20px;
+    gap: var(--padding-padrao);
     width: 300px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--cor-clara);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
     text-align: center;
 }
 /* Estilo da imagem de perfil */
@@ -75,8 +75,8 @@ main {
     display: none;
 }
 .editar-foto button {
-    background-color: #007BFF;
-    color: white;
+    background-color: var(--cor-10);
+    color: var(--cor-clara);
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
@@ -88,9 +88,9 @@ main {
 }
 /* Nome do usuário */
 .perfil-nome span {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+    font-size: var(--tamanho-titulo);
+    font-weight: var(--peso-titulo);
+    color: var(--texto-padrao);
 }
 /* Botões de ação */
 .perfil-botoes {
@@ -100,29 +100,33 @@ main {
 .perfil-botoes button {
     display: flex;
     align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    padding: var(--padding-padrao);
+    background-color: var(--cor-clara);
+    border: 1px solid var(--cor-borda);
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color var(--transicao);
 }
+
 .perfil-botoes button:hover {
     background-color: #f0f0f0;
 }
+
 .perfil-botoes img {
     width: 24px;
     height: 24px;
     margin-right: 10px;
 }
+
 /* Estilo para o link de Log-out */
 .perfil-logout {
     margin-top: 10px;
-    color: #007BFF;
+    color: var(--cor-10);
     font-weight: bold;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color var(--transicao);
 }
+
 .perfil-logout:hover {
     color: #0056b3;
 }

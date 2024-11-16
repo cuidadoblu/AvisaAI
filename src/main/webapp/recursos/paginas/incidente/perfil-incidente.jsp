@@ -65,12 +65,12 @@
             <form action="inserir-comentario" method="post">
                 <div class="formulario-grupo">
                     <label for="novo-comentario">Adicionar comentário</label>
+                    <input type="hidden" name="id-incidente" id="id-incidente" value="${incidente.id}">
+                    <input type="hidden" name="id-usuario" id="id-usuario" value="${usuarioLogado.id}">
                     <textarea id="novo-comentario" name="novo-comentario"
-                              placeholder="Escreva seu comentário aqui..." required></textarea>
+                              placeholder="Escreva seu comentário aqui..." value="${comentario.conteudo}" required></textarea>
                 </div>
-                <button type="submit" class="botao-enviar">Enviar
-                    comentário
-                </button>
+                <button type="submit" class="botao-enviar">Enviar comentário</button>
             </form>
         </div>
 
@@ -79,6 +79,7 @@
                 <div>
                     <span class="nome">{comentario.usuario}</span> <span class="data">{comentario.dataHora}</span>
                 </div>
+                <input type="hidden" name="id-comentario" id="id-comentario" value="${comentario.id}">
                 <div>${comentario.conteudo}</div>
                 <button class="botao-responder"
                         onclick="responderComentario('comentario1')">Responder

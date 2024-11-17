@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AvisaAí</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/icone%20guarda-chuva.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/componentes/cabecalho.css">  
 </head>

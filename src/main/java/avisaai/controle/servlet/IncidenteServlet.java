@@ -1,5 +1,7 @@
 package avisaai.controle.servlet;
 
+import avisaai.modelo.dao.comentario.ComentarioDAO;
+import avisaai.modelo.dao.comentario.ComentarioDAOImpl;
 import avisaai.modelo.dao.comunidade.ComunidadeDAO;
 import avisaai.modelo.dao.comunidade.ComunidadeDAOImpl;
 import avisaai.modelo.dao.incidente.IncidenteDAO;
@@ -8,6 +10,7 @@ import avisaai.modelo.dao.localidade.LocalidadeDAO;
 import avisaai.modelo.dao.localidade.LocalidadeDAOImpl;
 import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
+import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.localidade.Localidade;
@@ -36,12 +39,14 @@ public class IncidenteServlet extends HttpServlet {
     private ComunidadeDAO comunidadeDAO;
     private LocalidadeDAO localidadeDAO;
     private UsuarioDAO usuarioDAO;
+    private ComentarioDAO comentarioDAO;
 
     public void init() {
         incidenteDAO = new IncidenteDAOImpl();
         comunidadeDAO = new ComunidadeDAOImpl();
         localidadeDAO = new LocalidadeDAOImpl();
         usuarioDAO = new UsuarioDAOImpl();
+        comentarioDAO = new ComentarioDAOImpl();
     }
 
     protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -101,7 +106,22 @@ public class IncidenteServlet extends HttpServlet {
 
         Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-        requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
+        try {
+            Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
+            Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
+
+            if (incidente != null) {
+                List <Comentario> comentariosIncidente = comentarioDAO.consultarComentarioIncidente(incidente);
+                requisicao.setAttribute("listaComentarios", comentariosIncidente);
+                requisicao.setAttribute("incidente", incidente);
+                requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
+            } else {
+                resposta.sendRedirect("incidente-nao-encontrado");
+            }
+        } catch (NumberFormatException e) {
+            requisicao.setAttribute("mensagemErro", "Parâmetro inválido para o incidente.");
+            requisicao.getRequestDispatcher("/recursos/paginas/erro/erro-400.jsp").forward(requisicao, resposta);
+        }
     }
 
     private void mostrarTelaConsultaIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)

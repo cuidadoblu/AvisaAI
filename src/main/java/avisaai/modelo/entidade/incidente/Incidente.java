@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.foto.Foto;
 import avisaai.modelo.entidade.localidade.Localidade;
@@ -41,7 +42,7 @@ public class Incidente implements Serializable {
 	@Column(name = "titulo_incidente", length = 100, nullable = false)
 	private String titulo;
 
-	@Column(name = "descricao_incidente", length = 950, nullable = false)
+	@Column(name = "descricao_incidente", length = 350, nullable = false)
 	private String descricao;
 
 	@Column(name = "data_incidente", nullable = false)
@@ -70,6 +71,9 @@ public class Incidente implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
 	private List<Foto> fotoIncidente;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
+	private List<Comentario> comentariosIncidente;
+
 	public Incidente() {
 	}
 
@@ -84,6 +88,7 @@ public class Incidente implements Serializable {
 		setLocalidade(localidade);
 		setSituacao(situacao);
 		fotoIncidente = new ArrayList<Foto>();
+		comentariosIncidente = new ArrayList<Comentario>();
 	}
 	
 	public Incidente(Long id, String titulo, String descricao, LocalDateTime dataHora, Categoria categoria,
@@ -98,6 +103,7 @@ public class Incidente implements Serializable {
 		setLocalidade(localidade);
 		setSituacao(situacao);
 		fotoIncidente = new ArrayList<Foto>();
+		comentariosIncidente = new ArrayList<Comentario>();
 	}
 
 	public Long getId() {
@@ -181,7 +187,23 @@ public class Incidente implements Serializable {
 	}
 
 	public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
-		this.fotoIncidente.add(foto);
+		this.fotoIncidente.remove(foto);
+	}
+
+	public List<Comentario> getComentariosIncidente() {
+		return comentariosIncidente;
+	}
+
+	public void setComentariosIncidente(List<Comentario> comentariosIncidente) {
+		this.comentariosIncidente = comentariosIncidente;
+	}
+
+	public void adicionarComentarioIncidente(List<Comentario> comentariosIncidente, Comentario comentario) {
+		this.comentariosIncidente.add(comentario);
+	}
+
+	public void removerComentarioIncidente(List<Comentario> comentariosIncidente, Comentario comentario) {
+		this.comentariosIncidente.remove(comentario);
 	}
 
 	public int hashCode() {

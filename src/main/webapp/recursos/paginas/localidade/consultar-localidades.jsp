@@ -7,7 +7,6 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Lista de Localidades</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/logo azul.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/localidade/localidade.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
 </head>

@@ -22,8 +22,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@WebServlet(urlPatterns = { "/inserir-comentario", "/atualizar-comentario", "/excluir-comentario", "/comentarios",
-		"/exibir-comentario", "/comentario-nao-encontrado" })
+@WebServlet(urlPatterns = { "/inserir-comentario", "/atualizar-comentario", "/excluir-comentario", "/comentario-nao-encontrado" })
 public class ComentarioServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1653883628982882326L;
@@ -50,10 +49,6 @@ public class ComentarioServlet extends HttpServlet {
 		try {
 			switch (action) {
 
-			case "cadastro-comentario":
-				mostrarCadastroComentario(requisicao, resposta);
-				break;
-
 			case "/inserir-comentario":
 				inserirComentario(requisicao, resposta);
 				break;
@@ -66,10 +61,6 @@ public class ComentarioServlet extends HttpServlet {
 				excluirComentario(requisicao, resposta);
 				break;
 
-			case "/comentarios":
-				listarComentarios(requisicao, resposta);
-				break;
-
 			case "/comentario-nao-encontrado":
 				erro(requisicao, resposta);
 				break;
@@ -79,31 +70,22 @@ public class ComentarioServlet extends HttpServlet {
 		}
 	}
 
-	private void mostrarCadastroComentario(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws ServletException, IOException {
-
-		Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
-
-		requisicao.getRequestDispatcher("cadastro-comentario.jsp").forward(requisicao, resposta);
-	}
-
 	private void inserirComentario(HttpServletRequest requisicao, HttpServletResponse resposta)
 			throws SQLException, ServletException, IOException {
 
 		HttpSession sessao = requisicao.getSession();
 
 		Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
-		Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
+		Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
 
 		String conteudo = requisicao.getParameter("conteudo");
 		Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
-		Usuario usuario = usuarioDAO.consultarUsuarioId(idUsuario);
 
 		Comentario comentario = new Comentario(conteudo, LocalDateTime.now(), usuario, incidente);
 		comentarioDAO.inserirComentario(comentario);
 
 		requisicao.setAttribute("mensagemPopup", "Comentario Cadastrado!");
-		requisicao.getRequestDispatcher("comentarios").forward(requisicao, resposta);
+		requisicao.getRequestDispatcher("perfil-incidente?idIncidente").forward(requisicao, resposta);
 	}
 
 	private void atualizarComentario(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -131,18 +113,6 @@ public class ComentarioServlet extends HttpServlet {
 
 		requisicao.setAttribute("mensagemPopup", "Comentario Excluído!");
 		requisicao.getRequestDispatcher("comentarios").forward(requisicao, resposta);
-	}
-
-	private void listarComentarios(HttpServletRequest requisicao, HttpServletResponse resposta)
-			throws SQLException, ServletException, IOException {
-
-		Long idIncidente = Long.parseLong(requisicao.getParameter("id_incidente"));
-		Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
-
-		List<Comentario> listaComentarios = comentarioDAO.consultarComentarioIncidente(incidente);
-
-		requisicao.setAttribute("listaComentarios", listaComentarios);
-		requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
 	}
 
 	private void erro(HttpServletRequest requisicao, HttpServletResponse resposta)

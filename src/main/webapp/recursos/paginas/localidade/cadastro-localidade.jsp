@@ -8,7 +8,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AvisaAí - Cadastrar Localidade</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/localidade/localidade.css	">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/localidade/localidade.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
 
 </head>

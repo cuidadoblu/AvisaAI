@@ -24,20 +24,14 @@ public class FotoDAOImpl implements FotoDAO {
 
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
-
 			sessao.save(foto);
-
 			sessao.getTransaction().commit();
-
 		} catch (Exception sqlException) {
-
-			if (sessao.getTransaction() != null) {
+			if (sessao != null && sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
-
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}
@@ -53,19 +47,15 @@ public class FotoDAOImpl implements FotoDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.remove(foto);
+			sessao.delete(foto);
 
 			sessao.getTransaction().commit();
-
 		} catch (Exception sqlException) {
-
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
-
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}
@@ -84,16 +74,12 @@ public class FotoDAOImpl implements FotoDAO {
 			sessao.update(foto);
 
 			sessao.getTransaction().commit();
-
 		} catch (Exception sqlException) {
-
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
-
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}
@@ -117,17 +103,14 @@ public class FotoDAOImpl implements FotoDAO {
 			criteria.select(raizFoto);
 
 			fotos = sessao.createQuery(criteria).getResultList();
+
 			sessao.getTransaction().commit();
-
 		} catch (Exception sqlException) {
-
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
-
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}
@@ -150,21 +133,17 @@ public class FotoDAOImpl implements FotoDAO {
 			CriteriaQuery<Foto> criteria = construtor.createQuery(Foto.class);
 			Root<Foto> raizFoto = criteria.from(Foto.class);
 
-			ParameterExpression<Long> idFoto = construtor.parameter(Long.class);
-			criteria.select(raizFoto).where(construtor.equal(raizFoto.get("id"), idFoto));
+			criteria.select(raizFoto).where(construtor.equal(raizFoto.get("id"), id));
 
-			foto = sessao.createQuery(criteria).getSingleResult();
+			foto = sessao.createQuery(criteria).uniqueResult();
+
 			sessao.getTransaction().commit();
-
 		} catch (Exception sqlException) {
-
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
-
 		} finally {
-
 			if (sessao != null) {
 				sessao.close();
 			}

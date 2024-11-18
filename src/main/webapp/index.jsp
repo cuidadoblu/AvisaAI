@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/recursos/paginas/componentes/cabecalho.jsp" />
+<!DOCTYPE html>
 <html>
 <body>
-	<br>
+	<jsp:include page="/recursos/paginas/componentes/cabecalho.jsp" />
 	<h2>Usuário</h2>
 	<a href="cadastro-usuario">Cadastrar-se</a>
 	<br>
@@ -47,5 +47,9 @@
 	<a href="editar-incidente">Editar Incidente</a>
 	<br>
 	<a href="excluir-incidente">Excluir Incidente</a>
+	<br>
+	<h2>Foto</h2>
+	<a href="formulario-foto">form-foto</a>
+	<br>
 </body>
 </html>

@@ -68,10 +68,10 @@ public class Incidente implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
-	private List<Foto> fotoIncidente;
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
+	//private List<Foto> fotoIncidente;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_incidente", cascade = CascadeType.REMOVE)
 	private List<Comentario> comentariosIncidente;
 
 	public Incidente() {
@@ -87,7 +87,7 @@ public class Incidente implements Serializable {
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
-		fotoIncidente = new ArrayList<Foto>();
+		//fotoIncidente = new ArrayList<Foto>();
 		comentariosIncidente = new ArrayList<Comentario>();
 	}
 	
@@ -102,7 +102,7 @@ public class Incidente implements Serializable {
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
-		fotoIncidente = new ArrayList<Foto>();
+		//fotoIncidente = new ArrayList<Foto>();
 		comentariosIncidente = new ArrayList<Comentario>();
 	}
 
@@ -178,7 +178,7 @@ public class Incidente implements Serializable {
 		this.situacao = situacao;
 	}
 
-	public List<Foto> getFotoIncidente() {
+	/*public List<Foto> getFotoIncidente() {
 		return fotoIncidente;
 	}
 
@@ -189,7 +189,7 @@ public class Incidente implements Serializable {
 	public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
 		this.fotoIncidente.remove(foto);
 	}
-
+*/
 	public List<Comentario> getComentariosIncidente() {
 		return comentariosIncidente;
 	}

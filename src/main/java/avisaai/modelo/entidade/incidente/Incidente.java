@@ -71,7 +71,7 @@ public class Incidente implements Serializable {
 	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
 	//private List<Foto> fotoIncidente;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "id_incidente", cascade = CascadeType.REMOVE)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)
 	private List<Comentario> comentariosIncidente;
 
 	public Incidente() {

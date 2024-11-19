@@ -32,192 +32,192 @@ import avisaai.modelo.enumeracao.situacao.Situacao;
 @Table(name = "incidente")
 public class Incidente implements Serializable {
 
-	static final long serialVersionUID = -3363285045481180558L;
+    static final long serialVersionUID = -3363285045481180558L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_incidente")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_incidente")
+    private Long id;
 
-	@Column(name = "titulo_incidente", length = 100, nullable = false)
-	private String titulo;
+    @Column(name = "titulo_incidente", length = 100, nullable = false)
+    private String titulo;
 
-	@Column(name = "descricao_incidente", length = 350, nullable = false)
-	private String descricao;
+    @Column(name = "descricao_incidente", length = 350, nullable = false)
+    private String descricao;
 
-	@Column(name = "data_incidente", nullable = false)
-	private LocalDateTime dataHora;
+    @Column(name = "data_incidente", nullable = false)
+    private LocalDateTime dataHora;
 
-	@Column(name = "categoria")
-	@Enumerated(EnumType.STRING)
-	private Categoria categoria;
+    @Column(name = "categoria")
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
-	private Comunidade comunidade;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_comunidade", referencedColumnName = "id_comunidade")
+    private Comunidade comunidade;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-	private Usuario usuario;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
-	private Localidade localidade;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_localidade", referencedColumnName = "id_localidade")
+    private Localidade localidade;
 
-	@Column(name = "situacao")
-	@Enumerated(EnumType.STRING)
-	private Situacao situacao;
+    @Column(name = "situacao")
+    @Enumerated(EnumType.STRING)
+    private Situacao situacao;
 
-	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
-	//private List<Foto> fotoIncidente;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_foto", cascade = CascadeType.REMOVE)
+    private List<Foto> fotoIncidente;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)
-	private List<Comentario> comentariosIncidente;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)
+    private List<Comentario> comentariosIncidente;
 
-	public Incidente() {
-	}
+    public Incidente() {
+    }
 
-	public Incidente(String titulo, String descricao, LocalDateTime dataHora, Categoria categoria,
-			Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
-		setTitulo(titulo);
-		setDescricao(descricao);
-		setDataHora(dataHora);
-		setCategoria(categoria);
-		setComunidade(comunidade);
-		setUsuario(usuario);
-		setLocalidade(localidade);
-		setSituacao(situacao);
-		//fotoIncidente = new ArrayList<Foto>();
-		comentariosIncidente = new ArrayList<Comentario>();
-	}
-	
-	public Incidente(Long id, String titulo, String descricao, LocalDateTime dataHora, Categoria categoria,
-			Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
-		setId(id);
-		setTitulo(titulo);
-		setDescricao(descricao);
-		setDataHora(dataHora);
-		setCategoria(categoria);
-		setComunidade(comunidade);
-		setUsuario(usuario);
-		setLocalidade(localidade);
-		setSituacao(situacao);
-		//fotoIncidente = new ArrayList<Foto>();
-		comentariosIncidente = new ArrayList<Comentario>();
-	}
+    public Incidente(String titulo, String descricao, LocalDateTime dataHora, Categoria categoria,
+                     Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
+        setTitulo(titulo);
+        setDescricao(descricao);
+        setDataHora(dataHora);
+        setCategoria(categoria);
+        setComunidade(comunidade);
+        setUsuario(usuario);
+        setLocalidade(localidade);
+        setSituacao(situacao);
+        fotoIncidente = new ArrayList<Foto>();
+        comentariosIncidente = new ArrayList<Comentario>();
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Incidente(Long id, String titulo, String descricao, LocalDateTime dataHora, Categoria categoria,
+                     Comunidade comunidade, Usuario usuario, Localidade localidade, Situacao situacao) {
+        setId(id);
+        setTitulo(titulo);
+        setDescricao(descricao);
+        setDataHora(dataHora);
+        setCategoria(categoria);
+        setComunidade(comunidade);
+        setUsuario(usuario);
+        setLocalidade(localidade);
+        setSituacao(situacao);
+        fotoIncidente = new ArrayList<Foto>();
+        comentariosIncidente = new ArrayList<Comentario>();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public String getTitulo() {
+        return titulo;
+    }
 
-	public String getDescricao() {
-		return descricao;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+    public String getDescricao() {
+        return descricao;
+    }
 
-	public LocalDateTime getDataHora() {
-		return dataHora;
-	}
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
-	public void setDataHora(LocalDateTime data) {
-		this.dataHora = data;
-	}
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
 
-	public Categoria getCategoria() {
-		return categoria;
-	}
+    public void setDataHora(LocalDateTime data) {
+        this.dataHora = data;
+    }
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
-	public Comunidade getComunidade() {
-		return comunidade;
-	}
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
-	public void setComunidade(Comunidade comunidade) {
-		this.comunidade = comunidade;
-	}
+    public Comunidade getComunidade() {
+        return comunidade;
+    }
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
+    public void setComunidade(Comunidade comunidade) {
+        this.comunidade = comunidade;
+    }
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-	public Localidade getLocalidade() {
-		return localidade;
-	}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setLocalidade(Localidade localidade) {
-		this.localidade = localidade;
-	}
+    public Localidade getLocalidade() {
+        return localidade;
+    }
 
-	public Situacao getSituacao() {
-		return situacao;
-	}
+    public void setLocalidade(Localidade localidade) {
+        this.localidade = localidade;
+    }
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
-	}
+    public Situacao getSituacao() {
+        return situacao;
+    }
 
-	/*public List<Foto> getFotoIncidente() {
-		return fotoIncidente;
-	}
+    public void setSituacao(Situacao situacao) {
+        this.situacao = situacao;
+    }
 
-	public void adicionarFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
-		this.fotoIncidente.add(foto);
-	}
+    public List<Foto> getFotoIncidente() {
+        return fotoIncidente;
+    }
 
-	public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
-		this.fotoIncidente.remove(foto);
-	}
-*/
-	public List<Comentario> getComentariosIncidente() {
-		return comentariosIncidente;
-	}
+    public void adicionarFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
+        this.fotoIncidente.add(foto);
+    }
 
-	public void setComentariosIncidente(List<Comentario> comentariosIncidente) {
-		this.comentariosIncidente = comentariosIncidente;
-	}
+    public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
+        this.fotoIncidente.remove(foto);
+    }
 
-	public void adicionarComentarioIncidente(List<Comentario> comentariosIncidente, Comentario comentario) {
-		this.comentariosIncidente.add(comentario);
-	}
+    public List<Comentario> getComentariosIncidente() {
+        return comentariosIncidente;
+    }
 
-	public void removerComentarioIncidente(List<Comentario> comentariosIncidente, Comentario comentario) {
-		this.comentariosIncidente.remove(comentario);
-	}
+    public void setComentariosIncidente(List<Comentario> comentariosIncidente) {
+        this.comentariosIncidente = comentariosIncidente;
+    }
 
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    public void adicionarComentarioIncidente(List<Comentario> comentariosIncidente, Comentario comentario) {
+        this.comentariosIncidente.add(comentario);
+    }
 
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Incidente outro = (Incidente) obj;
-		return Objects.equals(id, outro.id);
-	}
+    public void removerComentarioIncidente(List<Comentario> comentariosIncidente, Comentario comentario) {
+        this.comentariosIncidente.remove(comentario);
+    }
+
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Incidente outro = (Incidente) obj;
+        return Objects.equals(id, outro.id);
+    }
 }

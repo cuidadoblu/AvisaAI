@@ -4,6 +4,12 @@
 <jsp:include page="../componentes/cabecalho.jsp"/>
 <!DOCTYPE html>
 <html lang="pt-br">
+<script>
+    function atualizarUsuario() {
+
+    }
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,14 +22,14 @@
     <c:choose>
         <c:when test="${usuarioLogado != null}">
             <div class="perfil-container">
-                <jsp:include page="${pageContext.request.contextPath}/recursos/paginas/usuario/editar-usuario.jsp"/>
+                <jsp:include page="/recursos/paginas/usuario/editar-usuario.jsp"/>
                 <div class="perfil-imagem">
                     <img src="${usuarioLogado.fotoPerfil}"
                          alt="Foto de ${usuarioLogado.nome} ${usuarioLogado.sobrenome}">
                     <div class="editar-foto">
                         <form action="uploadFoto" method="post"
                               enctype="multipart/form-data">
-                            <input type="file" name="foto-perfil" id="foto-perfil">
+                            <input type="file" name="id-foto" id="id-foto">
                             <input type="hidden" name="id-usuario" value="${usuarioLogado.id}">
                             <button type="submit">Atualizar Foto</button>
                         </form>
@@ -58,14 +64,14 @@
                 </c:when>
                 <c:otherwise>
                     <div class="perfil-container">
-                        <jsp:include page="${pageContext.request.contextPath}/recursos/paginas/usuario/editar-usuario.jsp"/>
+                        <jsp:include page="/recursos/paginas/usuario/editar-usuario.jsp"/>
                         <div class="perfil-imagem">
                             <img src="${usuario.fotoPerfil}"
                                  alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
                             <div class="editar-foto">
                                 <form action="uploadFoto" method="post"
                                       enctype="multipart/form-data">
-                                    <input type="file" name="foto-perfil" id="foto-perfil">
+                                    <input type="file" name="id-foto" id="id-foto">
                                     <input type="hidden" name="id-usuario" value="${usuario.id}">
                                     <button type="submit">Atualizar Foto</button>
                                 </form>

@@ -27,7 +27,7 @@ public class Foto implements Serializable {
     private String extensao;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "id_incidente", referencedColumnName = "id_incidente", nullable = false)
+    @JoinColumn(name = "id_incidente", referencedColumnName = "id_incidente")
     private Incidente incidenteProprietarioFoto;
 
     public Foto() {

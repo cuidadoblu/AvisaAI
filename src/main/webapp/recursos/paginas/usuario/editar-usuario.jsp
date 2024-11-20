@@ -4,7 +4,7 @@
     <form action="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
         <div class="editar-foto">
             <label for="foto">Escolha uma foto:</label>
-            <input type="file" name="foto" id="foto" accept="image/*" value='${usuario.fotoPerfil}' required>
+            <input type="file" name="foto" id="foto" accept="image/*" value="${usuario.fotoPerfil}" required>
             <button type="submit">Atualizar</button>
         </div>
     </form>

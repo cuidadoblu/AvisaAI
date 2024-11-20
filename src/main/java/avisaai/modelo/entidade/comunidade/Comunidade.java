@@ -27,7 +27,7 @@ public class Comunidade implements Serializable {
     @Column(name = "descricao_comunidade", length = 300)
     private String descricao;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
     private Foto fotoPerfil;
 

@@ -7,6 +7,7 @@ import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.util.Utilitario;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/comunidades", "/cadastro-comunidade", "/perfil-comunidade", "/atualizar-comunidade",
         "/acompanhar-comunidade", "/inserir-comunidade", "/editar-comunidade", "/excluir-comunidade", "/comunidade-nao-encontrada"})
-
+@MultipartConfig
 public class ComunidadeServlet extends HttpServlet {
 
     private static final long serialVersionUID = 9041251404722080496L;

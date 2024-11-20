@@ -2,7 +2,7 @@
 <html>
 <body>
 <div>
-    <form action-="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
+    <form action="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
         <div class="editar-foto">
             <label for="foto">Escolha uma foto:</label>
             <input type="file" name="foto" id="foto" accept="image/*" value='${usuario.fotoPerfil}' required>

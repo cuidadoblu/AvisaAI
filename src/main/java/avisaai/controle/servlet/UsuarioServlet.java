@@ -13,6 +13,7 @@ import avisaai.util.Utilitario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
         "/inserir-usuario", "/atualizar-usuario", "/atualizar-foto-usuario" ,"/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/editar-usuario", "/usuario-nao-encontrado"})
+@MultipartConfig
 public class UsuarioServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1959126762240015341L;
@@ -214,8 +216,10 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession sessao = requisicao.getSession();
 
         Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuario-logado");
+        Foto fotoUsuario = usuarioLogado.getFotoPerfil();
 
         sessao.setAttribute("usuario", usuarioLogado);
+        sessao.setAttribute("fotoPerfil", fotoUsuario);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
     }
@@ -285,7 +289,7 @@ public class UsuarioServlet extends HttpServlet {
         Part fotoPart = requisicao.getPart("foto");
         if (fotoPart == null || fotoPart.getSize() <= 0) {
             requisicao.setAttribute("mensagemErro", "Nenhuma foto enviada ou tamanho inválido.");
-            requisicao.getRequestDispatcher("/recursos/paginas/fotoTeste/foto.jsp").forward(requisicao, resposta);
+            requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
             return;
         }
 
@@ -296,7 +300,7 @@ public class UsuarioServlet extends HttpServlet {
 
         if (!mimeType.startsWith("image/")) {
             requisicao.setAttribute("mensagemErro", "O arquivo enviado não é uma imagem válida.");
-            requisicao.getRequestDispatcher("/recursos/paginas/fotoTeste/foto.jsp").forward(requisicao, resposta);
+            requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
             return;
         }
 

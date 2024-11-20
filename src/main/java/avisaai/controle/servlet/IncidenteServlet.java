@@ -20,6 +20,7 @@ import avisaai.modelo.enumeracao.situacao.Situacao;
 import avisaai.util.Utilitario;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/incidentes", "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/feed-pessoal", "/incidente-nao-encontrado"})
-public class IncidenteServlet extends HttpServlet {
+@MultipartConfig
+ class IncidenteServlet extends HttpServlet {
 
     private static final long serialVersionUID = -2732576384429342823L;
     private IncidenteDAO incidenteDAO;

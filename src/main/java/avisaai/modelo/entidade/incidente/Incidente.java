@@ -190,6 +190,11 @@ public class Incidente implements Serializable {
 	public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
 		this.fotoIncidente.remove(foto);
 	}
+
+	public void setFotoIncidente(Collection<Foto> foto) {
+		this.fotoIncidente = fotoIncidente;
+	}
+
 */
 	public List<Comentario> getComentariosIncidente() {
 		return comentariosIncidente;
@@ -220,9 +225,5 @@ public class Incidente implements Serializable {
 			return false;
 		Incidente outro = (Incidente) obj;
 		return Objects.equals(id, outro.id);
-	}
-
-	public void setFoto(Collection<Foto> foto) {
-		this.foto = foto;
 	}
 }

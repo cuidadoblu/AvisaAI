@@ -44,7 +44,7 @@
                         <img src="img/icone-configuracao.png" alt="Configurações"
                              class="icone-configuracao">
                     </button>
-                    <a href="logout"> <img src="img/icone-logout.png" alt="Logout"
+                    <a href="deslogar"> <img src="img/icone-logout.png" alt="Logout"
                                            class="icone-logout">
                     </a>
                 </div>

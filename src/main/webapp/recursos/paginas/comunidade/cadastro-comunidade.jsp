@@ -8,7 +8,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AvisaAí - Cadastro Comunidade</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
 </head>
 <body>
@@ -27,20 +28,16 @@
             </a>
             <h2>Cadastrar Comunidade</h2>
         </div>
-        <form action="inserir-comunidade" method="post">
+        <form action="inserir-comunidade" method="post" enctype="multipart/form-data">
             <div class="formulario-entradas">
                 <div class="formulario-grupo">
-                    <label for="foto" class="arquivo-foto">Escolha uma foto</label> <input
-                        type="file" id="foto" name="foto" class="arquivo-foto"
-                        accept="image/*"/>
+                    <label for="foto">Escolha uma foto:</label>
+                    <input type="file" id="foto" name="foto" accept="image/*" value="${comunidade.fotoPerfil}" required/>
                 </div>
-
                 <div class="formulario-grupo">
-                    <label for="nome">Comunidade</label> <input type="text" id="nome"
-                                                                name="nome" class="formulario-controle"
-                                                                placeholder="Escreva o nome da comunidade..."
-                                                                maxlength="30"
-                                                                required/>
+                    <label for="nome">Comunidade</label>
+                    <input type="text" id="nome" name="nome" class="formulario-controle"
+                           placeholder="Escreva o nome da comunidade..." maxlength="30" required/>
                 </div>
 
                 <div class="formulario-grupo">

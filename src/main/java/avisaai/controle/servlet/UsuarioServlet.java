@@ -199,7 +199,7 @@ public class UsuarioServlet extends HttpServlet {
 
         Usuario usuario = null;
 
-        long id = Long.parseLong(requisicao.getParameter("id-usuario"));
+        Long id = Long.parseLong(requisicao.getParameter("id-usuario"));
 
         usuario = usuarioDAO.consultarUsuarioId(id);
 
@@ -296,6 +296,9 @@ public class UsuarioServlet extends HttpServlet {
 
         Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
 
+        Foto fotoAntiga = usuario.getFotoPerfil();
+        fotoDAO.deletarFoto(fotoAntiga);
+
         Part fotoPart = requisicao.getPart("foto");
         if (fotoPart == null || fotoPart.getSize() <= 0) {
             requisicao.setAttribute("mensagemErro", "Nenhuma foto enviada ou tamanho inválido.");
@@ -325,7 +328,7 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.atualizarUsuario(usuario);
 
-        sessao.setAttribute("id-foto", foto.getId());
+        sessao.setAttribute("fotoPerfil", foto);
 
         requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
     }

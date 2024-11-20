@@ -30,24 +30,22 @@
 	<main>
 		<div class="comunidade-container">
 			<div class="comunidade-imagem">
-				<img src="<c:out value='${comunidade.fotoPerfil}'/>"
+				<img src="exibir-foto?id-foto=${fotoComunidade.id}"
 					alt="Imagem de Perfil da Comunidade">
 			</div>
 			<div class="comunidade-nome">
 				<h2>
-					<c:out value='${comunidade.nome}' />
+					${comunidade.nome}
 				</h2>
 			</div>
 			<div class="comunidade-localidade">
 				<h2>
-					Comunidade:
-					<c:out value='${comunidade.localidade}' />
+					Comunidade: ${comunidade.localidade}
 				</h2>
 			</div>
 			<div class="comunidade-descricao">
 				<h2>
-					Sobre a Comunidade:
-					<c:out value='${comunidade.descricao}' />
+					Sobre a Comunidade: ${comunidade.descricao}
 				</h2>
 			</div>
 			<div class="perfil-botoes">

@@ -2,16 +2,14 @@
 	margin: 0;
 	padding: 0;
 	font-family: var(--fonte-principal);
+	box-sizing: border-box;
 }
 
 body {
-	font-family: var(--fonte-principal);
-	margin: 0;
-	padding: 0;
 	color: var(--texto-padrao);
 	background-color: var(--cor-clara);
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 }
 
 /* Estilos para a barra superior (header) */
@@ -19,11 +17,12 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: var(--padding-padrao);
-	background-color: rgba(44, 62, 80, 0.95);
+	padding: 15px;
+	background-color: rgba(44, 62, 80, 0.90);
 	backdrop-filter: blur(10px);
 	position: sticky;
 	width: 100%;
+	height: auto;
 	top: 0;
 	z-index: 3;
 	box-shadow: var(--sombra-card);
@@ -47,13 +46,13 @@ body {
 	align-items: center;
 	transition: transform 0.3s;
 	width: min-content;
-	height: 30px;
+	height: 25px;
 }
 
 .logo-avisaai-img {
 	justify-items: center;
 	width: auto;
-	height: 75%;
+	height: 100%;
 }
 
 .logo-avisaai:hover {
@@ -132,7 +131,7 @@ body {
 }
 
 .icones-avisaai a img {
-	width: auto;
+	height: 100%;
 	margin-left: 10px;
 	transition: transform var(--transicao);
 }
@@ -144,7 +143,7 @@ body {
 /* Estilos para a barra lateral */
 .barra-lateral-avisaai {
 	position: fixed;
-	top: 50px;
+	top: 60px;
 	left: -250px;
 	width: 250px;
 	height: 100%;
@@ -152,7 +151,7 @@ body {
 	color: var(--cor-clara);
 	overflow: auto;
 	transition: left var(--transicao);
-	z-index: 999;
+	z-index: 2;
 }
 
 .barra-lateral-avisaai.aberta {
@@ -189,15 +188,25 @@ body {
 }
 
 .perfil-avisaai {
-	padding: 20px;
+	padding: 0px 20px;
 	text-align: center;
 }
 
-.perfil-avisaai img {
-	width: 50px;
-	border-radius: 50%;
-	margin-bottom: 10px;
+.perfil-avisaai a {
+	display: inline-flex;
+	align-items: center;
+	text-decoration: none;
+	background: none;
+	color: inherit;
 }
+
+.perfil-avisaai-img {
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+}
+
+
 
 .sair-botao {
 	display: block;
@@ -205,7 +214,7 @@ body {
 	padding: 10px;
 	background-color: var(--cor-clara);
 	color: var(--texto-padrao);
-	border: none;
+	border-radius: 10px;
 	cursor: pointer;
 	text-align: center;
 	transition: background var(--transicao);
@@ -224,7 +233,7 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 998;
+	z-index: 1;
 }
 
 .fundo-transparente-avisaai.ativo {

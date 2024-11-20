@@ -6,3 +6,4 @@ target/
 .mvn/
 .idea/
 /avisaai.iml
+/.smarttomcat/

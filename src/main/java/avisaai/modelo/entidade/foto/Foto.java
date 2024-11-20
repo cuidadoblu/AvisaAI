@@ -1,7 +1,12 @@
 package avisaai.modelo.entidade.foto;
 
+import avisaai.modelo.entidade.comunidade.Comunidade;
+import avisaai.modelo.entidade.incidente.Incidente;
+import avisaai.modelo.entidade.usuario.Usuario;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +26,10 @@ public class Foto implements Serializable {
     @Column(name = "extensao_foto", nullable = false)
     private String extensao;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id_incidente", referencedColumnName = "id_incidente")
+    private Incidente incidenteProprietarioFoto;
+
     public Foto() {
     }
 
@@ -33,6 +42,12 @@ public class Foto implements Serializable {
         setId(id);
         setConteudo(conteudo);
         setExtensao(extensao);
+    }
+
+    public Foto(byte[] conteudo, String extensao, Incidente incidenteProprietarioFoto) {
+        setConteudo(conteudo);
+        setExtensao(extensao);
+        setIncidenteProprietarioFoto(incidenteProprietarioFoto);
     }
 
     public Long getId() {
@@ -57,6 +72,14 @@ public class Foto implements Serializable {
 
     public void setExtensao(String extensao) {
         this.extensao = extensao;
+    }
+
+    public Incidente getIncidenteProprietarioFoto() {
+        return incidenteProprietarioFoto;
+    }
+
+    public void setIncidenteProprietarioFoto(Incidente incidenteProprietarioFoto) {
+        this.incidenteProprietarioFoto = incidenteProprietarioFoto;
     }
 
     public int hashCode() {

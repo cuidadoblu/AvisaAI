@@ -2,18 +2,18 @@
 <html>
 <body>
 <div>
+    <form action-="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
+        <div class="editar-foto">
+            <label for="foto">Escolha uma foto:</label>
+            <input type="file" name="foto" id="foto" accept="image/*" value='${usuario.fotoPerfil}' required>
+            <button type="submit">Atualizar</button>
+        </div>
+    </form>
     <form action="atualizar-usuario" method="post">
         <div id="perfil-container" class="perfil-container">
             <div class="perfil-imagem">
                 <img src="${usuario.fotoPerfil}"
                      alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
-            </div>
-            <div class="editar-foto">
-                <form action="uploadFoto" method="post"
-                      enctype="multipart/form-data">
-                    <input type="file" name="foto-perfil" id="foto-perfil">
-                    <button type="submit">Atualizar Foto</button>
-                </form>
             </div>
             <input type="hidden" name="id-usuario" value="${usuario.id}">
             <div class="editar-usuario">
@@ -44,5 +44,7 @@
         const div = document.getElementById("perfil-container");
         div.style.display = div.style.display === "block" ? "none" : "block";
     });
+
+
 </script>
 </html>

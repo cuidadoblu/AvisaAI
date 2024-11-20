@@ -2,8 +2,11 @@ package avisaai.controle.servlet;
 
 import avisaai.modelo.dao.contato.ContatoDAO;
 import avisaai.modelo.dao.contato.ContatoDAOImpl;
+import avisaai.modelo.dao.foto.FotoDAO;
+import avisaai.modelo.dao.foto.FotoDAOImpl;
 import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
+import avisaai.modelo.entidade.foto.Foto;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.entidade.usuario.contato.Contato;
 import avisaai.util.Utilitario;
@@ -11,25 +14,24 @@ import avisaai.util.Utilitario;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
-        "/inserir-usuario", "/atualizar-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/editar-usuario", "/usuario-nao-encontrado"})
+        "/inserir-usuario", "/atualizar-usuario", "/atualizar-foto-usuario" ,"/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/editar-usuario", "/usuario-nao-encontrado"})
 public class UsuarioServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1959126762240015341L;
     private UsuarioDAO usuarioDAO;
     private ContatoDAO contatoDAO;
+    private FotoDAO fotoDAO;
 
     public void init() {
         usuarioDAO = new UsuarioDAOImpl();
         contatoDAO = new ContatoDAOImpl();
+        fotoDAO = new FotoDAOImpl();
     }
 
     protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -92,6 +94,10 @@ public class UsuarioServlet extends HttpServlet {
 
                 case "/atualizar-usuario":
                     atualizarUsuario(requisicao, resposta);
+                    break;
+
+                case "/atualizar-foto-usuario":
+                    atualizarFotoUsuario(requisicao, resposta);
                     break;
 
                 case "/excluir-usuario":
@@ -266,6 +272,47 @@ public class UsuarioServlet extends HttpServlet {
         usuarioDAO.atualizarUsuario(usuario);
 
         requisicao.setAttribute("mensagemPopup", "Usuário Atualizado!");
+        requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+    }
+
+    private void atualizarFotoUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws SQLException, ServletException, IOException {
+
+        HttpSession sessao = requisicao.getSession();
+
+        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
+
+        Part fotoPart = requisicao.getPart("foto");
+        if (fotoPart == null || fotoPart.getSize() <= 0) {
+            requisicao.setAttribute("mensagemErro", "Nenhuma foto enviada ou tamanho inválido.");
+            requisicao.getRequestDispatcher("/recursos/paginas/fotoTeste/foto.jsp").forward(requisicao, resposta);
+            return;
+        }
+
+        String fileName = fotoPart.getSubmittedFileName();
+        String extensaoOriginal = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+        String mimeType = fotoPart.getContentType();
+
+        if (!mimeType.startsWith("image/")) {
+            requisicao.setAttribute("mensagemErro", "O arquivo enviado não é uma imagem válida.");
+            requisicao.getRequestDispatcher("/recursos/paginas/fotoTeste/foto.jsp").forward(requisicao, resposta);
+            return;
+        }
+
+        byte[] conteudoOriginal = fotoPart.getInputStream().readAllBytes();
+
+        byte[] conteudoConvertido = Utilitario.converterImagemParaFormato(conteudoOriginal, "jpg");
+
+        Foto foto = new Foto(conteudoConvertido, "jpg");
+        fotoDAO.inserirFoto(foto);
+
+        usuario.setFotoPerfil(foto);
+
+        usuarioDAO.atualizarUsuario(usuario);
+
+        requisicao.setAttribute("id-foto", foto.getId());
+
         requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
     }
 

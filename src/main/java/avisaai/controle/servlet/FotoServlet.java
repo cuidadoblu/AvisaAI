@@ -63,7 +63,7 @@ public class FotoServlet extends HttpServlet {
 
     private void mostrarFormFoto(HttpServletRequest requisicao, HttpServletResponse resposta)
             throws ServletException, IOException, SQLException {
-        requisicao.getRequestDispatcher("/recursos/paginas/fotoTeste/exibirfoto.jsp").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("/recursos/paginas/fotoTeste/foto.jsp").forward(requisicao, resposta);
     }
 
     private void salvarFoto(HttpServletRequest requisicao, HttpServletResponse resposta)

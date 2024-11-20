@@ -3,6 +3,7 @@ package avisaai.modelo.entidade.incidente;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -71,8 +72,8 @@ public class Incidente implements Serializable {
 	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
 	//private List<Foto> fotoIncidente;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)
-	private List<Comentario> comentariosIncidente;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)
+    private List<Comentario> comentariosIncidente;
 
 	public Incidente() {
 	}
@@ -219,5 +220,9 @@ public class Incidente implements Serializable {
 			return false;
 		Incidente outro = (Incidente) obj;
 		return Objects.equals(id, outro.id);
+	}
+
+	public void setFoto(Collection<Foto> foto) {
+		this.foto = foto;
 	}
 }

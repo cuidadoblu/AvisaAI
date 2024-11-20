@@ -203,7 +203,10 @@ public class UsuarioServlet extends HttpServlet {
 
         usuario = usuarioDAO.consultarUsuarioId(id);
 
+        Foto fotoUsuario = usuario.getFotoPerfil();
+
         sessao.setAttribute("usuario", usuario);
+        sessao.setAttribute("fotoPerfil", fotoUsuario);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
     }
@@ -259,15 +262,22 @@ public class UsuarioServlet extends HttpServlet {
 
         Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
 
+        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
+
+        Long idUsuarioLogado = usuario.getId();
+
+        if (idUsuario != idUsuarioLogado) {
+            requisicao.setAttribute("mensagemPopup", "Você pode alterar somente o seu usuário!");
+            requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
+        }
+
         if (usuarioDAO.consultarUsuarioId(idUsuario) == null) {
-            resposta.sendRedirect("perfil-usuario");
+            resposta.sendRedirect("feed-pessoal");
         }
 
         String nome = requisicao.getParameter("nome");
         String sobrenome = requisicao.getParameter("sobrenome");
         String senha = requisicao.getParameter("senha");
-
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
 
         usuario.setNome(nome);
         usuario.setSobrenome(sobrenome);
@@ -276,7 +286,7 @@ public class UsuarioServlet extends HttpServlet {
         usuarioDAO.atualizarUsuario(usuario);
 
         requisicao.setAttribute("mensagemPopup", "Usuário Atualizado!");
-        requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
     }
 
     private void atualizarFotoUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -289,7 +299,7 @@ public class UsuarioServlet extends HttpServlet {
         Part fotoPart = requisicao.getPart("foto");
         if (fotoPart == null || fotoPart.getSize() <= 0) {
             requisicao.setAttribute("mensagemErro", "Nenhuma foto enviada ou tamanho inválido.");
-            requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+            requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
             return;
         }
 
@@ -300,7 +310,7 @@ public class UsuarioServlet extends HttpServlet {
 
         if (!mimeType.startsWith("image/")) {
             requisicao.setAttribute("mensagemErro", "O arquivo enviado não é uma imagem válida.");
-            requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+            requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
             return;
         }
 
@@ -315,9 +325,9 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.atualizarUsuario(usuario);
 
-        requisicao.setAttribute("id-foto", foto.getId());
+        sessao.setAttribute("id-foto", foto.getId());
 
-        requisicao.getRequestDispatcher("perfil-usuario").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
     }
 
     private void excluirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)

@@ -12,7 +12,7 @@
     <form action="atualizar-usuario" method="post">
         <div id="perfil-container" class="perfil-container">
             <div class="perfil-imagem">
-                <img src="${usuario.fotoPerfil}"
+                <img src="exibir-foto?id-foto=${fotoPerfil.id}"
                      alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
             </div>
             <input type="hidden" name="id-usuario" value="${usuario.id}">

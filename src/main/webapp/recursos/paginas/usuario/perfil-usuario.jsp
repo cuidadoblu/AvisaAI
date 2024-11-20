@@ -25,7 +25,7 @@
             <div class="perfil-container">
                 <jsp:include page="/recursos/paginas/usuario/editar-usuario.jsp"/>
                 <div class="perfil-imagem">
-                    <img src="exibir-foto?id=${fotoPerfil.id}"
+                    <img src="exibir-foto?id-foto=${fotoPerfil.id}"
                          alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
                 </div>
                 <div class="perfil-nome">

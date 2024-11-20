@@ -1,14 +1,4 @@
 /* Estilo cadastro-incidente */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--fonte-principal);
-}
-
-body {
-    background-color: var(--cor-clara);
-}
 
 .container-cadastro {
     width: 100%;
@@ -134,7 +124,6 @@ select.formulario-controle:hover {
     transform: scale(0.98);
 }
 
-/* Responsividade */
 @media (max-width: var(--largura-maxima-mobile)) {
     .formulario-entradas {
         grid-template-columns: 1fr;
@@ -145,16 +134,34 @@ select.formulario-controle:hover {
 }
 
 /* Estilo feed-pessoal */
-body {
-    background-color: var(--cor-clara);
+.principal {
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
+    gap: 20px;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.coluna {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.feed-incidentes {
+    width: 100%;
+    height: auto;
+    max-width: var(--largura-maxima-container);
 }
 
 .container-postagem {
-    width: 100%;
-    max-width: var(--largura-maxima-container);
-    margin: 40px auto;
-    padding: var(--padding-padrao);
-    background-color: var(--cor-clara);
+    padding: 20px;
+    margin-bottom: 20px;
     border-radius: var(--raio-borda);
     box-shadow: var(--sombra-card);
 }
@@ -164,6 +171,12 @@ h2 {
     color: var(--texto-padrao);
     text-align: center;
     margin-bottom: 20px;
+}
+
+.conteudo-cabeçalho {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .cabecalho-postagem {
@@ -206,7 +219,7 @@ h2 {
 }
 
 .data {
-    color: var(--texto-claro);
+    color: var(--texto-secundario);
     font-size: 12px;
 }
 
@@ -231,8 +244,8 @@ h2 {
 }
 
 .miniaturas img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
@@ -352,5 +365,5 @@ textarea:focus {
     position: relative;
     top: 5px;
     right: 10px;
-    font-size: 20
+    font-size: 20px;
 }

@@ -6,23 +6,23 @@
     --texto-padrao: #333;
     --texto-secundario: #555; 
     --cor-borda: #ddd;
-    --cor-clara: #fff; /* Para fundos, também 60% */
+    --cor-clara: rgba(255, 255, 255, 0.8); /* Para fundos, também 60% */
 
     /* Sombras e Transições */
     --sombra-card: 0 4px 8px rgba(0, 0, 0, 0.1); /*Sombra padrão*/
     --transicao: 0.3s ease;
 
     /* Dimensões Globais */
-    --largura-maxima-container: 1000px; 
-    --raio-borda: 10px; 
-    --padding-padrao: 20px; 
+    --largura-maxima-container: 1000px;
+    --raio-borda: 10px;
+    --padding-padrao: 20px;
 
     /* Tipografia */
-    --fonte-principal: 'Roboto', sans-serif; 
-    --tamanho-titulo: 30px; 
-    --tamanho-texto: 16px; 
-    --peso-titulo: bold; 
-    --peso-texto: normal; 
+    --fonte-principal: 'Roboto', sans-serif;
+    --tamanho-titulo: 30px;
+    --tamanho-texto: 16px;
+    --peso-titulo: bold;
+    --peso-texto: normal;
 
     /* Responsividade */
     --largura-maxima-mobile: 600px; 

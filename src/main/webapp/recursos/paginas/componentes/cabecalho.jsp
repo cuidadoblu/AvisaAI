@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/recursos/imagens/logos/png/icone%20guarda-chuva.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/componentes/cabecalho.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
 </head>
 <div class="fundo-transparente-avisaai" id="fundoTransparente" onclick="fecharMenu()"></div>
 

@@ -42,7 +42,7 @@
 	<br>
 	<a href="incidentes">Consultar Incidentes</a>
 	<br>
-	<a href="perfil-incidente">Perfil Incidente</a>
+	<a href="perfil-incidente?id-incidente=1">Perfil Incidente</a>
 	<br>
 	<a href="editar-incidente">Editar Incidente</a>
 	<br>

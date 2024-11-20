@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<body>
-<div>
+<div id="editar-perfil" class="editar-usuario" style="z-index: 2; display: none;">
     <form action="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
         <div class="editar-foto">
             <label for="foto">Escolha uma foto:</label>
@@ -10,7 +9,7 @@
         </div>
     </form>
     <form action="atualizar-usuario" method="post">
-        <div id="perfil-container" class="perfil-container">
+        <div id="editar-perfil-container" class="perfil-container">
             <div class="perfil-imagem">
                 <img src="exibir-foto?id-foto=${fotoPerfil.id}"
                      alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
@@ -38,13 +37,28 @@
         </div>
     </form>
 </div>
-</body>
-<script>
-    document.getElementById("botao-cancelar").addEventListener("click", function() {
-        const div = document.getElementById("perfil-container");
-        div.style.display = div.style.display === "block" ? "none" : "block";
-    });
+<style>
+    #editar-perfil {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-
-</script>
+    #editar-perfil-container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        max-width: 90%;
+    }
+</style>
 </html>

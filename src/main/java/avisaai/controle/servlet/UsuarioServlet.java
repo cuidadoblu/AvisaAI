@@ -4,9 +4,12 @@ import avisaai.modelo.dao.contato.ContatoDAO;
 import avisaai.modelo.dao.contato.ContatoDAOImpl;
 import avisaai.modelo.dao.foto.FotoDAO;
 import avisaai.modelo.dao.foto.FotoDAOImpl;
+import avisaai.modelo.dao.incidente.IncidenteDAO;
+import avisaai.modelo.dao.incidente.IncidenteDAOImpl;
 import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.foto.Foto;
+import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.entidade.usuario.contato.Contato;
 import avisaai.util.Utilitario;
@@ -21,7 +24,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/usuarios", "/login", "/fazer-login", "/deslogar", "/cadastro-usuario", "/alterar-senha", "/definir-senha",
-        "/inserir-usuario", "/atualizar-usuario", "/atualizar-foto-usuario" ,"/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/editar-usuario", "/usuario-nao-encontrado"})
+        "/inserir-usuario", "/atualizar-usuario", "/atualizar-foto-usuario", "/excluir-usuario", "/perfil-usuario", "/perfil-usuario-logado", "/editar-usuario", "/usuario-nao-encontrado"})
 @MultipartConfig
 public class UsuarioServlet extends HttpServlet {
 
@@ -29,11 +32,13 @@ public class UsuarioServlet extends HttpServlet {
     private UsuarioDAO usuarioDAO;
     private ContatoDAO contatoDAO;
     private FotoDAO fotoDAO;
+    private IncidenteDAO incidenteDAO;
 
     public void init() {
         usuarioDAO = new UsuarioDAOImpl();
         contatoDAO = new ContatoDAOImpl();
         fotoDAO = new FotoDAOImpl();
+        incidenteDAO = new IncidenteDAOImpl();
     }
 
     protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -200,11 +205,11 @@ public class UsuarioServlet extends HttpServlet {
         Usuario usuario = null;
 
         long id = Long.parseLong(requisicao.getParameter("id-usuario"));
-
         usuario = usuarioDAO.consultarUsuarioId(id);
-
         Foto fotoUsuario = usuario.getFotoPerfil();
+        List<Incidente> incidentesUsuario = incidenteDAO.consultarIncidentesUsuarioPorData(usuario);
 
+        requisicao.setAttribute("listaIncidentes", incidentesUsuario);
         sessao.setAttribute("usuario", usuario);
         sessao.setAttribute("fotoPerfil", fotoUsuario);
 
@@ -220,11 +225,13 @@ public class UsuarioServlet extends HttpServlet {
 
         Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuario-logado");
         Foto fotoUsuario = usuarioLogado.getFotoPerfil();
+        List<Incidente> incidentesUsuario = incidenteDAO.consultarIncidentesUsuarioPorData(usuarioLogado);
 
+        requisicao.setAttribute("listaIncidentes", incidentesUsuario);
         sessao.setAttribute("usuario", usuarioLogado);
         sessao.setAttribute("fotoPerfil", fotoUsuario);
 
-        requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario-logado.jsp").forward(requisicao, resposta);
     }
 
     private void mostrarTelaEditarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)

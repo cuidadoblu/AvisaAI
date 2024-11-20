@@ -15,6 +15,8 @@
 	<br>
 	<a href="definir-senha">Definir Senha</a>
 	<br>
+	<a href="perfil-usuario-logado">Meu Perfil</a>
+	<br>
 	<a href="perfil-usuario?id-usuario=1">Perfil</a>
 	<br>
 	<h2>Localidade</h2>

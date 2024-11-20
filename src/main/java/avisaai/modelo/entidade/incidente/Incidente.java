@@ -3,7 +3,6 @@ package avisaai.modelo.entidade.incidente;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +22,6 @@ import javax.persistence.Table;
 
 import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.comunidade.Comunidade;
-import avisaai.modelo.entidade.foto.Foto;
 import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.enumeracao.categoria.Categoria;
@@ -190,11 +188,6 @@ public class Incidente implements Serializable {
 	public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
 		this.fotoIncidente.remove(foto);
 	}
-
-	public void setFotoIncidente(Collection<Foto> foto) {
-		this.fotoIncidente = fotoIncidente;
-	}
-
 */
 	public List<Comentario> getComentariosIncidente() {
 		return comentariosIncidente;

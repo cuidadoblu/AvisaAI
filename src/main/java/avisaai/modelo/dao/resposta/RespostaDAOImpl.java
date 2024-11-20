@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -34,6 +33,8 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		} catch (Exception sqlException) {
 
+			sqlException.printStackTrace();
+
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
@@ -54,11 +55,13 @@ public class RespostaDAOImpl implements RespostaDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.remove(resposta);
+			sessao.delete(resposta);
 
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
 
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
@@ -85,6 +88,9 @@ public class RespostaDAOImpl implements RespostaDAO {
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
@@ -146,13 +152,15 @@ public class RespostaDAOImpl implements RespostaDAO {
 			CriteriaQuery<Resposta> criteria = construtor.createQuery(Resposta.class);
 			Root<Resposta> raizResposta = criteria.from(Resposta.class);
 
-			Join<Resposta, Comentario> juncaoComentario = raizResposta.join("id_comentarioOrigem");
+			Join<Resposta, Comentario> juncaoComentario = raizResposta.join("comentarioOrigem");
 			criteria.where(construtor.equal(juncaoComentario.get("id"), comentario.getId()));
 
 			respostas = sessao.createQuery(criteria).getResultList();
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
 
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
@@ -189,6 +197,8 @@ public class RespostaDAOImpl implements RespostaDAO {
 
 		} catch (Exception sqlException) {
 
+			sqlException.printStackTrace();
+
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
@@ -216,19 +226,22 @@ public class RespostaDAOImpl implements RespostaDAO {
 			CriteriaQuery<Resposta> criteria = construtor.createQuery(Resposta.class);
 			Root<Resposta> raizResposta = criteria.from(Resposta.class);
 
-			ParameterExpression<Long> idResposta = construtor.parameter(Long.class);
-			criteria.select(raizResposta).where(construtor.equal(raizResposta.get("id"), idResposta));
+			criteria.select(raizResposta)
+					.where(construtor.equal(raizResposta.get("id"), id));
 
-			resposta = sessao.createQuery(criteria).getSingleResult();
+			resposta = sessao.createQuery(criteria).uniqueResult();
 
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
+
 			sqlException.printStackTrace();
+
 			if (sessao.getTransaction() != null) {
 				sessao.getTransaction().rollback();
 			}
 		} finally {
+
 			if (sessao != null) {
 				sessao.close();
 			}

@@ -1,15 +1,5 @@
 package avisaai.modelo.dao.comentario;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Session;
-
 import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.comentario.Comentario_;
 import avisaai.modelo.entidade.comentario.resposta.Resposta;
@@ -17,273 +7,289 @@ import avisaai.modelo.entidade.comentario.resposta.Resposta_;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.modelo.factory.conexao.ConexaoFactory;
+import org.hibernate.Session;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 public class ComentarioDAOImpl implements ComentarioDAO {
 
-	private final ConexaoFactory fabrica = new ConexaoFactory();
+    private final ConexaoFactory fabrica = new ConexaoFactory();
 
-	public void inserirComentario(Comentario comentario) {
+    public void inserirComentario(Comentario comentario) {
 
-		Session sessao = null;
+        Session sessao = null;
 
-		try {
+        try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sessao.save(comentario);
+            sessao.save(comentario);
 
-			sessao.getTransaction().commit();
+            sessao.getTransaction().commit();
 
-		} catch (Exception sqlException) {
+        } catch (Exception sqlException) {
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            sqlException.printStackTrace();
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-	}
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-	public void deletarComentario(Comentario comentario) {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+    }
 
-		Session sessao = null;
+    public void deletarComentario(Comentario comentario) {
 
-		try {
+        Session sessao = null;
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+        try {
 
-			sessao.remove(comentario);
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sessao.getTransaction().commit();
+            sessao.delete(comentario);
 
-		} catch (Exception sqlException) {
+            sessao.getTransaction().commit();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+        } catch (Exception sqlException) {
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-	}
+            sqlException.printStackTrace();
 
-	public void atualizarComentario(Comentario comentario) {
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-		Session sessao = null;
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+    }
 
-		try {
+    public void atualizarComentario(Comentario comentario) {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+        Session sessao = null;
 
-			sessao.update(comentario);
+        try {
 
-			sessao.getTransaction().commit();
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-		} catch (Exception sqlException) {
+            sessao.update(comentario);
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            sessao.getTransaction().commit();
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-	}
+        } catch (Exception sqlException) {
 
-	public List<Comentario> recuperarComentarios() {
+            sqlException.printStackTrace();
 
-		Session sessao = null;
-		List<Comentario> comentarios = null;
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-		try {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+    }
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+    public List<Comentario> recuperarComentarios() {
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+        Session sessao = null;
+        List<Comentario> comentarios = null;
 
-			CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
-			Root<Comentario> raizComentario = criteria.from(Comentario.class);
+        try {
 
-			criteria.select(raizComentario);
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			comentarios = sessao.createQuery(criteria).getResultList();
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			sessao.getTransaction().commit();
+            CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
+            Root<Comentario> raizComentario = criteria.from(Comentario.class);
 
-		} catch (Exception sqlException) {
+            criteria.select(raizComentario);
 
-			sqlException.printStackTrace();
+            comentarios = sessao.createQuery(criteria).getResultList();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            sessao.getTransaction().commit();
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return comentarios;
-	}
+        } catch (Exception sqlException) {
 
-	public List<Comentario> consultarComentarioIncidente(Incidente incidente) {
+            sqlException.printStackTrace();
 
-		Session sessao = null;
-		List<Comentario> comentarios = null;
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-		try {
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return comentarios;
+    }
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+    public List<Comentario> consultarComentarioIncidente(Incidente incidente) {
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+        Session sessao = null;
+        List<Comentario> comentarios = null;
 
-			CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
-			Root<Comentario> raizComentario = criteria.from(Comentario.class);
+        try {
 
-			Join<Comentario, Incidente> juncaoIncidente = raizComentario.join("incidente");
-			criteria.where(construtor.equal(juncaoIncidente.get("id"), incidente.getId()));
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			comentarios = sessao.createQuery(criteria).getResultList();
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			sessao.getTransaction().commit();
+            CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
+            Root<Comentario> raizComentario = criteria.from(Comentario.class);
 
-		} catch (Exception sqlException) {
+            Join<Comentario, Incidente> juncaoIncidente = raizComentario.join(Comentario_.incidente);
+            criteria.where(construtor.equal(juncaoIncidente.get("id"), incidente.getId()));
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            comentarios = sessao.createQuery(criteria).getResultList();
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return comentarios;
-	}
+            sessao.getTransaction().commit();
 
-	public List<Comentario> consultarComentarioUsuario(Usuario usuario) {
+        } catch (Exception sqlException) {
 
-		Session sessao = null;
-		List<Comentario> comentarios = null;
+            sqlException.printStackTrace();
 
-		try {
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-			CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
-			Root<Comentario> raizComentario = criteria.from(Comentario.class);
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return comentarios;
+    }
 
-			Join<Comentario, Usuario> juncaoUsuario = raizComentario.join("id_usuario");
-			criteria.where(construtor.equal(juncaoUsuario.get("id"), usuario.getId()));
+    public List<Comentario> consultarComentarioUsuario(Usuario usuario) {
 
-			comentarios = sessao.createQuery(criteria).getResultList();
-			sessao.getTransaction().commit();
+        Session sessao = null;
+        List<Comentario> comentarios = null;
 
-		} catch (Exception sqlException) {
+        try {
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return comentarios;
-	}
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-	public List<Resposta> consultarRespostasComentario(Comentario comentario) {
+            CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
+            Root<Comentario> raizComentario = criteria.from(Comentario.class);
 
-		Session sessao = null;
-		List<Resposta> respostas = null;
+            Join<Comentario, Usuario> juncaoUsuario = raizComentario.join(Comentario_.usuario);
+            criteria.where(construtor.equal(juncaoUsuario.get("id"), usuario.getId()));
 
-		try {
+            comentarios = sessao.createQuery(criteria).getResultList();
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            sessao.getTransaction().commit();
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+        } catch (Exception sqlException) {
 
-			CriteriaQuery<Resposta> criteria = construtor.createQuery(Resposta.class);
-			Root<Resposta> raizResposta = criteria.from(Resposta.class);
+            sqlException.printStackTrace();
 
-			criteria.select(raizResposta);
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-			Join<Resposta, Comentario> juncaoComentario = raizResposta.join(Resposta_.comentarioOrigem);
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+        return comentarios;
+    }
 
-			ParameterExpression<Long> id = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoComentario.get(Comentario_.id), id));
+    public List<Resposta> consultarRespostasComentario(Comentario comentario) {
 
-			respostas = sessao.createQuery(criteria).setParameter(id, comentario.getId()).getResultList();
+        Session sessao = null;
+        List<Resposta> respostas = null;
 
-			sessao.getTransaction().commit();
+        try {
 
-		} catch (Exception sqlException) {
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sqlException.printStackTrace();
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            CriteriaQuery<Resposta> criteria = construtor.createQuery(Resposta.class);
+            Root<Resposta> raizResposta = criteria.from(Resposta.class);
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
+            Join<Resposta, Comentario> juncaoComentario = raizResposta.join(Resposta_.comentarioOrigem);
+            criteria.where(construtor.equal(juncaoComentario.get(Comentario_.id), comentario.getId()));
 
-		return respostas;
-	}
+            respostas = sessao.createQuery(criteria).getResultList();
 
-	public Comentario consultarComentarioId(Long id) {
+            sessao.getTransaction().commit();
 
-		Session sessao = null;
-		Comentario comentario = null;
+        } catch (Exception sqlException) {
 
-		try {
+            sqlException.printStackTrace();
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
 
-			CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
-			Root<Comentario> raizComentario = criteria.from(Comentario.class);
+        return respostas;
+    }
 
-			ParameterExpression<Long> idComentario = construtor.parameter(Long.class);
-			criteria.select(raizComentario).where(construtor.equal(raizComentario.get("id"), idComentario));
+    public Comentario consultarComentarioId(Long id) {
 
-			comentario = sessao.createQuery(criteria).getSingleResult();
+        Session sessao = null;
+        Comentario comentario = null;
 
-			sessao.getTransaction().commit();
+        try {
 
-		} catch (Exception sqlException) {
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
 
-			sqlException.printStackTrace();
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Comentario> criteria = construtor.createQuery(Comentario.class);
+            Root<Comentario> raizComentario = criteria.from(Comentario.class);
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-		} finally {
+            criteria.select(raizComentario)
+                    .where(construtor.equal(raizComentario.get("id"), id));
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		return comentario;
-	}
+            comentario = sessao.createQuery(criteria).uniqueResult();
+
+            sessao.getTransaction().commit();
+
+        } catch (Exception exception) {
+
+            exception.printStackTrace();
+
+            if (sessao.getTransaction() != null) {
+                sessao.getTransaction().rollback();
+            }
+        } finally {
+
+            if (sessao != null) {
+                sessao.close();
+            }
+        }
+
+        return comentario;
+    }
 }

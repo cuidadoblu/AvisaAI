@@ -14,17 +14,6 @@
         function trocarImagemPrincipal(imagemUrl) {
             document.getElementById("imagem-principal").src = imagemUrl;
         }
-
-        function mostrarFormularioComentario() {
-            document.getElementById('formulario-comentario').style.display = 'block';
-            document.getElementById('botao-comentar').style.display = 'none';
-        }
-
-        function ocultarFormularioComentario() {
-            document.getElementById('formulario-comentario').style.display = 'none';
-            document.getElementById('botao-comentar').style.display = 'inline-block';
-            document.getElementById('form-comentario').reset();
-        }
     </script>
 </head>
 <body>
@@ -75,22 +64,9 @@
             <span class="contador-comentarios">Comentários</span>
         </div>
 
-        <button class="botao-curtir" onclick="mostrarFormularioComentario()">Comentar</button>
+        <jsp:include page="../comentario/cadastro-comentario.jsp" />
 
-        <div id="formulario-comentario" style="display: none;">
-            <form id="form-comentario" action="inserir-comentario" method="post">
-                <div class="formulario-grupo">
-                    <input type="hidden" name="id-incidente" value="${incidente.id}">
-                    <textarea name="conteudo" placeholder="Insira seu comentário" required maxlength="350"></textarea>
-                </div>
-                <div>
-                    <button type="submit" class="botao-curtir">Enviar</button>
-                    <button type="reset" onclick="ocultarFormularioComentario()">Cancelar</button>
-                </div>
-            </form>
-        </div>
-
-        <jsp:include page="../comentario/listar-comentarios.jsp" />
+        <jsp:include page="../componentes/listar-comentarios.jsp" />
 
     </div>
 </main>

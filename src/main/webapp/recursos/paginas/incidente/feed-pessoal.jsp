@@ -8,39 +8,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AvisaAí - Feed Pessoal</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/incidente/incidente.css">
 </head>
 <body>
-<div class="layout-container">
-    <div class="colunas" id="esquerda"></div>
-
-    <div class="colunas" id="principal">
+<div class="principal">
+    <div class="coluna" id="esquerda">direita</div>
+    <div class="coluna" id="meio">
         <jsp:include page="../componentes/feed-incidentes.jsp"/>
     </div>
-
-    <div class="colunas" id="direita"></div>
+    <div class="coluna" id="direita">Direita</div>
 </div>
 </body>
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-    }
-
-    body {
-        background-color: #ffffff;
-        height: 100vh;
-        width: 100vw;
-    }
-
-    .layout-container {
-        display: grid;
-        grid-template-columns: 2fr 8fr 2fr;
-        gap: 20px;
-        width: 100%;
-        height: calc(100vh - 80px);
-        box-sizing: border-box;
-    }
-</style>
 </html>

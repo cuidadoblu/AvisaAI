@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<>
 <script>
     function mostrarFormularioComentario() {
         document.getElementById('formulario-comentario').style.display = 'block';
@@ -12,19 +11,18 @@
     }
 </script>
 
-<button id="botao-comentar" onclick="mostrarFormularioComentario()">Comentar</button>
+<button class="botao-curtir" id="botao-comentar" onclick="mostrarFormularioComentario()">Comentar</button>
 
 <div id="formulario-comentario" style="display: none;">
-    <h2>Escreva um Comentário</h2>
-    <form action="inserir-comentario" method="post">
-        <input type="hidden" name="id-incidente" value='${incidente.id}'/>
-        <input type="hidden" name="id-usuario" value='${usuariologado.id}'/>
-        <textarea name="conteudo" placeholder="Escreva seu comentário aqui..." required></textarea>
+    <form id="form-comentario" action="inserir-comentario" method="post">
+        <div class="formulario-grupo">
+            <input type="hidden" name="id-incidente" value="${incidente.id}">
+            <textarea name="conteudo" placeholder="Insira seu comentário" required maxlength="350"></textarea>
+        </div>
         <div>
-            <button type="submit" class="botao-enviar">Enviar</button>
-            <button type="button" onclick="ocultarFormularioComentario()">Cancelar</button>
+            <button type="submit" class="botao-curtir">Enviar</button>
+            <button type="reset" onclick="ocultarFormularioComentario()">Cancelar</button>
         </div>
     </form>
 </div>
-</>
 

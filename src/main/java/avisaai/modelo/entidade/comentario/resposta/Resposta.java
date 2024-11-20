@@ -50,6 +50,7 @@ public class Resposta implements Serializable {
 		setDataHora(dataHora);
 		setUsuario(usuario);
 		setConteudo(conteudo);
+		setComentarioOrigem(comentarioOrigem);
 	}
 
 	public Resposta(Long id, String conteudo, LocalDateTime dataHora, Usuario usuario, Comentario comentarioOrigem) {
@@ -58,6 +59,7 @@ public class Resposta implements Serializable {
 		setDataHora(dataHora);
 		setUsuario(usuario);
 		setConteudo(conteudo);
+		setComentarioOrigem(comentarioOrigem);
 	}
 
 	public Long getId() {

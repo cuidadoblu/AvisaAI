@@ -17,7 +17,7 @@
             <c:when test="${usuario != null}">
                 <div class="perfil-container">
                     <div class="perfil-imagem">
-                        <img src="exibir-foto?id-foto=${fotoPerfil.id}"
+                        <img src="exibir-foto?id-foto=${usuario.fotoPerfil.id}"
                              alt="Foto de ${usuario.nome} ${usuario.sobrenome}">
                     </div>
                     <div class="perfil-nome">

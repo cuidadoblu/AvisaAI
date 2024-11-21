@@ -30,7 +30,7 @@
 <main>
     <div class="comunidade-container">
         <div class="comunidade-imagem">
-            <img src="exibir-foto?id-foto=${fotoComunidade.id}"
+            <img src="exibir-foto-comunidade?id-comunidade=${comunidade.id}"
                  alt="Imagem de Perfil da Comunidade">
         </div>
         <div class="comunidade-nome">

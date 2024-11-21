@@ -213,8 +213,8 @@ public class UsuarioServlet extends HttpServlet {
         List<Incidente> incidentesUsuario = incidenteDAO.consultarIncidentesUsuarioPorData(usuario);
 
         requisicao.setAttribute("listaIncidentes", incidentesUsuario);
-        sessao.setAttribute("usuario", usuario);
-        sessao.setAttribute("fotoPerfil", fotoUsuario);
+        requisicao.setAttribute("usuario", usuario);
+        requisicao.setAttribute("fotoPerfil", fotoUsuario);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
     }
@@ -231,8 +231,8 @@ public class UsuarioServlet extends HttpServlet {
         List<Incidente> incidentesUsuario = incidenteDAO.consultarIncidentesUsuarioPorData(usuarioLogado);
 
         requisicao.setAttribute("listaIncidentes", incidentesUsuario);
-        sessao.setAttribute("usuario", usuarioLogado);
-        sessao.setAttribute("fotoPerfil", fotoUsuario);
+        requisicao.setAttribute("usuario", usuarioLogado);
+        requisicao.setAttribute("fotoPerfil", fotoUsuario);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario-logado.jsp").forward(requisicao, resposta);
     }
@@ -338,9 +338,9 @@ public class UsuarioServlet extends HttpServlet {
 
         usuarioDAO.atualizarUsuario(usuario);
 
-        sessao.setAttribute("fotoPerfil", foto);
+        requisicao.setAttribute("fotoPerfil", foto);
 
-        requisicao.getRequestDispatcher("perfil-usuario-logado").forward(requisicao, resposta);
+        requisicao.getRequestDispatcher("editar-usuario").forward(requisicao, resposta);
     }
 
     private void excluirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)

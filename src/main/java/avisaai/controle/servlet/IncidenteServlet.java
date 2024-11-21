@@ -180,7 +180,7 @@ import java.util.List;
 
         HttpSession sessao = requisicao.getSession();
 
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
+        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
         String titulo = requisicao.getParameter("titulo");
         String descricao = requisicao.getParameter("descricao");
         LocalDateTime dataHora = LocalDateTime.now();

@@ -71,7 +71,7 @@ public class RespostaServlet extends HttpServlet {
 
         Long idComentario = Long.parseLong(requisicao.getParameter("id-comentario"));
         String conteudo = requisicao.getParameter("conteudo");
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
+        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
         Comentario comentarioOrigem = comentarioDAO.consultarComentarioId(idComentario);
 

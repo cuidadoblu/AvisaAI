@@ -143,7 +143,7 @@ public class UsuarioServlet extends HttpServlet {
 
         if (usuarioLogado != null) {
             HttpSession sessao = requisicao.getSession();
-            sessao.setAttribute("usuario-logado", usuarioLogado);
+            sessao.setAttribute("usuarioLogado", usuarioLogado);
             RequestDispatcher dispatcher = requisicao.getRequestDispatcher("");
             dispatcher.forward(requisicao, resposta);
         }
@@ -153,7 +153,7 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession sessao = requisicao.getSession();
-        sessao.setAttribute("usuario-logado", null);
+        sessao.setAttribute("usuarioLogado", null);
 
         resposta.sendRedirect("login");
     }
@@ -208,13 +208,10 @@ public class UsuarioServlet extends HttpServlet {
 
         usuario = usuarioDAO.consultarUsuarioId(id);
 
-        Foto fotoUsuario = usuario.getFotoPerfil();
+        List<Incidente> incidentesCadastrados = incidenteDAO.consultarIncidentesUsuario(usuario);
 
-        List<Incidente> incidentesUsuario = incidenteDAO.consultarIncidentesUsuarioPorData(usuario);
-
-        requisicao.setAttribute("listaIncidentes", incidentesUsuario);
-        sessao.setAttribute("usuario", usuario);
-        sessao.setAttribute("fotoPerfil", fotoUsuario);
+        requisicao.setAttribute("listaIncidentes", incidentesCadastrados);
+        requisicao.setAttribute("usuario", usuario);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario.jsp").forward(requisicao, resposta);
     }
@@ -226,13 +223,11 @@ public class UsuarioServlet extends HttpServlet {
 
         HttpSession sessao = requisicao.getSession();
 
-        Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuario-logado");
-        Foto fotoUsuario = usuarioLogado.getFotoPerfil();
-        List<Incidente> incidentesUsuario = incidenteDAO.consultarIncidentesUsuarioPorData(usuarioLogado);
+        Usuario usuarioLogado = (Usuario) sessao.getAttribute("usuarioLogado");
 
-        requisicao.setAttribute("listaIncidentes", incidentesUsuario);
-        sessao.setAttribute("usuario", usuarioLogado);
-        sessao.setAttribute("fotoPerfil", fotoUsuario);
+        List<Incidente> incidentesCadastrados = incidenteDAO.consultarIncidentesUsuario(usuarioLogado);
+
+        requisicao.setAttribute("listaIncidentes", incidentesCadastrados);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario-logado.jsp").forward(requisicao, resposta);
     }
@@ -272,7 +267,7 @@ public class UsuarioServlet extends HttpServlet {
 
         Long idUsuario = Long.parseLong(requisicao.getParameter("id-usuario"));
 
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
+        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
         Long idUsuarioLogado = usuario.getId();
 
@@ -304,7 +299,7 @@ public class UsuarioServlet extends HttpServlet {
 
         HttpSession sessao = requisicao.getSession();
 
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario-logado");
+        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
         Foto fotoAntiga = usuario.getFotoPerfil();
         fotoDAO.deletarFoto(fotoAntiga);

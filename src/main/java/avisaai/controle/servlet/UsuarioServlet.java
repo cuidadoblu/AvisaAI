@@ -91,10 +91,6 @@ public class UsuarioServlet extends HttpServlet {
                     mostrarTelaPerfilUsuarioLogado(requisicao, resposta);
                     break;
 
-                case "/editar-usuario":
-                    mostrarTelaEditarUsuario(requisicao, resposta);
-                    break;
-
                 case "/inserir-usuario":
                     inserirUsuario(requisicao, resposta);
                     break;
@@ -230,14 +226,6 @@ public class UsuarioServlet extends HttpServlet {
         requisicao.setAttribute("listaIncidentes", incidentesCadastrados);
 
         requisicao.getRequestDispatcher("/recursos/paginas/usuario/perfil-usuario-logado.jsp").forward(requisicao, resposta);
-    }
-
-    private void mostrarTelaEditarUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)
-            throws ServletException, IOException {
-
-        Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
-
-        requisicao.getRequestDispatcher("/recursos/paginas/usuario/editar-usuario.jsp").forward(requisicao, resposta);
     }
 
     private void inserirUsuario(HttpServletRequest requisicao, HttpServletResponse resposta)

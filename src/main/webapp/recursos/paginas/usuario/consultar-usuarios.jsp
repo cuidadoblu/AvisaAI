@@ -25,7 +25,7 @@
             <c:forEach var="usuario" items="${listaUsuarios}">
                 <li>
                     <a href="perfil-usuario?id-usuario=${usuario.id}" class="card-usuario">
-                        <img src="${usuario.fotoPerfil}" alt="Foto de ${usuario.nome} ${usuario.sobrenome}"/>
+                        <img src="exibir-foto-usuario?id-usuario=${usuario.id}" alt="Foto de ${usuario.nome} ${usuario.sobrenome}"/>
                         <span class="nome-usuario">${usuario.nome} ${usuario.sobrenome}</span>
                     </a>
                 </li>

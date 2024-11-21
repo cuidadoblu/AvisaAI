@@ -113,8 +113,8 @@ public class ComunidadeServlet extends HttpServlet {
 
         Foto fotoComunidade = comunidade.getFotoPerfil();
 
-        sessao.setAttribute("comunidade", comunidade);
-        sessao.setAttribute("fotoComunidade", fotoComunidade);
+        requisicao.setAttribute("comunidade", comunidade);
+        requisicao.setAttribute("fotoComunidade", fotoComunidade);
 
         requisicao.getRequestDispatcher("/recursos/paginas/comunidade/perfil-comunidade.jsp").forward(requisicao,
                 resposta);
@@ -156,8 +156,8 @@ public class ComunidadeServlet extends HttpServlet {
         Comunidade comunidade = new Comunidade(nome, descricao, foto);
         comunidadeDAO.inserirComunidade(comunidade);
 
-        sessao.setAttribute("comunidade", comunidade);
-        sessao.setAttribute("fotoComunidade", foto);
+        requisicao.setAttribute("comunidade", comunidade);
+        requisicao.setAttribute("fotoComunidade", foto);
 
         requisicao.setAttribute("mensagemPopup", "Comunidade Cadastrada!");
         requisicao.getRequestDispatcher("comunidades").forward(requisicao, resposta);
@@ -231,12 +231,11 @@ public class ComunidadeServlet extends HttpServlet {
 
         comunidadeDAO.atualizarComunidade(comunidade);
 
-        sessao.setAttribute("comunidade", comunidade);
-        sessao.setAttribute("fotoComunidade", foto);
+        requisicao.setAttribute("comunidade", comunidade);
+        requisicao.setAttribute("fotoComunidade", foto);
 
         requisicao.setAttribute("mensagemPopup", "Comunidade Atualizada!");
         resposta.sendRedirect("perfil-comunidade");
-
     }
 
     private void acompanharDesacompanharComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -274,6 +273,8 @@ public class ComunidadeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
+
+        HttpSession sessao = requisicao.getSession();
 
         String nome = requisicao.getParameter("nome");
 

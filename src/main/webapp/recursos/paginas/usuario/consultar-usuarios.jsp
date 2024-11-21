@@ -9,7 +9,7 @@
     <title>Lista de Usuários</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/usuario/usuario.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/recursos/css/geral.css">
- 
+
 </head>
 <body>
 <form action="usuarios" method="get">
@@ -23,11 +23,12 @@
     <c:otherwise>
         <ul class="lista-usuarios">
             <c:forEach var="usuario" items="${listaUsuarios}">
-                <li><a href="perfil-usuario?id-usuario=${usuario.id}"
-                       class="card-usuario"> <img src="${usuario.fotoPerfil}"
-                                                  alt="Foto de ${usuario.nome} ${usuario.sobrenome}"/> <span
-                        class="nome-usuario">${usuario.nome} ${usuario.sobrenome}</span>
-                </a></li>
+                <li>
+                    <a href="perfil-usuario?id-usuario=${usuario.id}" class="card-usuario">
+                        <img src="${usuario.fotoPerfil}" alt="Foto de ${usuario.nome} ${usuario.sobrenome}"/>
+                        <span class="nome-usuario">${usuario.nome} ${usuario.sobrenome}</span>
+                    </a>
+                </li>
             </c:forEach>
         </ul>
     </c:otherwise>

@@ -39,7 +39,6 @@
                     <input type="text" id="nome" name="nome" class="formulario-controle"
                            placeholder="Escreva o nome da comunidade..." maxlength="30" required/>
                 </div>
-
                 <div class="formulario-grupo">
                     <label for="descricao">Descrição</label>
                     <textarea id="descricao" name="descricao"
@@ -47,7 +46,6 @@
                               placeholder="Escreva uma descrição para a comunidade..." rows="4"
                               required></textarea>
                 </div>
-
                 <div class="formulario-botoes">
                     <button type="reset" class="botao-limpar">Limpar</button>
                     <button type="submit" class="botao-confirmar">Confirmar</button>

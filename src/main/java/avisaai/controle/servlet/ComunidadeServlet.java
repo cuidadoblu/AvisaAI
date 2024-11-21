@@ -160,7 +160,7 @@ public class ComunidadeServlet extends HttpServlet {
         sessao.setAttribute("fotoComunidade", foto);
 
         requisicao.setAttribute("mensagemPopup", "Comunidade Cadastrada!");
-        resposta.sendRedirect("perfil-comunidade");
+        requisicao.getRequestDispatcher("comunidades").forward(requisicao, resposta);
     }
 
     private void excluirComunidade(HttpServletRequest requisicao, HttpServletResponse resposta)

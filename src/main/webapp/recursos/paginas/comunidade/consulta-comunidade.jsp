@@ -44,11 +44,12 @@
 					<div class="card-comunidade">
 						<img src="${comunidade.fotoPerfil}"
 							alt="Foto da comunidade ${comunidade.nome}" />
-						<div class="titulo-comunidade">${comunidade.nome}</div>
+						<div class="titulo-comunidade">
+							<a href="perfil-comunidade?id-comunidade=${comunidade.id}">${comunidade.nome}</a>
+						</div>
 						<div class="descricao-comunidade">
 							Sobre:<br /> ${comunidade.descricao}
 						</div>
-
 						<div class="perfil-botoes">
 							<!-- Aqui o botão alterna entre "Acompanhar" e "Desacompanhar" -->
 							<button type="button"

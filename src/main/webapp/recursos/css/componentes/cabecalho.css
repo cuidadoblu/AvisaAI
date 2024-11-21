@@ -55,6 +55,13 @@ body {
 	height: 100%;
 }
 
+.perfil-usuario-img {
+	justify-items: center;
+	width: auto;
+	height: 100%;
+	border-radius: 30%;
+}
+
 .logo-avisaai:hover {
 	transform: scale(1.1);
 }

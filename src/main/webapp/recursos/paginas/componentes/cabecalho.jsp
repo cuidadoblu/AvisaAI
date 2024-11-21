@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -51,8 +52,8 @@
             <img src="icons/notificacoes.png" alt="Notificações">
         </a>
         <a href="perfil-usuario-logado" class="logo-avisaai">
-            <img class="logo-avisaai-img"
-                 src="${pageContext.request.contextPath}/recursos/imagens/usuarios/Sem%20Foto.png" alt="Perfil">
+            <img class="perfil-usuario-img" src="exibir-foto?id-foto=${usuarioLogado.fotoPerfil.id}"
+                 alt="Foto de ${usuarioLogado.nome}">
         </a>
     </div>
 </header>
@@ -60,23 +61,29 @@
 <div class="barra-lateral-avisaai" id="barraLateral">
     <div class="menu-avisaai">
         <h2>Menu</h2>
-        <a href="cadastro-incidente"><i class="fas fa-exclamation-triangle"></i> Cadastrar Incidente</a>
-        <a href="feed-pessoal"><i class="fas fa-newspaper"></i> Feed</a>
+        <a href="cadastro-incidente"><i class="fas fa-exclamation-triangle"></i>
+            Cadastrar Incidente
+        </a>
+        <a href="feed-pessoal">
+            <i class="fas fa-newspaper"></i> Feed
+        </a>
         <h3>Comunidades</h3>
-        <a href="perfil-comunidade?id=1"><img
-                src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Centro.jpg" alt="Centro">
-            Centro</a>
-        <a href="perfil-comunidade?id=2"><img
-                src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Vila%20Nova.png"
-                alt="Vila Nova"> Vila Nova</a>
+        <a href="perfil-comunidade?id=1">
+            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Centro.jpg" alt="Centro">
+            Centro
+        </a>
+        <a href="perfil-comunidade?id=2">
+            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Vila%20Nova.png"
+                 alt="Vila Nova">
+            Vila Nova
+        </a>
     </div>
     <div class="perfil-avisaai">
-        <a href="perfil-usuario-logado">
-            <img src="exibir-foto?id-foto=${usuarioLogado.fotoPerfil.id}"
+        <a href="perfil-usuario-logado" class="logo-avisaai">
+            <img class="perfil-usuario-img" src="exibir-foto?id-foto=${usuarioLogado.fotoPerfil.id}"
                  alt="Foto de ${usuarioLogado.nome}">
             <span>${usuarioLogado.nome} ${usuarioLogado.sobrenome}<</span>
         </a>
-
         <button class="sair-botao" onclick="redirecionar('deslogar')">
             <i class="fas fa-sign-out-alt"></i> Sair da Conta
         </button>

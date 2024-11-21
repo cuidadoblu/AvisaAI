@@ -28,22 +28,26 @@
     background-color: var(--cor-clara);
     cursor: pointer;
 }
+
 /* Estilo do perfil-usuario */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: var(--fonte-principal);
     background-color: var(--cor-clara);
 }
+
 main {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
+
 /* Estilo do container do perfil */
 .perfil-container {
     display: grid;
@@ -54,26 +58,32 @@ main {
     border-radius: var(--raio-borda);
     box-shadow: var(--sombra-card);
     text-align: center;
+    padding: 20px;
 }
+
 /* Estilo da imagem de perfil */
 .perfil-imagem {
     position: relative;
     display: flex;
     justify-content: center;
 }
+
 .perfil-imagem img {
     width: 120px;
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .editar-foto {
     position: absolute;
     bottom: 10px;
 }
+
 .editar-foto input[type="file"] {
     display: none;
 }
+
 .editar-foto button {
     background-color: var(--cor-10);
     color: var(--cor-clara);
@@ -83,20 +93,24 @@ main {
     cursor: pointer;
     font-size: 12px;
 }
+
 .editar-foto button:hover {
     background-color: #0056b3;
 }
+
 /* Nome do usuário */
 .perfil-nome span {
     font-size: var(--tamanho-titulo);
     font-weight: var(--peso-titulo);
     color: var(--texto-padrao);
 }
+
 /* Botões de ação */
 .perfil-botoes {
     display: grid;
     gap: 10px;
 }
+
 .perfil-botoes button {
     display: flex;
     align-items: center;
@@ -110,6 +124,53 @@ main {
 
 .perfil-botoes button:hover {
     background-color: #f0f0f0;
+}
+
+#editar-perfil {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-botoes #botao-confirmar, #botao-cancelar {
+    padding: 10px 20px;
+    font-size: var(--tamanho-texto);
+    border: none;
+    border-radius: var(--raio-borda);
+    cursor: pointer;
+    transition: background-color var(--transicao), transform var(--transicao);
+}
+
+.perfil-botoes #botao-confirmar {
+    justify-content: center;
+    background-color: var(--cor-10);
+    color: var(--cor-clara);
+}
+
+
+.perfil-botoes #botao-confirmar:hover {
+    background-color: var(--cor-30);
+    transform: scale(1.05);
+}
+
+.perfil-botoes #botao-cancelar {
+    color: var(--texto-padrao);
+}
+
+.perfil-botoes #botao-cancelar:hover {
+    background-color: var(--cor-borda);
+    transform: scale(1.05);
+}
+
+.perfil-botoes #botao-confirmar:active,.perfil-botoes #botao-cancelar:active {
+    transform: scale(0.98);
 }
 
 .perfil-botoes img {
@@ -129,10 +190,4 @@ main {
 
 .perfil-logout:hover {
     color: #0056b3;
-}
-/*
-Estilo editar-usuario*/
-
-#perfil-container {
-    z-index: 2;
 }

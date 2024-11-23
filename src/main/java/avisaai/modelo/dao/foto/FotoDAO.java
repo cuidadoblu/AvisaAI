@@ -3,6 +3,7 @@ package avisaai.modelo.dao.foto;
 import java.util.List;
 
 import avisaai.modelo.entidade.foto.Foto;
+import avisaai.modelo.entidade.incidente.Incidente;
 
 public interface FotoDAO {
 
@@ -15,4 +16,6 @@ public interface FotoDAO {
 	List<Foto> recuperarFotos();
 
 	Foto consultarFotoId(Long id);
+
+	List<Foto> recuperarFotosIncidente(Incidente incidente);
 }

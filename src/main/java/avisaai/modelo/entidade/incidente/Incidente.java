@@ -69,8 +69,8 @@ public class Incidente implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 
-	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "id", cascade = CascadeType.REMOVE)
-	//private List<Foto> fotoIncidente;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidenteProprietarioFoto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Foto> fotosIncidente;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)
     private List<Comentario> comentariosIncidente;
@@ -88,7 +88,7 @@ public class Incidente implements Serializable {
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
-		//fotoIncidente = new ArrayList<Foto>();
+		fotosIncidente = new ArrayList<Foto>();
 		comentariosIncidente = new ArrayList<Comentario>();
 	}
 	
@@ -103,7 +103,7 @@ public class Incidente implements Serializable {
 		setUsuario(usuario);
 		setLocalidade(localidade);
 		setSituacao(situacao);
-		//fotoIncidente = new ArrayList<Foto>();
+		fotosIncidente = new ArrayList<Foto>();
 		comentariosIncidente = new ArrayList<Comentario>();
 	}
 
@@ -179,18 +179,18 @@ public class Incidente implements Serializable {
 		this.situacao = situacao;
 	}
 
-	/*public List<Foto> getFotoIncidente() {
-		return fotoIncidente;
+	public List<Foto> getFotosIncidente() {
+		return fotosIncidente;
 	}
 
-	public void adicionarFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
-		this.fotoIncidente.add(foto);
+	public void adicionarFotosIncidente(Foto foto) {
+		this.fotosIncidente.add(foto);
 	}
 
-	public void removerFotoIncidente(List<Foto> fotoIncidente, Foto foto) {
-		this.fotoIncidente.remove(foto);
+	public void removerFotosIncidente(Foto foto) {
+		this.fotosIncidente.remove(foto);
 	}
-*/
+
 	public List<Comentario> getComentariosIncidente() {
 		return comentariosIncidente;
 	}

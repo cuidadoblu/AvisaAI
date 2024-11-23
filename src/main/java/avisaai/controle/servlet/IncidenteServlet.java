@@ -4,6 +4,8 @@ import avisaai.modelo.dao.comentario.ComentarioDAO;
 import avisaai.modelo.dao.comentario.ComentarioDAOImpl;
 import avisaai.modelo.dao.comunidade.ComunidadeDAO;
 import avisaai.modelo.dao.comunidade.ComunidadeDAOImpl;
+import avisaai.modelo.dao.foto.FotoDAO;
+import avisaai.modelo.dao.foto.FotoDAOImpl;
 import avisaai.modelo.dao.incidente.IncidenteDAO;
 import avisaai.modelo.dao.incidente.IncidenteDAOImpl;
 import avisaai.modelo.dao.localidade.LocalidadeDAO;
@@ -12,6 +14,7 @@ import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.comentario.Comentario;
 import avisaai.modelo.entidade.comunidade.Comunidade;
+import avisaai.modelo.entidade.foto.Foto;
 import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.localidade.Localidade;
 import avisaai.modelo.entidade.usuario.Usuario;
@@ -22,10 +25,7 @@ import avisaai.util.Utilitario;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -42,6 +42,7 @@ public class IncidenteServlet extends HttpServlet {
     private LocalidadeDAO localidadeDAO;
     private UsuarioDAO usuarioDAO;
     private ComentarioDAO comentarioDAO;
+    private FotoDAO fotoDAO;
 
     public void init() {
         incidenteDAO = new IncidenteDAOImpl();
@@ -49,6 +50,7 @@ public class IncidenteServlet extends HttpServlet {
         localidadeDAO = new LocalidadeDAOImpl();
         usuarioDAO = new UsuarioDAOImpl();
         comentarioDAO = new ComentarioDAOImpl();
+        fotoDAO = new FotoDAOImpl();
     }
 
     protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -108,18 +110,29 @@ public class IncidenteServlet extends HttpServlet {
 
         Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-        Long idIncidente = Long.parseLong(requisicao.getParameter("id-ioncidente"));
+        String idIncidenteParam = requisicao.getParameter("id-incidente");
+        if (idIncidenteParam == null || idIncidenteParam.isEmpty()) {
+            resposta.sendRedirect("erro.jsp?mensagem=ID do incidente não fornecido");
+            return;
+        }
+
+        Long idIncidente = Long.parseLong(idIncidenteParam);
 
         Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
-
-        if (incidente != null) {
-            List<Comentario> comentariosIncidente = comentarioDAO.consultarComentarioIncidente(incidente);
-            requisicao.setAttribute("listaComentarios", comentariosIncidente);
-            requisicao.setAttribute("incidente", incidente);
-            requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
-        } else {
+        if (incidente == null) {
             resposta.sendRedirect("incidente-nao-encontrado");
+            return;
         }
+
+        List<Comentario> comentariosIncidente = comentarioDAO.consultarComentarioIncidente(incidente);
+        List<Foto> fotosIncidente = fotoDAO.recuperarFotosIncidente(incidente);
+
+        requisicao.setAttribute("listaComentarios", comentariosIncidente);
+        requisicao.setAttribute("listaFotos", fotosIncidente);
+        requisicao.setAttribute("incidente", incidente);
+
+        requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp")
+                .forward(requisicao, resposta);
     }
 
     private void mostrarTelaConsultaIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -190,11 +203,33 @@ public class IncidenteServlet extends HttpServlet {
 
         incidenteDAO.inserirIncidente(incidente);
 
-        Long idIncidente = incidente.getId();
+        Part fotoPart = requisicao.getPart("foto");
+        if (fotoPart == null || fotoPart.getSize() <= 0) {
+            requisicao.setAttribute("mensagemErro", "Nenhuma foto enviada ou tamanho inválido.");
+            requisicao.getRequestDispatcher("cadastro-comunidade").forward(requisicao, resposta);
+            return;
+        }
 
-        requisicao.setAttribute("id-incidente", idIncidente);
+        String fileName = fotoPart.getSubmittedFileName();
+        String extensaoOriginal = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+        String mimeType = fotoPart.getContentType();
+
+        if (!mimeType.startsWith("image/")) {
+            requisicao.setAttribute("mensagemErro", "O arquivo enviado não é uma imagem válida.");
+            requisicao.getRequestDispatcher("cadastro-comunidade").forward(requisicao, resposta);
+            return;
+        }
+
+        byte[] conteudoOriginal = fotoPart.getInputStream().readAllBytes();
+
+        byte[] conteudoConvertido = Utilitario.converterImagemParaFormato(conteudoOriginal, "jpg");
+
+        Foto foto = new Foto(conteudoConvertido, "jpg", incidente);
+        fotoDAO.inserirFoto(foto);
+
         requisicao.setAttribute("mensagemPopup", "Incidente Cadastrado!");
-        requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
+        resposta.sendRedirect("perfil-incidente?id-incidente=" + incidente.getId());
     }
 
     private void atualizarIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)

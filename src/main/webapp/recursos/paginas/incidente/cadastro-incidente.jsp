@@ -26,7 +26,7 @@
 				</a>
 				<h2>Cadastrar Incidente</h2>
 			</div>
-			<form action="inserir-incidente" method="post">
+			<form action="inserir-incidente" method="post" enctype="multipart/form-data">
 				<div class="formulario-entradas">
 					<div class="formulario-grupo">
 						<label for="titulo">Título</label>

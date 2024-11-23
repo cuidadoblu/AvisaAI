@@ -32,7 +32,7 @@
             <div class="formulario-entradas">
                 <div class="formulario-grupo">
                     <label for="foto">Escolha uma foto:</label>
-                    <input type="file" id="foto" name="foto" accept="image/*" value="${comunidade.fotoPerfil}" required/>
+                    <input type="file" id="foto" name="foto" accept="image/*" required/>
                 </div>
                 <div class="formulario-grupo">
                     <label for="nome">Comunidade</label>

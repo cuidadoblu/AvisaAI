@@ -102,13 +102,13 @@ public class LocalidadeServlet extends HttpServlet {
 
         String logradouro = requisicao.getParameter("logradouro");
         String tipo = requisicao.getParameter("tipo");
-        String numero = requisicao.getParameter("numero");
+        short numero = Short.parseShort(requisicao.getParameter("numero"));
         String bairro = requisicao.getParameter("bairro");
         String cidade = requisicao.getParameter("cidade");
         String estado = requisicao.getParameter("estado");
         String complemento = requisicao.getParameter("complemento");
 
-        Localidade localidade = new Localidade(logradouro, tipo, Short.parseShort(numero), bairro, cidade, estado, complemento);
+        Localidade localidade = new Localidade(logradouro, tipo, numero, bairro, cidade, estado, complemento);
 
         localidadeDAO.inserirLocalidade(localidade);
 

@@ -5,6 +5,6 @@
 </head>
 <body>
 <h1>Foto Exibida</h1>
-<img src="exibir-foto?id=7" alt="Foto">
+<img src="exibir-foto?id-foto=7" alt="Foto">
 </body>
 </html>

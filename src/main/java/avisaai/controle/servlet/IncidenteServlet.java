@@ -34,7 +34,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = {"/incidentes", "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/feed-pessoal", "/incidente-nao-encontrado"})
 @MultipartConfig
- class IncidenteServlet extends HttpServlet {
+public class IncidenteServlet extends HttpServlet {
 
     private static final long serialVersionUID = -2732576384429342823L;
     private IncidenteDAO incidenteDAO;
@@ -108,21 +108,17 @@ import java.util.List;
 
         Utilitario.checarUsuarioLogadoMostrarTelas(requisicao, resposta);
 
-        try {
-            Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
-            Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
+        Long idIncidente = Long.parseLong(requisicao.getParameter("id-ioncidente"));
 
-            if (incidente != null) {
-                List <Comentario> comentariosIncidente = comentarioDAO.consultarComentarioIncidente(incidente);
-                requisicao.setAttribute("listaComentarios", comentariosIncidente);
-                requisicao.setAttribute("incidente", incidente);
-                requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
-            } else {
-                resposta.sendRedirect("incidente-nao-encontrado");
-            }
-        } catch (NumberFormatException e) {
-            requisicao.setAttribute("mensagemErro", "Parâmetro inválido para o incidente.");
-            requisicao.getRequestDispatcher("/recursos/paginas/erro/erro-400.jsp").forward(requisicao, resposta);
+        Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
+
+        if (incidente != null) {
+            List<Comentario> comentariosIncidente = comentarioDAO.consultarComentarioIncidente(incidente);
+            requisicao.setAttribute("listaComentarios", comentariosIncidente);
+            requisicao.setAttribute("incidente", incidente);
+            requisicao.getRequestDispatcher("/recursos/paginas/incidente/perfil-incidente.jsp").forward(requisicao, resposta);
+        } else {
+            resposta.sendRedirect("incidente-nao-encontrado");
         }
     }
 
@@ -187,12 +183,16 @@ import java.util.List;
         Categoria categoria = Categoria.valueOf(requisicao.getParameter("categoria"));
         Situacao situacao = Situacao.ATIVO;
 
-        incidenteDAO.inserirIncidente(new Incidente(titulo, descricao, dataHora, categoria,
+        Incidente incidente = new Incidente(titulo, descricao, dataHora, categoria,
                 comunidadeDAO.consultarComunidadeId(Long.parseLong(requisicao.getParameter("id-localidade"))),
-                usuario,
-                localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
-                situacao));
+                usuario, localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
+                situacao);
 
+        incidenteDAO.inserirIncidente(incidente);
+
+        Long idIncidente = incidente.getId();
+
+        requisicao.setAttribute("id-incidente", idIncidente);
         requisicao.setAttribute("mensagemPopup", "Incidente Cadastrado!");
         requisicao.getRequestDispatcher("perfil-incidente").forward(requisicao, resposta);
     }

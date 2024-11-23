@@ -70,9 +70,9 @@
 							<option value="ALAGAMENTO">Alagamento</option>
 							<option value="INUNDACAO">Inundação</option>
 							<option value="DESLIZAMENTO">Deslizamento</option>
-							<option value="DOAÇÃO">Doação</option>
+							<option value="DOACAO">Doação</option>
 							<option value="RESGATE">Resgate</option>
-							<option value="ASSISTÊNCIA">Assistência</option>
+							<option value="ASSISTENCIA">Assistência</option>
 							<option value="OUTROS">Outros</option>
 						</select>
 					</div>

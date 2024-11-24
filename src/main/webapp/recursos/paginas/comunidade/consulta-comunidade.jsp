@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:include page="/recursos/paginas/componentes/cabecalho.jsp"/>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="/recursos/paginas/componentes/cabecalho.jsp" />
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Consulta de Comunidades</title>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/recursos/css/geral.css">
+<meta charset="UTF-8" />
+<title>Consulta de Comunidades</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/recursos/css/comunidade/comunidade.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/recursos/css/geral.css">
 
-    <script>
+<script>
         function toggleAcompanhamento(button, comunidadeId) {
             // Altera o texto do botão entre "Acompanhar" e "Desacompanhar"
             if (button.textContent === 'Acompanhar') {
@@ -28,39 +28,44 @@
 
 </head>
 <body>
-<h2>Consulta de Comunidades</h2>
-<form action="comunidades" method="get">
-    <input type="text" name="nome" placeholder="Nome da comunidade"/>
-    <button type="submit">Pesquisar</button>
-</form>
+	<div class="principal">
+		<div class="coluna" id="esquerda">Esquerda</div>
+		<div class="coluna" id="meio">
+			<h2>Consulta de Comunidades</h2>
+			<form action="comunidades" method="get">
+				<input type="text" name="nome" placeholder="Nome da comunidade" />
+				<button type="submit">Pesquisar</button>
+			</form>
 
-<div class="container-comunidades">
-    <c:choose>
-        <c:when test="${empty listaComunidades}">
-            <p>Nenhuma comunidade encontrada.</p>
-        </c:when>
-        <c:otherwise>
-            <c:forEach var="comunidade" items="${listaComunidades}">
-                <div class="card-comunidade">
-                    <img src="exibir-foto-comunidade?id-comunidade=${comunidade.id}"
-                         alt="Foto da comunidade ${comunidade.nome}"/>
-                    <div class="titulo-comunidade">
-                        <a href="perfil-comunidade?id-comunidade=${comunidade.id}">${comunidade.nome}</a>
-                    </div>
-                    <div class="descricao-comunidade">
-                        Sobre:<br/> ${comunidade.descricao}
-                    </div>
-                    <div class="perfil-botoes">
-                        <!-- Aqui o botão alterna entre "Acompanhar" e "Desacompanhar" -->
-                        <button type="button"
-                                onclick="toggleAcompanhamento(this, ${comunidade.id})"
-                                class="botao-acompanhar">Acompanhar
-                        </button>
-                    </div>
-                </div>
-            </c:forEach>
-        </c:otherwise>
-    </c:choose>
-</div>
+			<div class="container-comunidades">
+				<c:choose>
+					<c:when test="${empty listaComunidades}">
+						<p>Nenhuma comunidade encontrada.</p>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="comunidade" items="${listaComunidades}">
+							<div class="card-comunidade">
+								<img src="exibir-foto-comunidade?id-comunidade=${comunidade.id}"
+									alt="Foto da comunidade ${comunidade.nome}" />
+								<div class="titulo-comunidade">
+									<a href="perfil-comunidade?id-comunidade=${comunidade.id}">${comunidade.nome}</a>
+								</div>
+								<div class="descricao-comunidade">
+									Sobre:<br /> ${comunidade.descricao}
+								</div>
+								<div class="perfil-botoes">
+									<!-- Aqui o botão alterna entre "Acompanhar" e "Desacompanhar" -->
+									<button type="button"
+										onclick="toggleAcompanhamento(this, ${comunidade.id})"
+										class="botao-acompanhar">Acompanhar</button>
+								</div>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+		<div class="coluna" id="direita">Direita</div>
+	</div>
 </body>
 </html>

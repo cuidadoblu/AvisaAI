@@ -191,3 +191,160 @@ main {
 .perfil-logout:hover {
     color: #0056b3;
 }
+.principal {
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+.coluna {
+    padding-top: 20px;
+    display: flex
+;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+/* Estilo para páginas de login/cadastro/definir e alterar senha */
+.adentrar * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* Estilo geral do corpo */
+.adentrar body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  background-color: #FFFFFF;
+  color: #2C3E50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+/* Logo no topo */
+.adentrar header {
+  width: 100%;
+}
+
+.adentrar .logo-acesso {
+  display: flex;
+  justify-content: left;
+  padding-left: 20px;
+}
+
+.adentrar input{
+    margin-bottom: 15px;
+    padding: 20px;
+    border: 1px solid #3498DB;
+    border-radius: 20px;
+    font-size: 24px;
+}
+
+.adentrar .logo-avisaai {
+  width: 300px;
+}
+
+/* Estilo da seção principal (imagens e formulários) */
+.adentrar .container-acesso {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 120px);
+  width: 100vw;
+}
+
+.adentrar .acesso-esquerda {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.adentrar .imagem-tela {
+  width: 620px;
+}
+
+.adentrar .acesso-direita {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100vw;
+}
+
+.adentrar .formulario-entradas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+}
+
+.adentrar h2 {
+  font-size: 64px;
+  text-align: center;
+  color: #3498DB;
+  width: 550px;
+}
+
+.adentrar h3 {
+  font-size: 18px;
+  text-align: center;
+  color: #3498DB;
+  width: 550px;
+  margin-bottom: 10px;
+}
+
+.adentrar form {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+}
+
+.adentrarinput {
+  margin-bottom: 15px;
+  padding: 20px;
+  border: 1px solid #3498DB;
+  border-radius: 20px;
+  font-size: 24px;
+}
+
+.adentrar input::placeholder {
+  color: #2C3E50;
+}
+
+.adentrar button {
+  padding: 15px 60px 15px 60px;
+  background-color: #3498DB;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.adentrar button:hover {
+  background-color: #2980B9;
+}
+
+.adentrar .formulario-botoes {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.adentrar .botao-login {
+  margin-bottom: 15px;
+}
+
+.adentrar.link {
+  color: #2980B9;
+  text-decoration: none; /* Remove o sublinhado do link */
+}
+

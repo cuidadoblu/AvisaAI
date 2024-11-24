@@ -197,5 +197,19 @@ select.formulario-controle:hover {
 .botao-acompanhar.desacompanhar {
     background-color: var(--cor-borda);
 }
-
+.principal {
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+.coluna {
+    padding-top: 20px;
+    display: flex
+;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
 /* Estilo perfil-comunidade */

@@ -11,6 +11,8 @@
     /* Sombras e Transições */
     --sombra-card: 0 4px 8px rgba(0, 0, 0, 0.1); /*Sombra padrão*/
     --transicao: 0.3s ease;
+    --transicao-scale: transform: scale(1.01);
+    
 
     /* Dimensões Globais */
     --largura-maxima-container: 1000px;
@@ -26,4 +28,6 @@
 
     /* Responsividade */
     --largura-maxima-mobile: 600px; 
+    
+    
 }

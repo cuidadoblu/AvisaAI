@@ -37,7 +37,7 @@ body {
 }
 
 .icone-menu-avisaai:hover {
-	transform: scale(1.1);
+	transform: scale(1.01);
 }
 
 .logo-avisaai {
@@ -63,7 +63,7 @@ body {
 }
 
 .logo-avisaai:hover {
-	transform: scale(1.1);
+	transform: scale(1.01);
 }
 
 .barra-consulta-container {
@@ -144,7 +144,7 @@ body {
 }
 
 .icones-avisaai a img:hover {
-	transform: scale(1.1);
+	transform: scale(1.01);
 }
 
 /* Estilos para a barra lateral */

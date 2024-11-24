@@ -3,8 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="feed-incidentes">
     <c:forEach var="incidente" items="${listaIncidentes}">
-        <div class="container-postagem">
-            <div class="cabecalho-postagem">
+        <div class="container-postagem" 
+             onclick="window.location.href='${pageContext.request.contextPath}/perfil-incidente?id-incidente=${incidente.id}'">
+			<div class="cabecalho-postagem">
                 <div class="titulo-postagem">${incidente.titulo}</div>
                 <div class="icone-situacao">🌧️ ${incidente.categoria}</div>
             </div>

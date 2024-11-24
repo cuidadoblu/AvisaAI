@@ -162,7 +162,9 @@ select.formulario-controle:hover {
     box-shadow: var(--sombra-card);
     width: 100%;
     height: 100%;
+    transition: transform var(--transicao);
 }
+
 
 h2 {
     font-size: var(--tamanho-titulo);

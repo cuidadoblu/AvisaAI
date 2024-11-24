@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="principal">
-    <div class="coluna" id="esquerda">
+    <div class="coluna" id="esquerda"> Esquerda
         <!-- Conteúdo ou espaços laterais -->
     </div>
 
@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div class="coluna" id="direita">
+    <div class="coluna" id="direita"> Direita
         <!-- Conteúdo ou espaços laterais -->
     </div>
 </div>

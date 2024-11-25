@@ -1,14 +1,4 @@
 /* Estilo cadastro-comunidade */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--fonte-principal);
-}
-
-body {
-    background-color: var(--cor-clara);
-}
 
 .container-cadastro {
     width: 100%;
@@ -117,7 +107,7 @@ select.formulario-controle:hover {
 
 .botao-limpar:hover {
     background-color: var(--cor-borda);
-    transform: scale(1.05);
+    transform: scale(1.01);
 }
 
 .botao-confirmar {
@@ -127,7 +117,7 @@ select.formulario-controle:hover {
 
 .botao-confirmar:hover {
     background-color: var(--cor-30);
-    transform: scale(1.05);
+    transform: scale(1.01);
 }
 
 .botao-limpar:active, .botao-confirmar:active {
@@ -146,11 +136,16 @@ select.formulario-controle:hover {
 }
 
 /* Estilo consulta-comunidade */
-.container-comunidades {
+.comunidade-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: var(--padding-padrao);
+    grid-template-rows: auto auto 1fr auto;
+    gap: var(--padding-padrao);
+    width: 300px;
+    background-color: var(--cor-clara);
+    border-radius: var(--raio-borda);
+    box-shadow: var(--sombra-card);
+    text-align: center;
+    padding: 20px;
 }
 
 .card-comunidade {
@@ -159,6 +154,7 @@ select.formulario-controle:hover {
     padding: 15px;
     text-align: center;
     box-shadow: var(--sombra-card);
+    margin:10px;
 }
 
 .card-comunidade img {
@@ -192,10 +188,15 @@ select.formulario-controle:hover {
     cursor: pointer;
     text-decoration: none;
     font-size: var(--tamanho-texto);
+    transition: background-color var(--transicao), transform var(--transicao);
 }
 
-.botao-acompanhar.desacompanhar {
-    background-color: var(--cor-borda);
+.botao-acompanhar:hover {
+     background-color: var(--cor-30);
+    transform: scale(1.05);
+}
+.botao-acompanhar:active {
+    transform: scale(0.98);
 }
 .principal {
     display: grid;
@@ -206,10 +207,12 @@ select.formulario-controle:hover {
 }
 .coluna {
     padding-top: 20px;
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+}
+.comunidade-descricao, .comunidade-categoria{
+	text-align: left;
 }
 /* Estilo perfil-comunidade */

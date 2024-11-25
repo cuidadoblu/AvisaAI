@@ -24,12 +24,12 @@
             <div class="perfil-botoes">
                 <button type="button" onclick="window.location.href='incidentes-acompanhados'">
                     <img src="${pageContext.request.contextPath}/recursos/imagens/icones/usuario/acompanhados-perfil.png"
-                         alt="Incidentes Acompanhados" class="icone-icidente-acompanhados">
+                         alt="Incidentes Acompanhados" class="icone-icidente-acompanhados"> Incidentes Acompanhados
                 </button>
                 <jsp:include page="/recursos/paginas/componentes/editar-usuario.jsp"/>
                 <a href="deslogar">
                     <img src="${pageContext.request.contextPath}/recursos/imagens/icones/usuario/Lego-out%20perfil.png"
-                         alt="Logout" class="icone-logout">
+                         alt="Logout" class="icone-logout">Log out
                 </a>
             </div>
         </div>
@@ -40,4 +40,13 @@
     <div class="coluna" id="direita">Direita</div>
 </div>
 </body>
+<style>
+.container-postagem:hover {
+	transform: scale(1.01);
+}
+
+.container-postagem:active {
+	transform: scale(0.98);
+}
+</style>
 </html>

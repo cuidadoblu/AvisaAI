@@ -31,12 +31,13 @@
 	<div class="principal">
 		<div class="coluna" id="esquerda">Esquerda</div>
 		<div class="coluna" id="meio">
-			<h2>Consulta de Comunidades</h2>
-			<form action="comunidades" method="get">
-				<input type="text" name="nome" placeholder="Nome da comunidade" />
-				<button type="submit">Pesquisar</button>
-			</form>
-
+			<div class="consulta-comunidade">
+				<h2>Consulta de Comunidades</h2>
+				<form action="comunidades" method="get">
+					<input type="text" name="nome" placeholder="Nome da comunidade" />
+					<button type="submit">Pesquisar</button>
+				</form>
+			</div>
 			<div class="container-comunidades">
 				<c:choose>
 					<c:when test="${empty listaComunidades}">

@@ -41,4 +41,13 @@
     <div class="coluna" id="direita">Direita</div>
 </div>
 </body>
+<style>
+.container-postagem:hover {
+	transform: scale(1.01);
+}
+
+.container-postagem:active {
+	transform: scale(0.98);
+}
+</style>
 </html>

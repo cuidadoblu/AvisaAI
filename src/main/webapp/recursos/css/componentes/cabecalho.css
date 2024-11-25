@@ -8,8 +8,8 @@
 body {
 	color: var(--texto-padrao);
 	background-color: var(--cor-clara);
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 }
 
 /* Estilos para a barra superior (header) */

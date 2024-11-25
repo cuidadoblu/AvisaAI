@@ -27,10 +27,9 @@
                 <div class="titulo-postagem">${incidente.titulo}</div>
                 <div class="icone-situacao">${incidente.categoria}</div>
             </div>
-            <%--
             <c:choose>
-                <c:when test="${not empty listaFotos}">
-                    <img id="imagem-principal" src="exibir-foto?id-foto=${listaFotos[0].id}"
+                <c:when test="${not empty fotosIncidente}">
+                    <img id="imagem-principal" src="exibir-foto?id-foto=${fotosIncidente[0].id}"
                          alt="Imagem principal do incidente" class="imagem-postagem">
                 </c:when>
                 <c:otherwise>
@@ -41,29 +40,26 @@
             </c:choose>
 
             <div class="miniaturas">
-                <c:if test="${not empty listaFotos}">
-                    <c:forEach var="foto" items="${listaFotos}">
+                <c:if test="${not empty fotosIncidente}">
+                    <c:forEach var="foto" items="${fotosIncidente}">
                         <img src="exibir-foto?id-foto=${foto.id}" alt="Imagem do incidente"
                              onclick="trocarImagemPrincipal(${foto.id})" class="miniatura-imagem">
                     </c:forEach>
                 </c:if>
             </div>
-            --%>
 
-            <div class="informacao-postagem">
-                <%--
-                <img src="exibir-foto?id-foto=${incidente.usuario.fotoPerfil.id}"
-                     alt="Foto de ${incidente.usuario.nome} ${incidente.usuario.sobrenome}" class="imagem-usuario">
+           <%-- <div class="informacao-postagem">
+                <img src="exibir-foto?id-foto=${fotoPerfil.id}"
+                     alt="Foto de ${usuario.nome} ${usuario.sobrenome}" class="imagem-usuario">
 
                 <div>
                     <div class="nome">${incidente.usuario.nome} ${incidente.usuario.sobrenome}</div>
                     <div class="data">${incidente.dataHora}</div>
                 </div>
-                --%>
                 <div class="mensagem-postagem">
                     ${incidente.descricao}
                 </div>
-            </div>
+            </div>--%>
 
             <!-- Reações -->
             <div class="reacoes">

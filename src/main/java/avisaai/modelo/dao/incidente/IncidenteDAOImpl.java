@@ -468,9 +468,13 @@ public class IncidenteDAOImpl implements IncidenteDAO {
     }
 
     public Incidente consultarIncidenteId(Long id) {
+
+        Session sessao = null;
         Incidente incidente = null;
 
-        try (Session sessao = fabrica.getConexao().openSession()) {
+        try {
+
+            sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
 
             CriteriaBuilder construtor = sessao.getCriteriaBuilder();
@@ -483,8 +487,43 @@ public class IncidenteDAOImpl implements IncidenteDAO {
             sessao.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
-        }
+        } finally {
 
-        return incidente;
+            if (sessao != null) {
+                sessao.close();
+            }
+
+            return incidente;
+        }
+    }
+
+    public Usuario recuperarUsuarioPorIncidente(Incidente incidente) {
+
+        Session sessao = null;
+        Usuario usuario = null;
+
+        try {
+
+            sessao = fabrica.getConexao().openSession();
+            sessao.beginTransaction();
+
+            CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+            CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+            Root<Usuario> raizUsuario = criteria.from(Usuario.class);
+
+            criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("incidente"), incidente));
+
+            usuario = sessao.createQuery(criteria).getSingleResult();
+            sessao.getTransaction().commit();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        } finally {
+
+            if (sessao != null) {
+                sessao.close();
+            }
+
+            return usuario;
+        }
     }
 }

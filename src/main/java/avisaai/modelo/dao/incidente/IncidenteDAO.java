@@ -35,4 +35,6 @@ public interface IncidenteDAO {
     List<Incidente> consultarIncidentesSituacao(Situacao situacao);
 
     Incidente consultarIncidenteId(Long id);
+
+    Usuario recuperarUsuarioPorIncidente(Incidente incidente);
 }

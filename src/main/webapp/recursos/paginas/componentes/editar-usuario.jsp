@@ -6,16 +6,16 @@
 </button>
 <div id="editar-perfil" class="editar-usuario">
     <div id="editar-perfil-container" class="perfil-container">
-        <form action="atualizar-usuario" method="post">
-            <div class="perfil-imagem">
-                <form action="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
+        <div class="perfil-imagem">
+            <form action="atualizar-foto-usuario" method="post" enctype="multipart/form-data">
                 <div class="editar-foto">
                     <label for="foto"><img src="exibir-foto?id-foto=${usuarioLogado.fotoPerfil.id}" alt="Foto de ${usuarioLogado.nome}"></label>
                     <input type="file" name="foto" class="formulario-controle" id="foto" accept="image/*" required>
                     <button type="submit" class="botao-confirmar">Atualizar</button>
                 </div>
             </form>
-            </div>
+        </div>
+        <form action="atualizar-usuario" method="post">
             <input type="hidden" name="id-usuario" value="${usuario.id}">
             <div class="formulario-grupo">
                 <label for="nome">Nome:</label>

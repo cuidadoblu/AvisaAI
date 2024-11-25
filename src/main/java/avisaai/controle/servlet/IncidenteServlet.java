@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/incidentes", "/perfil-incidente", "/consulta-incidente", "/inserir-incidente", "/cadastro-incidente", "/feed-pessoal", "/incidente-nao-encontrado"})
@@ -127,6 +128,9 @@ public class IncidenteServlet extends HttpServlet {
         List<Comentario> comentariosIncidente = comentarioDAO.consultarComentarioIncidente(incidente);
         List<Foto> fotosIncidente = fotoDAO.recuperarFotosIncidente(incidente);
 
+        Usuario usuario = incidenteDAO.recuperarUsuarioPorIncidente(incidente);
+
+        requisicao.setAttribute("usuario", usuario);
         requisicao.setAttribute("listaComentarios", comentariosIncidente);
         requisicao.setAttribute("listaFotos", fotosIncidente);
         requisicao.setAttribute("incidente", incidente);
@@ -201,32 +205,47 @@ public class IncidenteServlet extends HttpServlet {
                 usuario, localidadeDAO.consultarLocalidadeId(Long.parseLong(requisicao.getParameter("id-comunidade"))),
                 situacao);
 
+        Collection<Part> fotoParts = requisicao.getParts();
+        boolean fotoValida = false;
+
+        for(Part fotoPart : fotoParts) {
+            if (fotoPart.getName().equals("foto")) {
+                if (fotoPart.getSize() > 0) {
+                    String fileName = fotoPart.getSubmittedFileName();
+                    String extensaoOriginal = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+
+                    String mimeType = fotoPart.getContentType();
+
+                    if (!mimeType.startsWith("image/")) {
+                        requisicao.setAttribute("mensagemErro", "Um dos arquivos enviados não é uma imagem válida.");
+                        requisicao.getRequestDispatcher("cadastro-incidente").forward(requisicao, resposta);
+                        return;
+                    }
+
+                    byte[] conteudoOriginal = fotoPart.getInputStream().readAllBytes();
+
+                    byte[] conteudoConvertido = Utilitario.converterImagemParaFormato(conteudoOriginal, "jpg");
+
+                    Foto foto = new Foto(conteudoConvertido, "jpg");
+
+                    List<Foto> listaFotos = incidente.getFotosIncidente();
+
+                    listaFotos.add(foto);
+
+                    fotoDAO.inserirFoto(foto);
+
+                    fotoValida = true;
+                }
+            }
+        }
+
+        if (!fotoValida) {
+            requisicao.setAttribute("mensagemErro", "Nenhuma foto válida foi enviada.");
+            requisicao.getRequestDispatcher("cadastro-incidente").forward(requisicao, resposta);
+            return;
+        }
+
         incidenteDAO.inserirIncidente(incidente);
-
-        Part fotoPart = requisicao.getPart("foto");
-        if (fotoPart == null || fotoPart.getSize() <= 0) {
-            requisicao.setAttribute("mensagemErro", "Nenhuma foto enviada ou tamanho inválido.");
-            requisicao.getRequestDispatcher("cadastro-comunidade").forward(requisicao, resposta);
-            return;
-        }
-
-        String fileName = fotoPart.getSubmittedFileName();
-        String extensaoOriginal = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-
-        String mimeType = fotoPart.getContentType();
-
-        if (!mimeType.startsWith("image/")) {
-            requisicao.setAttribute("mensagemErro", "O arquivo enviado não é uma imagem válida.");
-            requisicao.getRequestDispatcher("cadastro-comunidade").forward(requisicao, resposta);
-            return;
-        }
-
-        byte[] conteudoOriginal = fotoPart.getInputStream().readAllBytes();
-
-        byte[] conteudoConvertido = Utilitario.converterImagemParaFormato(conteudoOriginal, "jpg");
-
-        Foto foto = new Foto(conteudoConvertido, "jpg", incidente);
-        fotoDAO.inserirFoto(foto);
 
         requisicao.setAttribute("mensagemPopup", "Incidente Cadastrado!");
         resposta.sendRedirect("perfil-incidente?id-incidente=" + incidente.getId());

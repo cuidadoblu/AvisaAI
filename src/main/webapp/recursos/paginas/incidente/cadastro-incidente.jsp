@@ -52,7 +52,7 @@
 							<div class="formulario-grupo">
 								<label for="foto" class="arquivo-foto">Escolha uma foto</label>
 								<input type="file" id="foto" name="foto" class="arquivo-foto"
-									accept="image/*">
+									accept="image/*" multiple>
 							</div>
 
 							<div class="formulario-grupo">

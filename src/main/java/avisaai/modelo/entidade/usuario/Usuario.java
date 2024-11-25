@@ -50,7 +50,7 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "id_contato", referencedColumnName = "id_contato")
 	private Contato contato;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_foto", referencedColumnName = "id_foto")
 	private Foto fotoPerfil;
 

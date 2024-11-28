@@ -226,11 +226,9 @@ public class IncidenteServlet extends HttpServlet {
 
                     byte[] conteudoConvertido = Utilitario.converterImagemParaFormato(conteudoOriginal, "jpg");
 
-                    Foto foto = new Foto(conteudoConvertido, "jpg");
+                    Foto foto = new Foto(conteudoConvertido, "jpg", incidente);
 
-                    List<Foto> listaFotos = incidente.getFotosIncidente();
-
-                    listaFotos.add(foto);
+                    incidente.adicionarFotosIncidente(foto);
 
                     fotoDAO.inserirFoto(foto);
 

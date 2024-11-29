@@ -25,7 +25,9 @@ public class FotoDAOImpl implements FotoDAO {
 
             sessao = fabrica.getConexao().openSession();
             sessao.beginTransaction();
+
             sessao.save(foto);
+
             sessao.getTransaction().commit();
         } catch (Exception sqlException) {
             if (sessao != null && sessao.getTransaction() != null) {

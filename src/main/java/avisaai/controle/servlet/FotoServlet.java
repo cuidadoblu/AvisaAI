@@ -4,10 +4,13 @@ import avisaai.modelo.dao.comunidade.ComunidadeDAO;
 import avisaai.modelo.dao.comunidade.ComunidadeDAOImpl;
 import avisaai.modelo.dao.foto.FotoDAO;
 import avisaai.modelo.dao.foto.FotoDAOImpl;
+import avisaai.modelo.dao.incidente.IncidenteDAO;
+import avisaai.modelo.dao.incidente.IncidenteDAOImpl;
 import avisaai.modelo.dao.usuario.UsuarioDAO;
 import avisaai.modelo.dao.usuario.UsuarioDAOImpl;
 import avisaai.modelo.entidade.comunidade.Comunidade;
 import avisaai.modelo.entidade.foto.Foto;
+import avisaai.modelo.entidade.incidente.Incidente;
 import avisaai.modelo.entidade.usuario.Usuario;
 import avisaai.util.Utilitario;
 
@@ -20,8 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-@WebServlet(urlPatterns = {"/formulario-foto","/salvar-foto", "/exibir-foto", "/exibir-foto-comunidade", "/exibir-foto-usuario"})
+@WebServlet(urlPatterns = {"/formulario-foto", "/salvar-foto", "/exibir-foto", "/exibir-foto-comunidade", "/exibir-foto-usuario", "/exibir-foto-incidente"})
 @MultipartConfig
 public class FotoServlet extends HttpServlet {
 
@@ -30,11 +34,13 @@ public class FotoServlet extends HttpServlet {
     private FotoDAO fotoDAO;
     private ComunidadeDAO comunidadeDAO;
     private UsuarioDAO usuarioDAO;
+    private IncidenteDAO incidenteDAO;
 
     public void init() {
         fotoDAO = new FotoDAOImpl();
         comunidadeDAO = new ComunidadeDAOImpl();
         usuarioDAO = new UsuarioDAOImpl();
+        incidenteDAO = new IncidenteDAOImpl();
     }
 
     protected void doPost(HttpServletRequest requisicao, HttpServletResponse resposta)
@@ -69,6 +75,10 @@ public class FotoServlet extends HttpServlet {
 
                 case "/exibir-foto-usuario":
                     exibirFotoPorUsuario(requisicao, resposta);
+                    break;
+
+                case "/exibir-foto-incidente":
+                    exibirFotosDoIncidente(requisicao, resposta);
                     break;
 
                 default:
@@ -201,5 +211,21 @@ public class FotoServlet extends HttpServlet {
 
         resposta.getOutputStream().write(foto.getConteudo());
         resposta.getOutputStream().flush();
+    }
+
+    public void exibirFotosDoIncidente(HttpServletRequest requisicao, HttpServletResponse resposta)
+            throws ServletException, IOException, SQLException {
+
+        Long idIncidente = Long.parseLong(requisicao.getParameter("id-incidente"));
+
+        Incidente incidente = incidenteDAO.consultarIncidenteId(idIncidente);
+
+        List<Foto> fotos = fotoDAO.recuperarFotosIncidente(incidente);
+
+        for (int i = 0; i < fotos.size(); i++) {
+            resposta.getOutputStream().write(fotos.get(i).getConteudo());
+        }
+
+
     }
 }

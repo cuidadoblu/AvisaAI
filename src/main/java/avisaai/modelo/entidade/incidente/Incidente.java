@@ -69,7 +69,7 @@ public class Incidente implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "incidenteProprietarioFoto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "incidenteProprietarioFoto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Foto> fotosIncidente;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "incidente", cascade = CascadeType.REMOVE)

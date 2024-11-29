@@ -206,10 +206,13 @@ public class IncidenteServlet extends HttpServlet {
                 situacao);
 
         Collection<Part> fotoParts = requisicao.getParts();
-        boolean fotoValida = false;
+
+        incidenteDAO.inserirIncidente(incidente);
 
         for(Part fotoPart : fotoParts) {
+
             if (fotoPart.getName().equals("foto")) {
+
                 if (fotoPart.getSize() > 0) {
                     String fileName = fotoPart.getSubmittedFileName();
                     String extensaoOriginal = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
@@ -226,26 +229,16 @@ public class IncidenteServlet extends HttpServlet {
 
                     byte[] conteudoConvertido = Utilitario.converterImagemParaFormato(conteudoOriginal, "jpg");
 
-                    Foto foto = new Foto(conteudoConvertido, "jpg");
+                    Foto foto = new Foto(conteudoConvertido, "jpg", incidente);
 
-                    List<Foto> listaFotos = incidente.getFotosIncidente();
-
-                    listaFotos.add(foto);
+                    incidente.adicionarFotosIncidente(foto);
 
                     fotoDAO.inserirFoto(foto);
-
-                    fotoValida = true;
                 }
             }
         }
 
-        if (!fotoValida) {
-            requisicao.setAttribute("mensagemErro", "Nenhuma foto válida foi enviada.");
-            requisicao.getRequestDispatcher("cadastro-incidente").forward(requisicao, resposta);
-            return;
-        }
-
-        incidenteDAO.inserirIncidente(incidente);
+        incidenteDAO.atualizarIncidente(incidente);
 
         requisicao.setAttribute("mensagemPopup", "Incidente Cadastrado!");
         resposta.sendRedirect("perfil-incidente?id-incidente=" + incidente.getId());

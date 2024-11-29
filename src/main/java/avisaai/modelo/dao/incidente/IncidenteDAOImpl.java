@@ -511,7 +511,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
             CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
             Root<Usuario> raizUsuario = criteria.from(Usuario.class);
 
-            criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("incidente"), incidente));
+            criteria.select(raizUsuario).where(construtor.equal(raizUsuario.get("incidentesCadastrados"), incidente));
 
             usuario = sessao.createQuery(criteria).getSingleResult();
             sessao.getTransaction().commit();

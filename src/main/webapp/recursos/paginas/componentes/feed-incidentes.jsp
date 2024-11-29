@@ -27,10 +27,12 @@
 
             <div class="miniaturas">
                 <c:choose>
-                    <c:when test="${not empty listaFotosIncidente}">
-                        <c:forEach var="foto" items="${incidente.fotoIncidente}">
-                            <img src="${foto.url}" alt="Imagem do incidente"
-                                 onclick="trocarImagemPrincipal('${foto.url}', 'imagem-principal-${incidente.id}')">
+                    <c:when test="${not empty incidente.fotosIncidente}">
+                        <c:forEach var="foto" items="${incidente.fotosIncidente}">
+                            <div class="item-foto">
+                                <img src="exibir-foto-incidente?id-incidente=${incidente.id}&foto-id=${foto.id}"
+                                     alt="Imagem do incidente" class="imagem-postagem">
+                            </div>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>

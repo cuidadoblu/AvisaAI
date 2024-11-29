@@ -115,7 +115,6 @@ select.formulario-controle:hover {
 }
 
 .botao-confirmar:hover {
-    background-color: var(--cor-30);
     transform: scale(1.01);
 }
 
@@ -161,7 +160,7 @@ select.formulario-controle:hover {
     border-radius: var(--raio-borda);
     box-shadow: var(--sombra-card);
     width: 100%;
-    height: 100%;
+    height: auto;
     transition: transform var(--transicao);
 }
 
@@ -278,11 +277,29 @@ h2 {
 }
 
 .botao-curtir:hover {
-    background-color: var(--cor-30);
     transform: scale(1.05);
 }
 
 .botao-curtir:active {
+    transform: scale(0.98);
+}
+.botao-filtrar {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: var(--tamanho-texto);	
+    color: var(--cor-10);
+    border: 1px solid var(--sombra-card);
+    border-radius: var(--raio-borda);
+    cursor: pointer;
+    transition: background-color var(--transicao), transform var(--transicao);
+}
+
+.botao-filtrar:hover {
+    transform: scale(1.05);
+}
+
+.botao-filtrar:active {
     transform: scale(0.98);
 }
 
@@ -327,7 +344,6 @@ textarea:focus {
 }
 
 .botao-enviar:hover {
-    background-color: var(--cor-30);
     transform: scale(1.05);
 }
 

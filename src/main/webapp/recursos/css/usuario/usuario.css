@@ -259,7 +259,7 @@ main {
 .adentrar input {
 	margin-bottom: 15px;
 	padding: 20px;
-	border: 1px solid #3498DB;
+	border: 1px solid var(--cor-10);
 	border-radius: 20px;
 	font-size: 24px;
 }
@@ -307,14 +307,14 @@ main {
 .adentrar h2 {
 	font-size: 64px;
 	text-align: center;
-	color: #3498DB;
+	color: var(--cor-30);;
 	width: 550px;
 }
 
 .adentrar h3 {
 	font-size: 18px;
 	text-align: center;
-	color: #3498DB;
+	color: var(--cor-30);;
 	width: 550px;
 	margin-bottom: 10px;
 }
@@ -325,13 +325,7 @@ main {
 	width: 550px;
 }
 
-.adentrarinput {
-	margin-bottom: 15px;
-	padding: 20px;
-	border: 1px solid #3498DB;
-	border-radius: 20px;
-	font-size: 24px;
-}
+
 
 .adentrar input::placeholder {
 	color: #2C3E50;
@@ -339,16 +333,17 @@ main {
 
 .adentrar button {
 	padding: 15px 60px 15px 60px;
-	background-color: #3498DB;
+	background-color: var(--cor-10);
 	color: white;
 	border: none;
 	border-radius: 15px;
 	cursor: pointer;
 	font-size: 24px;
+	transition: transform var(--transicao);
 }
 
 .adentrar button:hover {
-	background-color: #2980B9;
+	transform: scale(1.01);
 }
 
 .adentrar .formulario-botoes {
@@ -362,6 +357,9 @@ main {
 }
 
 .adentrar.link {
-	color: #2980B9;
+	color: var();
 	text-decoration: none; /* Remove o sublinhado do link */
+}
+.adentrar.a{
+	color: var(--cor-10)
 }

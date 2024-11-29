@@ -116,7 +116,6 @@ select.formulario-controle:hover {
 }
 
 .botao-confirmar:hover {
-    background-color: var(--cor-30);
     transform: scale(1.01);
 }
 
@@ -192,7 +191,6 @@ select.formulario-controle:hover {
 }
 
 .botao-acompanhar:hover {
-     background-color: var(--cor-30);
     transform: scale(1.05);
 }
 .botao-acompanhar:active {

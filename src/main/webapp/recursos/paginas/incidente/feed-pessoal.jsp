@@ -18,7 +18,9 @@
 		<div class="coluna" id="meio">
 			<jsp:include page="../componentes/feed-incidentes.jsp" />
 		</div>
-		<div class="coluna" id="direita">Direita</div>
+		<div class="coluna" id="direita">
+			<jsp:include page="../componentes/filtro.jsp"/>
+		</div>
 	</div>
 </body>
 <style>

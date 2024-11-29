@@ -11,6 +11,10 @@ body {
 	width: 100vw;
 	height: 100vh;
 }
+/*Links*/
+a{
+	color: var(--cor-10);
+}
 
 /* Estilos para a barra superior (header) */
 .cabecalho-avisaai {

@@ -1,0 +1,143 @@
+.filtros-container {
+	width: 320px;
+	background: var(--cor-clara);
+	border-radius: var(--raio-borda);
+	box-shadow: var(--sombra-card);
+	padding: var(--padding-padrao);
+	font-family: var(--fonte-principal);
+}
+
+/* Header */
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--padding-padrao);
+}
+
+.header h2 {
+	margin: 0;
+	font-size: var(--tamanho-texto);
+	color: var(--texto-padrao);
+}
+
+.header .limpar {
+	font-size: var(--tamanho-texto);
+	color: var(--cor-10);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.header .fechar {
+	background: none;
+	border: none;
+	font-size: var(--tamanho-texto);
+	color: var(--texto-padrao);
+	cursor: pointer;
+}
+
+/* Campos */
+.campo {
+	margin-bottom: var(--padding-padrao);
+}
+
+.campo label {
+	display: block;
+	font-size: var(--tamanho-texto);
+	margin-bottom: 8px;
+	color: var(--texto-secundario);
+}
+
+.campo select, .campo input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid var(--cor-borda);
+	border-radius: var(--raio-borda);
+	font-size: var(--tamanho-texto);
+	font-family: var(--fonte-principal);
+	margin-top: 10px;
+}
+
+/* Botões de situação (Toggle) */
+.toggle-container {
+	display: flex;
+	position: relative;
+	width: 200px;
+	height: 40px;
+	background-color: #EEEE;
+	border-radius: calc(var(--raio-borda)* 2);
+	padding: 4px;
+	overflow: hidden;
+}
+
+.slider {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%; /* O slider cobre 50% do container */
+	height: 100%;
+	background-color: var(--cor-10);
+	border-radius: calc(var(--raio-borda)* 2);
+	transition: transform var(--transicao);
+	z-index: 1; /* Fica atrás dos botões */
+}
+
+.toggle-option {
+	flex: 1;
+	position: relative;
+	z-index: 2; /* Os botões ficam acima do slider */
+	border: none;
+	background-color: transparent;
+	font-size: var(--tamanho-texto);
+	font-weight: bold;
+	color: var(--texto-secundario);
+	cursor: pointer;
+	transition: color var(--transicao);
+}
+
+.toggle-option.ativo {
+	color: var(--cor-clara); /* Texto branco para a opção ativa */
+}
+
+/* Categorias com radio */
+.radio-group {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.radio-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.radio-item input[type="radio"] {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.radio-item label {
+	font-size: var(--tamanho-texto);
+	color: var(--texto-secundario);
+	cursor: pointer;
+}
+
+/* Botão confirmar */
+.confirmar {
+	width: 100%;
+	padding: 10px;
+	background: var(--cor-10);
+	color: var(--cor-clara);
+	border: none;
+	border-radius: var(--raio-borda);
+	font-size: var(--tamanho-texto);
+	font-family: var(--fonte-principal);
+	cursor: pointer;
+	transition: transform var(--transicao);
+}
+
+.confirmar:hover {
+	transform: scale(1.01);
+}

@@ -48,9 +48,6 @@
         </div>
     </div>
     <div class="icones-avisaai">
-        <a href="notificacoes">
-            <img src="icons/notificacoes.png" alt="Notificações">
-        </a>
         <a href="perfil-usuario-logado">
             <img src="icons/perfil.png" alt="Perfil">
         </a>

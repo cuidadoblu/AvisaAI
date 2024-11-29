@@ -116,7 +116,6 @@ select.formulario-controle:hover {
 }
 
 .botao-confirmar:hover {
-    background-color: var(--cor-30);
     transform: scale(1.01);
 }
 

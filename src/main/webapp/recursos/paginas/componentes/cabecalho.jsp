@@ -48,9 +48,6 @@
         </div>
     </div>
     <div class="icones-avisaai">
-        <a href="notificacoes">
-            <img src="icons/notificacoes.png" alt="Notificações">
-        </a>
         <a href="perfil-usuario-logado" class="logo-avisaai">
             <img class="perfil-usuario-img" src="exibir-foto?id-foto=${usuarioLogado.fotoPerfil.id}"
                  alt="Foto de ${usuarioLogado.nome}">

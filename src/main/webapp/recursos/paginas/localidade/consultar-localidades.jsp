@@ -16,12 +16,14 @@
 	<div class="principal">
 		<div class="coluna" id="esquerda">Esquerda</div>
 		<div class="coluna" id="meio">
+		<div class="consulta-localidade">
 			<h2>Consulta de Localidades</h2>
 			<form method="get" action="localidades">
 				<input type="text" name="parametro" id="parametro"
 					placeholder="Digite o endereço">
 				<button type="submit">Pesquisar</button>
 			</form>
+		</div>
 			<c:choose>
 				<c:when test="${empty listaLocalidades}">
 					<p>Nenhuma localidade encontrada.</p>

@@ -23,7 +23,7 @@
             </div>
             <div class="perfil-botoes">
                 <button type="button" onclick="window.location.href='incidentes-acompanhados'">
-                    <img src="${pageContext.request.contextPath}/recursos/imagens/icones/usuario/acompanhados-perfil.png"
+                    <img src="${pageContext.request.contextPath}/recursos//imagens/icones/usuario/acompanhados perfil.png"
                          alt="Incidentes Acompanhados" class="icone-icidente-acompanhados"> Incidentes Acompanhados
                 </button>
                 <jsp:include page="/recursos/paginas/componentes/editar-usuario.jsp"/>
@@ -37,7 +37,7 @@
     <div class="coluna" id="meio">
         <jsp:include page="../componentes/feed-incidentes.jsp"/>
     </div>
-    <div class="coluna" id="direita">Direita</div>
+    <div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 </div>
 </body>
 <style>

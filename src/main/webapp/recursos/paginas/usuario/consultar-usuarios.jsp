@@ -15,7 +15,7 @@
 </head>
 <body>
 	<div class="principal">
-		<div class="coluna" id="esquerda">Esquerda</div>
+		<div class="coluna" id="esquerda"><!-- Conteúdo ou espaços laterais --></div>
 		<div class="coluna" id="meio">
 			<form action="usuarios" method="get">
 				<input type="text" name="nome" id="nome"
@@ -41,7 +41,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="coluna" id="direita">Direita</div>
+		<div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 	</div>
 </body>
 </html>

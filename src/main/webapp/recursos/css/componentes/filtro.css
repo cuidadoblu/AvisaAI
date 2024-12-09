@@ -26,6 +26,8 @@
 	color: var(--cor-10);
 	text-decoration: none;
 	cursor: pointer;
+	border: none;
+  	background: #fff;
 }
 
 .header .fechar {

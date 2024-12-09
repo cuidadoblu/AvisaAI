@@ -29,7 +29,7 @@
 </head>
 <body>
 	<div class="principal">
-		<div class="coluna" id="esquerda">Esquerda</div>
+		<div class="coluna" id="esquerda"><!-- Conteúdo ou espaços laterais --></div>
 		<div class="coluna" id="meio">
 			<div class="consulta-comunidade">
 				<h2>Consulta de Comunidades</h2>
@@ -66,7 +66,7 @@
 				</c:choose>
 			</div>
 		</div>
-		<div class="coluna" id="direita">Direita</div>
+		<div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 	</div>
 </body>
 </html>

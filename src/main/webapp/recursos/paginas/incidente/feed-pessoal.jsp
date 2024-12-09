@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="principal">
-		<div class="coluna" id="esquerda">Esquerda</div>
+		<div class="coluna" id="esquerda"><!-- Conteúdo ou espaços laterais --></div>
 		<div class="coluna" id="meio">
 			<jsp:include page="../componentes/feed-incidentes.jsp" />
 		</div>

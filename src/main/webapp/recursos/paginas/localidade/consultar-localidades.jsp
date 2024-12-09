@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="principal">
-		<div class="coluna" id="esquerda">Esquerda</div>
+		<div class="coluna" id="esquerda"><!-- Conteúdo ou espaços laterais --></div>
 		<div class="coluna" id="meio">
 		<div class="consulta-localidade">
 			<h2>Consulta de Localidades</h2>
@@ -58,7 +58,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="coluna" id="direita">Direita</div>
+		<div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 	</div>
 </body>
 </html>

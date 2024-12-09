@@ -38,7 +38,7 @@
     <div class="coluna" id="meio">
         <jsp:include page="../componentes/feed-incidentes.jsp"/>
     </div>
-    <div class="coluna" id="direita">Direita</div>
+    <div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 </div>
 </body>
 <style>

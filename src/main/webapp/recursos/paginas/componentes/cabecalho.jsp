@@ -26,6 +26,7 @@
             <input type="text" class="input-pesquisa" placeholder="Consultar"
                    onkeyup="mostrarConsultaExpandida(this.value)">
             <div class="consulta-expandida-avisaai" id="consultaExpandida">
+            <div class="barra-lateral"></div>
                 <h4>Comunidades</h4>
                 <c:forEach var="comunidade" items="${comunidades}">
                     <div class="item-consulta-avisaai" onclick="redirecionar('perfil-comunidade?id=${comunidade.id}')">
@@ -58,22 +59,36 @@
 <div class="barra-lateral-avisaai" id="barraLateral">
     <div class="menu-avisaai">
         <h2>Menu</h2>
-        <a href="cadastro-incidente"><i class="fas fa-exclamation-triangle"></i>
-            Cadastrar Incidente
+        <div class="comentarios">
+    	</div>
+        <a href="cadastro-incidente"><img src="${pageContext.request.contextPath}/recursos/imagens/icones/cabecalho/usuario/Cadastrar Incidente Cabeçalho.png" alt="Ocorrências">
+            Cadastrar Evento
         </a>
         <a href="feed-pessoal">
-            <i class="fas fa-newspaper"></i> Feed
+            <i class="fas fa-newspaper"></i> Eventos Acompanhados
         </a>
         <h3>Comunidades</h3>
         <a href="perfil-comunidade?id=1">
-            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Centro.jpg" alt="Centro">
-            Centro
+            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Ocorrencias.jpg" alt="Ocorrências">
+            Ocorrências
         </a>
         <a href="perfil-comunidade?id=2">
-            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Vila%20Nova.png"
-                 alt="Vila Nova">
-            Vila Nova
+            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Assistencia.jpg"
+                 alt="Assistência">
+            Assistência
         </a>
+        <a href="perfil-comunidade?id=2">
+            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Resgate.jpg"
+                 alt="Resgate">
+            Resgate
+        </a>
+        <a href="perfil-comunidade?id=2">
+            <img src="${pageContext.request.contextPath}/recursos/imagens/comunidades/png/Doação.jpg"
+                 alt="Doação">
+            Doação
+        </a>
+        <div class="comentarios">
+    	</div>
     </div>
     <div class="perfil-avisaai">
         <a href="perfil-usuario-logado" class="logo-avisaai">

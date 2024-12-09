@@ -49,8 +49,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="coluna" id="meio">Meio</div>
-			<div class="coluna" id="direita">Direita</div>
+			<div class="coluna" id="meio"><!-- Conteúdo ou espaço do meio --></div>
+			<div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 		</div>
 </body>
 </html>

@@ -19,9 +19,9 @@
             <input type="hidden" name="id-incidente" value="${incidente.id}">
             <textarea name="conteudo" placeholder="Insira seu comentário" required maxlength="350"></textarea>
         </div>
-        <div>
+        <div class="reacoes">
             <button type="submit" class="botao-curtir">Enviar</button>
-            <button type="reset" onclick="ocultarFormularioComentario()">Cancelar</button>
+            <button type="reset" class="botao-curtir" onclick="ocultarFormularioComentario()">Cancelar</button>
         </div>
     </form>
 </div>

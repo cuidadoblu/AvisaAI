@@ -17,7 +17,7 @@
 <body>
 	<main>
 		<div class="principal">
-			<div class="coluna" id="esquerda">Esquerda</div>
+			<div class="coluna" id="esquerda"><!-- Conteúdo ou espaços laterais --></div>
 			<div class="coluna" id="meio">
 				<div class="container-cadastro">
 					<div class="cabecalho-cadastro">
@@ -110,7 +110,7 @@
 					</form>
 				</div>
 			</div>
-			<div class="coluna" id="direita">Direita</div>
+			<div class="coluna" id="direita"><!-- Conteúdo ou espaços laterais --></div>
 		</div>
 	</main>
 

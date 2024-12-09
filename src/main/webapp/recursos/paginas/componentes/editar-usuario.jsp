@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <button type="button" id="btn-configuracoes">
-    <img src="${pageContext.request.contextPath}/recursos/imagens/icones/usuario/icone-configuracoes.png"
+    <img src="${pageContext.request.contextPath}/recursos/imagens/icones/usuario/icone configuracoes.png"
          alt="Configurações" class="icone-configuracao"> Configurações
 </button>
 <div id="editar-perfil" class="editar-usuario">

@@ -31,9 +31,9 @@
                     <input type="hidden" name="id-comentario" value="${comentario.id}"/>
                     <input type="hidden" name="id-incidente" value="${comentario.incidente.id}"/>
                     <textarea name="conteudo" placeholder="Escreva sua resposta aqui..." required></textarea>
-                    <div>
-                        <button type="submit" class="botao-enviar">Enviar</button>
-                        <button type="reset" onclick="ocultarFormularioResposta(${comentario.id})">Cancelar</button>
+                    <div class="reacoes">
+                        <button type="submit" class="botao-curtir">Enviar</button>
+                        <button type="reset" class="botao-curtir" onclick="ocultarFormularioResposta(${comentario.id})">Cancelar</button>
                     </div>
                 </form>
             </div>
